@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Minecraftia";
+  src: url("./assets/fonts/Minecraftia-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "RobotoMono-Bold";
+  src: url("./assets/fonts/RobotoMono-Bold.ttf") format("truetype");
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}

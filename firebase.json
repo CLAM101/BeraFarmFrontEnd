@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/bera-farm-front-end/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

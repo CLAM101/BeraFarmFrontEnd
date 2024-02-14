@@ -8,19 +8,19 @@
     "
   >
     <div
-      class="w-6/12 flex justify-center bg-opacity-85 bg-yellow-300 z10 rounded-xl items-center relative z-0 h-128 overflow-y-auto mt-20 no-scrollbar"
+      class="w-6/12 flex justify-center bg-opacity-85 bg-yellow-300 z10 rounded-xl items-center relative z-0 h-128 overflow-y-auto no-scrollbar"
       (click)="showInfo()"
       *ngIf="!infoPage"
     >
       <h1
-        class="z-40 text-black font-black text-5xl text-center leading-normal RobotoMonoBold"
+        class="z-40 text-black font-black text-5xl text-center leading-normal RobotoMonoBold select-none"
       >
         Welcome to the $FUZZ farm, click here to learn more!
       </h1>
     </div>
     <div
       *ngIf="infoPage"
-      class="w-9/12 flex justify-center bg-opacity-85 bg-yellow-300 z10 rounded-xl items-center relative z-0 h-155 overflow-y-auto mt-20 no-scrollbar"
+      class="w-9/12 flex justify-center bg-opacity-85 bg-yellow-300 z10 rounded-xl items-center relative z-0 h-155 overflow-y-auto no-scrollbar"
     >
       <div class="h-full w-11/12 flex flex-col mt-16">
         <h1
@@ -249,5 +249,22 @@
         </h1>
       </div>
     </div>
+  </div>
+
+  <div
+    class="absolute bottom-5 justify-between flex flex-row bg-yellow-300 bg-opacity-85 rounded-3xl p-5 w-52"
+  >
+    <img
+      (click)="openExternalLink('https://discord.gg/GyCA6FGP')"
+      class="h-12 w-h-12 relative active:opacity-15"
+      src="../.././../assets/discord logo.svg"
+      alt=""
+    />
+    <img
+      (click)="openExternalLink('https://twitter.com/TheFuzzFarm')"
+      class="h-12 w-h-12 relative active:opacity-15"
+      src="../../../assets/logo.svg"
+      alt=""
+    />
   </div>
 </div>

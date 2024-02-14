@@ -13,9 +13,15 @@ export class HomePageComponent {
 
   infoPage = false;
 
+  //enum for each button keys as strings
+
   ngOnInit(): void {}
 
   showInfo() {
     this.infoPage = true;
+  }
+
+  openExternalLink(url: string) {
+    window.open(url, '_blank');
   }
 }

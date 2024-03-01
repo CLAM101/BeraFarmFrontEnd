@@ -2,8 +2,7 @@
   class="rounded-md bg-opacity-85 h-16 flex justify-between w-80 mt-7 z-10 absolute bg-yellow-300 ml-12"
 >
   <button
-    (mousedown)="mouseDown('connectWallet')"
-    (mouseup)="mouseUp('connectWallet')"
+    (mousedown)="connectWallet()"
     class="rounded-l-md border-8 border-zinc-950 opacity-100 h-full w-1/4 active:opacity-15 z-20 RobotoMonoBold font-black"
   >
     <h3 class="text-xl">{{ connectWalletText }}</h3>
@@ -24,7 +23,7 @@
     <h3 class="text-xl">{{ getFuzzText }}</h3>
   </button>
   <button
-    (mousedown)="mouseDown('getCubs')"
+    (mousedown)="router.navigate(['buyPage'])"
     (mouseup)="mouseUp('getCubs')"
     class="border-8 border-zinc-950 opacity-100 h-full w-1/4 active:opacity-15 z-20 RobotoMonoBold font-black"
   >

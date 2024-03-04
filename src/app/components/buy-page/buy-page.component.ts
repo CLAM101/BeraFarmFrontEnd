@@ -50,7 +50,7 @@ export class BuyPageComponent {
   async configureBuyForFuzz() {
     this.mintPanel.mintPanelConfig = {
       mintPanelTitle: 'Buy Cubs for $FUZZ',
-      mintAction: 'Buy for $FUZZ',
+      mintAction: 'Approve $FUZZ',
       purchaseInfoText:
         'Purchase a maximum amount of 20 Cubs per wallet for $FUZZ token, the official worthless ERC20 fo the $FUZZ farm!',
     };
@@ -59,7 +59,7 @@ export class BuyPageComponent {
   async configureBondForHoney() {
     this.mintPanel.mintPanelConfig = {
       mintPanelTitle: 'Bond $HONEY',
-      mintAction: 'Bond For $HONEY',
+      mintAction: 'Approve $HONEY',
       purchaseInfoText:
         'Bond a maximum amount of 20 Cubs per wallet for $HONEY token at a 15% discount on the current price in $FUZZ!',
     };

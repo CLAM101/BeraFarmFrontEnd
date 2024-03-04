@@ -60,8 +60,10 @@
       <button
         *ngIf="!allowanceSufficient"
         (click)="
-          panelType === 'buyForHoney' || 'bondForHoney'
+          panelType === 'buyForHoney'
             ? approveSpendHoney()
+            : panelType === 'bondForHoney'
+            ? approveSpendBond()
             : approveSpendFuzz()
         "
         class="select-none mt-7 rounded-md text-3xl RobotoMonoBold font-black w-128 h-20 active:opacity-15 border-8 border-zinc-950"
@@ -71,7 +73,11 @@
       <button
         *ngIf="allowanceSufficient"
         (click)="
-          panelType === 'buyForHoney' ? approveSpendHoney() : approveSpendFuzz()
+          panelType === 'buyForHoney'
+            ? buyBeraCubsForHoney()
+            : panelType === 'bondForHoney'
+            ? bondForHoney()
+            : buyBeraCubsForFuzz()
         "
         class="select-none mt-7 rounded-md text-3xl RobotoMonoBold font-black w-128 h-20 active:opacity-15 border-8 border-zinc-950"
       >

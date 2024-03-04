@@ -67,7 +67,8 @@ export class MintPanelComponent {
 
   async approveSpendHoney() {
     try {
-      const approvalAmount = this.getTransactionCostHoney();
+      debugger;
+      const approvalAmount = await this.getTransactionCostHoney();
       const approvalTx = await this.honeyMethodCaller.approve(
         beraFarm,
         approvalAmount
@@ -180,7 +181,7 @@ export class MintPanelComponent {
     const totalSupplyPlusAmount = convertedTotalSupply + this.mintAmount;
 
     return await this.beraFarmMethodCaller.getHoneyBuyTransactionCost(
-      currentTotalSupply,
+      convertedTotalSupply,
       totalSupplyPlusAmount,
       this.mintAmount
     );

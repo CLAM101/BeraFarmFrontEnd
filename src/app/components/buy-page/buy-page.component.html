@@ -5,22 +5,26 @@
     alt=""
   />
 
-  <div class="absolute flex flex-col w-144">
+  <div *ngIf="!mintPanel.showMintPanel" class="absolute flex flex-col w-144">
     <button
-      class="mt-11 rounded-l-md border-8 border-zinc-950 opacity-100 h-28 w-full active:opacity-15 z-20 RobotoMonoBold font-black bg-yellow-300"
+      (click)="showMintPanelFunc('buyForHoney')"
+      class="bg-opacity-85 mt-11 rounded-md border-8 border-zinc-950 opacity-100 h-28 w-full active:opacity-15 z-20 RobotoMonoBold font-black bg-yellow-300"
     >
-      <h3 class="text-xl">Buy Cubs for $HONEY</h3>
+      <h3 class="text-3xl">Buy Cubs For $HONEY</h3>
     </button>
     <button
-      class="mt-11 rounded-l-md border-8 border-zinc-950 opacity-100 h-28 w-full active:opacity-15 z-20 RobotoMonoBold font-black bg-yellow-300"
+      (click)="showMintPanelFunc('buyForFuzz')"
+      class="bg-opacity-85 mt-11 rounded-md border-8 border-zinc-950 opacity-100 h-28 w-full active:opacity-15 z-20 RobotoMonoBold font-black bg-yellow-300"
     >
-      <h3 class="text-xl">Buy Cubs $FUZZ</h3>
+      <h3 class="text-3xl">Buy Cubs For $FUZZ</h3>
     </button>
     <button
-      class="mt-11 rounded-l-md border-8 border-zinc-950 opacity-100 h-28 w-full active:opacity-15 z-20 RobotoMonoBold font-black bg-yellow-300"
+      (click)="showMintPanelFunc('bondForHoney')"
+      class="bg-opacity-85 mt-11 rounded-md border-8 border-zinc-950 opacity-100 h-28 w-full active:opacity-15 z-20 RobotoMonoBold font-black bg-yellow-300"
     >
-      <h3 class="text-xl">Bond Cubs For $HONEY</h3>
+      <h3 class="text-3xl">Bond Cubs For $HONEY</h3>
     </button>
   </div>
+
   <app-mint-panel #mintPanel></app-mint-panel>
 </div>

@@ -1,1 +1,88 @@
-<p>mint-panel works!</p>
+<div
+  *ngIf="showMintPanel"
+  class="bg-opacity-85 select-none relative flex flex-row h-144 w-160 text-center justify-center items-center border-zinc-950 bg-yellow-300 border-8 rounded-md"
+>
+  <div
+    *ngIf="mintPanelConfig"
+    class="flex flex-col w-80 h-144 text-center items-center"
+  >
+    <h1 class="select-none text-3xl RobotoMonoBold font-black mt-16">
+      {{ mintPanelConfig.mintPanelTitle }}
+    </h1>
+    <div
+      class="flex border-8 border-zinc-950 h-64 w-64 relative mt-5 rounded-md"
+    >
+      <img
+        class="h-60 w-64 relative select-none"
+        src="../../../assets/images/bear-cub.webp"
+        alt="Bear Cub Image"
+      />
+    </div>
+
+    <h1>{{ mintPanelConfig.remainingSupply }}</h1>
+
+    <div
+      class="select-none mt-14 flex flex-row text-center justify-end items-center border-8 border-zinc-950 rounded-md"
+    >
+      <button
+        (click)="decrMintAmount()"
+        class="mr-20 active:opacity-15 border-r-8 border-zinc-950 select-none"
+      >
+        <img
+          src="../../../assets/minus-sign-of-a-line-in-horizontal-position-svgrepo-com.svg"
+          alt="Plus SVG"
+        />
+      </button>
+
+      <h1 class="text-3xl RobotoMonoBold font-black">{{ mintAmount }}</h1>
+
+      <button
+        (click)="incrMintAmount()"
+        class="ml-20 active:opacity-15 border-l-8 border-zinc-950 select-none"
+      >
+        <img src="../../../assets/plus-svgrepo-com.svg" alt="Plus SVG" />
+      </button>
+    </div>
+  </div>
+  <div
+    *ngIf="mintPanelConfig"
+    class="w-80 h-144 flex flex-col items-center justify-end"
+  >
+    <div class="h-72 w-80 flex justify-center items-center flex-col">
+      <h1
+        class="select-none text-3xl RobotoMonoBold font-black mt-16 leading-relaxed"
+      >
+        {{ mintPanelConfig.purchaseInfoText }}
+      </h1>
+    </div>
+
+    <div class="h-72 w-full flex justify-center items-center flex-col">
+      <button
+        *ngIf="!allowanceSufficient"
+        (click)="
+          panelType === 'buyForHoney' || 'bondForHoney'
+            ? approveSpendHoney()
+            : approveSpendFuzz()
+        "
+        class="select-none mt-7 rounded-md text-3xl RobotoMonoBold font-black w-128 h-20 active:opacity-15 border-8 border-zinc-950"
+      >
+        {{ mintPanelConfig.mintAction }}
+      </button>
+      <button
+        *ngIf="allowanceSufficient"
+        (click)="
+          panelType === 'buyForHoney' ? approveSpendHoney() : approveSpendFuzz()
+        "
+        class="select-none mt-7 rounded-md text-3xl RobotoMonoBold font-black w-128 h-20 active:opacity-15 border-8 border-zinc-950"
+      >
+        {{ mintPanelConfig.mintAction }}
+      </button>
+      <button
+        (click)="close()"
+        class="select-none mb-7 mt-7 rounded-md text-3xl RobotoMonoBold font-black w-128 h-20 active:opacity-15 border-8 border-zinc-950"
+      >
+        Back
+      </button>
+    </div>
+  </div>
+</div>

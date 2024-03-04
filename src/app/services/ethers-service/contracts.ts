@@ -1,0 +1,4 @@
+export const beraFarm = '0x4b6aB5F819A515382B0dEB6935D793817bB4af28';
+export const fuzzToken = '0xAA292E8611aDF267e563f334Ee42320aC96D0463';
+export const beraCub = '0xA4899D35897033b927acFCf422bc745916139776';
+export const mockHoney = '0xf953b3A269d80e3eB0F2947630Da976B896A8C5b';

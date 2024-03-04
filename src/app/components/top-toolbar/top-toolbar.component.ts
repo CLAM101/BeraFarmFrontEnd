@@ -3,11 +3,6 @@ import { Router } from '@angular/router';
 import { EthersService } from '../../services/ethers-service/ethers-service.service';
 import { MetaMaskInpageProvider } from '@metamask/providers';
 
-declare global {
-  interface Window {
-    ethereum?: MetaMaskInpageProvider;
-  }
-}
 @Component({
   selector: 'app-top-toolbar',
   standalone: true,
@@ -31,13 +26,13 @@ export class TopToolbarComponent {
   constructor(public router: Router, public ethersService: EthersService) {}
 
   async ngOnInit(): Promise<void> {
-    this.provider = this.ethersService.getProvider();
-    this.onNetworkChanged();
-    if (window.ethereum.selectedAddress && window.ethereum.isConnected()) {
-      //  await this.connectContracts();
-    } else {
-      alert('Please connect wallet');
-    }
+    //this.provider = this.ethersService.getProvider();
+    //this.onNetworkChanged();
+    // if (window.ethereum.selectedAddress && window.ethereum.isConnected()) {
+    //   //  await this.connectContracts();
+    // } else {
+    //   //  alert('Please connect wallet');
+    // }
   }
 
   // async connectContracts() {

@@ -26,44 +26,16 @@ export class TopToolbarComponent {
   constructor(public router: Router, public ethersService: EthersService) {}
 
   async ngOnInit(): Promise<void> {
-    //this.provider = this.ethersService.getProvider();
-    //this.onNetworkChanged();
-    // if (window.ethereum.selectedAddress && window.ethereum.isConnected()) {
-    //   //  await this.connectContracts();
-    // } else {
-    //   //  alert('Please connect wallet');
-    // }
+    this.provider = this.ethersService.getProvider();
+    this.ethersService.onNetworkChanged();
+    if (window.ethereum.selectedAddress && window.ethereum.isConnected()) {
+      this.ethersService.connectWallet();
+    } else {
+      alert('Please connect wallet');
+    }
   }
-
-  // async connectContracts() {
-  //   this.tokenContract = this.ethersService.getTokenContract(this.provider);
-  //   this.signer = await this.provider.getSigner();
-  //   this.tokenMethodCaller = this.tokenContract.connect(this.signer);
-  // }
 
   //capture the event emitted when suer changes network and log which network user changed to
-  async onNetworkChanged() {
-    window.ethereum.on('chainChanged', (chainId: string) => {
-      let convertedChainId: number = parseInt(chainId, 16);
-
-      if (convertedChainId !== 5) {
-        alert('Please change to the correct network');
-        this.changeNetwork();
-      }
-    });
-  }
-
-  //promt user to change networks if they are not on the correct network
-  async changeNetwork() {
-    await window.ethereum.request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: '0x5' }],
-    });
-  }
-
-  async connectWallet() {
-    this.ethersService.connectWallet();
-  }
 
   mouseUp(button: string) {
     if (button === 'connectWallet') {

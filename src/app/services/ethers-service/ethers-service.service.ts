@@ -30,6 +30,31 @@ export class EthersService {
     return new ethers.Contract(beraCub, beraCubABI, provider);
   }
 
+  //promt user to change networks if they are not on the correct network
+  async changeNetwork() {
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: '0x539' }],
+    });
+  }
+
+  async onNetworkChanged() {
+    window.ethereum.on('chainChanged', (chainId: string) => {
+      let convertedChainId: number = parseInt(chainId, 16);
+
+      if (convertedChainId !== 1337) {
+        alert('Please change to the correct network');
+        this.changeNetwork();
+      }
+    });
+  }
+
+  async checkAndChangeNetwork() {
+    if (window.ethereum.chainId !== '0x539') {
+      this.changeNetwork();
+    }
+  }
+
   async connectWallet() {
     let provider: any = this.getProvider();
     try {

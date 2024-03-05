@@ -19,10 +19,16 @@
       />
     </div>
 
+    <div>
+      <h1 class="select-none mt-6 text-2xl RobotoMonoBold font-black">
+        Transaction Total {{ mintCost }} {{ mintPanelConfig.ticker }}
+      </h1>
+    </div>
+
     <h1>{{ mintPanelConfig.remainingSupply }}</h1>
 
     <div
-      class="select-none mt-14 flex flex-row text-center justify-end items-center border-8 border-zinc-950 rounded-md"
+      class="select-none mt-6 flex flex-row text-center justify-end items-center border-8 border-zinc-950 rounded-md"
     >
       <button
         (click)="decrMintAmount()"
@@ -68,7 +74,7 @@
         "
         class="select-none mt-7 rounded-md text-3xl RobotoMonoBold font-black w-128 h-20 active:opacity-15 border-8 border-zinc-950"
       >
-        {{ mintPanelConfig.mintAction }}
+        {{ mintPanelConfig.approveText }}
       </button>
       <button
         *ngIf="allowanceSufficient"
@@ -81,7 +87,7 @@
         "
         class="select-none mt-7 rounded-md text-3xl RobotoMonoBold font-black w-128 h-20 active:opacity-15 border-8 border-zinc-950"
       >
-        {{ mintPanelConfig.mintAction }}
+        {{ mintPanelConfig.buyText }}
       </button>
       <button
         (click)="close()"

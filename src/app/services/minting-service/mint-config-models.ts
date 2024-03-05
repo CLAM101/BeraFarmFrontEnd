@@ -1,7 +1,8 @@
 export interface MintConfig {
   mintPanelTitle: string;
-  mintAction: string;
-
+  buyText: string;
+  approveText: string;
+  ticker: string;
   purchaseInfoText: string;
   remainingSupply?: number;
 }

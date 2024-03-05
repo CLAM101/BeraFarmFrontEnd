@@ -41,7 +41,9 @@ export class BuyPageComponent {
   async configureBuyForHoney() {
     this.mintPanel.mintPanelConfig = {
       mintPanelTitle: 'Buy Cubs for $HONEY',
-      mintAction: 'Approve $HONEY',
+      approveText: 'Approve $HONEY',
+      ticker: '$HONEY',
+      buyText: 'Buy For Honey',
       purchaseInfoText:
         "Purchase a maximum amount of 20 Cubs per wallet for $HONEY token, Berachain's native stablecoin!",
     };
@@ -50,7 +52,9 @@ export class BuyPageComponent {
   async configureBuyForFuzz() {
     this.mintPanel.mintPanelConfig = {
       mintPanelTitle: 'Buy Cubs for $FUZZ',
-      mintAction: 'Approve $FUZZ',
+      approveText: 'Approve $FUZZ',
+      ticker: '$FUZZ',
+      buyText: 'Buy For Fuzz',
       purchaseInfoText:
         'Purchase a maximum amount of 20 Cubs per wallet for $FUZZ token, the official worthless ERC20 fo the $FUZZ farm!',
     };
@@ -59,7 +63,9 @@ export class BuyPageComponent {
   async configureBondForHoney() {
     this.mintPanel.mintPanelConfig = {
       mintPanelTitle: 'Bond $HONEY',
-      mintAction: 'Approve $HONEY',
+      approveText: 'Approve $HONEY',
+      ticker: '$HONEY',
+      buyText: 'Bond For $HONEY',
       purchaseInfoText:
         'Bond a maximum amount of 20 Cubs per wallet for $HONEY token at a 15% discount on the current price in $FUZZ!',
     };

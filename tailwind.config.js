@@ -15,6 +15,8 @@ module.exports = {
         156: "50rem",
         160: "73rem",
         80: "95%",
+        75: "92%",
+
         // Add more custom sizes as needed
       },
     },

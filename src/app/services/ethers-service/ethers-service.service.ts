@@ -57,6 +57,7 @@ export class EthersService {
 
   async connectWallet() {
     let provider: any = this.getProvider();
+    this.checkAndChangeNetwork();
     try {
       await provider.send('eth_requestAccounts', []);
     } catch (err) {

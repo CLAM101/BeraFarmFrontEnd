@@ -6,11 +6,11 @@
     *ngIf="mintPanelConfig"
     class="flex flex-col w-80 h-144 text-center items-center"
   >
-    <h1 class="select-none text-3xl RobotoMonoBold font-black mt-16">
+    <h1 class="select-none text-3xl RobotoMonoBold font-black mt-10">
       {{ mintPanelConfig.mintPanelTitle }}
     </h1>
     <div
-      class="flex border-8 border-zinc-950 h-64 w-64 relative mt-5 rounded-md"
+      class="flex border-8 border-zinc-950 h-64 w-64 relative mt-3 rounded-md"
     >
       <img
         class="h-60 w-64 relative select-none"
@@ -18,17 +18,27 @@
         alt="Bear Cub Image"
       />
     </div>
-
     <div>
-      <h1 class="select-none mt-6 text-2xl RobotoMonoBold font-black">
-        Transaction Total {{ mintCost }} {{ mintPanelConfig.ticker }}
+      <h1 class="select-none mt-3 text-2xl RobotoMonoBold font-black">
+        REMAINING SUPPLY FOR {{ mintPanelConfig.ticker }} :
+        {{ remainingSupply }}
+      </h1>
+    </div>
+    <div>
+      <h1 class="select-none mt-3 text-2xl RobotoMonoBold font-black">
+        COST PER CUB: {{ costPerCub }} {{ mintPanelConfig.ticker }}
+      </h1>
+    </div>
+    <div>
+      <h1 class="select-none mt-3 text-2xl RobotoMonoBold font-black">
+        TRANSACTION TOTAL: {{ mintCost }} {{ mintPanelConfig.ticker }}
       </h1>
     </div>
 
     <h1>{{ mintPanelConfig.remainingSupply }}</h1>
 
     <div
-      class="select-none mt-6 flex flex-row text-center justify-end items-center border-8 border-zinc-950 rounded-md"
+      class="select-none mt-3 flex flex-row text-center justify-end items-center border-8 border-zinc-950 rounded-md"
     >
       <button
         (click)="decrMintAmount()"
@@ -54,15 +64,20 @@
     *ngIf="mintPanelConfig"
     class="w-80 h-144 flex flex-col items-center justify-end"
   >
-    <div class="h-72 w-80 flex justify-center items-center flex-col">
+    <div class="h-72 w-75 flex justify-center items-center flex-col">
       <h1
         class="select-none text-3xl RobotoMonoBold font-black mt-16 leading-relaxed"
+      >
+        YOUR CUB BALANCE: {{ walletCubBalance }}
+      </h1>
+      <h1
+        class="select-none text-2xl RobotoMonoBold font-black mt-3 leading-relaxed"
       >
         {{ mintPanelConfig.purchaseInfoText }}
       </h1>
     </div>
 
-    <div class="h-72 w-full flex justify-center items-center flex-col">
+    <div class="h-72 w-full flex justify-center items-center flex-col mt-10">
       <button
         *ngIf="!allowanceSufficient"
         (click)="
@@ -93,7 +108,7 @@
         (click)="close()"
         class="select-none mb-7 mt-7 rounded-md text-3xl RobotoMonoBold font-black w-128 h-20 active:opacity-15 border-8 border-zinc-950"
       >
-        Back
+        BACK
       </button>
     </div>
   </div>

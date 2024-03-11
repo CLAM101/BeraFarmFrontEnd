@@ -29,12 +29,16 @@ export class MintPanelComponent {
   panelType: string;
   allowanceSufficient = false;
   mintCost = '0';
+  remainingSupply: number;
+  walletCubBalance: number;
+  costPerCub: number;
 
   constructor(public router: Router, public ethersService: EthersService) {}
   async ngOnInit(): Promise<void> {
     this.provider = this.ethersService.getProvider();
     this.signer = await this.provider.getSigner();
     this.setupContracts();
+    this.getCubBalance();
   }
   open() {
     this.showMintPanel = true;
@@ -44,8 +48,9 @@ export class MintPanelComponent {
   }
 
   incrMintAmount() {
-    if (this.mintAmount < 20) this.mintAmount++;
-    this.checkAllowanceHoney();
+    if (this.mintAmount < 20 && this.mintAmount + this.walletCubBalance < 20)
+      this.mintAmount++;
+    this.checkAllowance();
     this.getMintCost();
   }
 
@@ -70,6 +75,19 @@ export class MintPanelComponent {
     this.fuzzTokenMethodCaller = this.fuzzTokenContract.connect(this.signer);
   }
 
+  async getCubBalance() {
+    const cubBalance = await this.beraCubContract.balanceOf(
+      window.ethereum.selectedAddress
+    );
+
+    this.walletCubBalance = parseInt(ethers.formatUnits(cubBalance, 0));
+  }
+
+  async getCostPerCubHoney() {
+    debugger;
+    this.costPerCub = this.remainingSupply > 2500 ? 5 : 10;
+  }
+
   async approveSpendHoney() {
     try {
       await this.ethersService.checkAndChangeNetwork();
@@ -91,24 +109,50 @@ export class MintPanelComponent {
   }
 
   async getMintCost() {
+    debugger;
     if (this.panelType === 'buyForHoney') {
       const fetchedCost = await this.getTransactionCostHoney();
       this.mintCost = ethers.formatEther(fetchedCost);
+      this.getCostPerCubHoney();
     }
     if (this.panelType === 'buyForFuzz') {
+      debugger;
       const fetchedCost = await this.getTransactionCostFuzz();
-      this.mintCost = ethers.formatEther(fetchedCost);
+      this.mintCost = fetchedCost;
     }
     if (this.panelType === 'bondForHoney') {
       const fetchedCost = await this.getTransactionCostBond();
-      this.mintCost = ethers.formatEther(fetchedCost);
+      this.mintCost = fetchedCost;
     }
   }
 
+  async setRemainingSupply() {
+    if (this.panelType === 'buyForHoney') {
+      this.remainingSupply = await this.getRemainingSupplyHoney();
+    }
+    if (this.panelType === 'buyForFuzz') {
+      this.remainingSupply = await this.getGeneralRemainingSupply();
+    }
+    if (this.panelType === 'bondForHoney') {
+      this.remainingSupply = await this.getGeneralRemainingSupply();
+    }
+  }
+
+  async checkAllowance() {
+    if (this.panelType === 'buyForHoney') {
+      this.checkAllowanceHoney();
+    }
+    if (this.panelType === 'buyForFuzz') {
+      this.checkAllowanceFuzz();
+    }
+    if (this.panelType === 'bondForHoney') {
+      this.checkAllowanceHoney();
+    }
+  }
   async approveSpendBond() {
     try {
       await this.ethersService.checkAndChangeNetwork();
-      const approvalAmount = this.getTransactionCostBond();
+      const approvalAmount = await this.getTransactionCostBond();
       const approvalTx = await this.honeyMethodCaller.approve(
         beraFarm,
         approvalAmount
@@ -125,7 +169,7 @@ export class MintPanelComponent {
   async approveSpendFuzz() {
     try {
       await this.ethersService.checkAndChangeNetwork();
-      const approvalAmount = this.getTransactionCostFuzz();
+      const approvalAmount = await this.getTransactionCostFuzz();
       const approvalTx = await this.fuzzTokenMethodCaller.approve(
         beraFarm,
         approvalAmount
@@ -145,7 +189,15 @@ export class MintPanelComponent {
       beraFarm
     );
 
-    const mintAmountCost = await this.getTransactionCostHoney();
+    let mintAmountCost;
+
+    if (this.panelType === 'buyForHoney') {
+      mintAmountCost = await this.getTransactionCostHoney();
+    }
+
+    if (this.panelType === 'bondForHoney') {
+      mintAmountCost = await this.getTransactionCostBond();
+    }
 
     if (mintAmountCost === 0) this.allowanceSufficient = false;
 
@@ -179,9 +231,16 @@ export class MintPanelComponent {
       alert('Bought For Honey');
       this.allowanceSufficient = false;
       this.mintAmount = 0;
+      await this.postBuyDetailUpdate();
     } catch (err) {
       alert(`Buy For Honey Failed ${err}`);
     }
+  }
+
+  async postBuyDetailUpdate() {
+    await this.getCubBalance();
+    await this.setRemainingSupply();
+    await this.getMintCost();
   }
 
   async buyBeraCubsForFuzz() {
@@ -225,12 +284,54 @@ export class MintPanelComponent {
   }
 
   async getTransactionCostBond() {
-    const bondCost = ethers.formatEther(this.beraFarmContract.getBondCost());
+    const bondCost = parseFloat(
+      ethers.formatEther(await this.beraFarmContract.getBondCost())
+    );
 
-    return parseInt(bondCost) * this.mintAmount;
+    const finalBondCost = bondCost * this.mintAmount;
+
+    return finalBondCost.toFixed(2).toString();
   }
 
-  async getTransactionCostFuzz(): Promise<number> {
-    return await this.beraFarmContract.maxCompoundCostSoFar();
+  async getTransactionCostFuzz(): Promise<string> {
+    const currentMintCost = await this.beraFarmContract.maxCompoundCostSoFar();
+
+    const mintCost = parseFloat(ethers.formatEther(currentMintCost));
+
+    const finalMintCost = mintCost * this.mintAmount;
+
+    return finalMintCost.toFixed(2).toString();
+  }
+
+  async getRemainingSupplyHoney() {
+    const currentTotalSupply = await this.beraCubContract.totalSupply();
+
+    const convertedTotalSupply = parseInt(
+      ethers.formatUnits(currentTotalSupply, 0)
+    );
+
+    const maxHoneySupply = await this.beraFarmContract.maxSupplyForHoney();
+
+    const convertedHoneySupply = parseInt(
+      ethers.formatUnits(maxHoneySupply, 0)
+    );
+
+    return convertedHoneySupply - convertedTotalSupply < 0
+      ? 0
+      : convertedHoneySupply - convertedTotalSupply;
+  }
+
+  async getGeneralRemainingSupply() {
+    const currentTotalSupply = await this.beraCubContract.totalSupply();
+
+    const convertedTotalSupply = parseInt(
+      ethers.formatUnits(currentTotalSupply, 0)
+    );
+
+    const maxSupply = await this.beraCubContract.maxSupply();
+
+    const convertedMaxSupply = parseInt(ethers.formatUnits(maxSupply, 0));
+
+    return convertedMaxSupply - convertedTotalSupply;
   }
 }

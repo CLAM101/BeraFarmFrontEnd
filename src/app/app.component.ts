@@ -12,14 +12,7 @@ declare global {
 }
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    TopToolbarComponent,
-    HomePageComponent,
-    BuyPageComponent,
-  ],
+
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

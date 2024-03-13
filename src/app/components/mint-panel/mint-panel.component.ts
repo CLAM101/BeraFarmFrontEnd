@@ -5,10 +5,12 @@ import { MintConfig } from 'src/app/services/minting-service/mint-config-models'
 import { EthersService } from 'src/app/services/ethers-service/ethers-service.service';
 import { beraFarm } from 'src/app/services/ethers-service/contracts';
 import { ethers } from 'ethers';
+import { Store } from '@ngrx/store';
+import { selectAllContracts } from 'src/global-state/selectors';
+import { reinitializeContracts } from 'src/global-state/actions';
 @Component({
   selector: 'app-mint-panel',
-  standalone: true,
-  imports: [CommonModule],
+
   templateUrl: './mint-panel.component.html',
   styleUrl: './mint-panel.component.css',
 })
@@ -32,12 +34,38 @@ export class MintPanelComponent {
   remainingSupply: number;
   walletCubBalance: number;
   costPerCub: number;
+  $contracts: any;
 
-  constructor(public router: Router, public ethersService: EthersService) {}
+  constructor(
+    public router: Router,
+    public ethersService: EthersService,
+    private store: Store
+  ) {}
   async ngOnInit(): Promise<void> {
-    this.provider = this.ethersService.getProvider();
+    this.$contracts = this.store.select(selectAllContracts);
+    this.provider = await this.ethersService.getProvider();
     this.signer = await this.provider.getSigner();
-    this.setupContracts();
+    this.$contracts.subscribe((contracts) => {
+      debugger;
+      if (
+        contracts.beraFarmContract &&
+        contracts.honeyContract &&
+        contracts.fuzzTokenContract &&
+        contracts.beraCubContract
+      ) {
+        this.beraFarmContract = contracts.beraFarmContract;
+        this.beraFarmMethodCaller = this.beraFarmContract.connect(this.signer);
+        this.beraCubContract = contracts.beraCubContract;
+        this.beraCubMethodCaller = this.beraCubContract.connect(this.signer);
+        this.honeyContract = contracts.honeyContract;
+        this.honeyMethodCaller = this.honeyContract.connect(this.signer);
+        this.fuzzTokenContract = contracts.fuzzTokenContract;
+        this.fuzzTokenMethodCaller = this.fuzzTokenContract.connect(
+          this.signer
+        );
+      }
+    });
+
     this.getCubBalance();
   }
   open() {
@@ -46,6 +74,8 @@ export class MintPanelComponent {
   close() {
     this.showMintPanel = false;
   }
+
+  setupContracts() {}
 
   incrMintAmount() {
     if (this.mintAmount < 20 && this.mintAmount + this.walletCubBalance < 20)
@@ -60,19 +90,8 @@ export class MintPanelComponent {
     this.getMintCost();
   }
 
-  async setupContracts() {
-    this.beraFarmContract = this.ethersService.getBeraFarmContract(
-      this.provider
-    );
-    this.beraFarmMethodCaller = this.beraFarmContract.connect(this.signer);
-
-    this.beraCubContract = this.ethersService.getBeraCubContract(this.provider);
-    this.beraCubMethodCaller = this.beraCubContract.connect(this.signer);
-
-    this.honeyContract = this.ethersService.getHoneyContract(this.provider);
-    this.honeyMethodCaller = this.honeyContract.connect(this.signer);
-    this.fuzzTokenContract = this.ethersService.getTokenContract(this.provider);
-    this.fuzzTokenMethodCaller = this.fuzzTokenContract.connect(this.signer);
+  ngOnDestroy() {
+    // this.$contracts.unsubscribe();
   }
 
   async getCubBalance() {
@@ -84,7 +103,6 @@ export class MintPanelComponent {
   }
 
   async getCostPerCubHoney() {
-    debugger;
     this.costPerCub = this.remainingSupply > 2500 ? 5 : 10;
   }
 
@@ -109,14 +127,12 @@ export class MintPanelComponent {
   }
 
   async getMintCost() {
-    debugger;
     if (this.panelType === 'buyForHoney') {
       const fetchedCost = await this.getTransactionCostHoney();
       this.mintCost = ethers.formatEther(fetchedCost);
       this.getCostPerCubHoney();
     }
     if (this.panelType === 'buyForFuzz') {
-      debugger;
       const fetchedCost = await this.getTransactionCostFuzz();
       this.mintCost = fetchedCost;
     }
@@ -304,6 +320,7 @@ export class MintPanelComponent {
   }
 
   async getRemainingSupplyHoney() {
+    debugger;
     const currentTotalSupply = await this.beraCubContract.totalSupply();
 
     const convertedTotalSupply = parseInt(

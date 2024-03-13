@@ -3,14 +3,16 @@ import { BrowserProvider, ethers } from 'ethers';
 import { Observable, Subject } from 'rxjs';
 import { beraFarm, fuzzToken, mockHoney, beraCub } from './contracts';
 import { beraFarmABI, tokenABI, standardERC20ABI, beraCubABI } from './abis';
+import { Store } from '@ngrx/store';
+import { reinitializeContracts } from 'src/global-state/actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EthersService {
-  constructor() {}
+  constructor(private store: Store) {}
 
-  getProvider(): BrowserProvider {
+  async getProvider(): Promise<BrowserProvider> {
     return new ethers.BrowserProvider(window.ethereum);
   }
 
@@ -36,6 +38,8 @@ export class EthersService {
       method: 'wallet_switchEthereumChain',
       params: [{ chainId: '0x539' }],
     });
+
+    this.store.dispatch(reinitializeContracts());
   }
 
   async onNetworkChanged() {
@@ -43,7 +47,6 @@ export class EthersService {
       let convertedChainId: number = parseInt(chainId, 16);
 
       if (convertedChainId !== 1337) {
-        alert('Please change to the correct network');
         this.changeNetwork();
       }
     });

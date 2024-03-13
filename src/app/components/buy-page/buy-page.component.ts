@@ -7,8 +7,7 @@ import { ethers } from 'ethers';
 
 @Component({
   selector: 'app-buy-page',
-  standalone: true,
-  imports: [MintPanelComponent, CommonModule],
+
   templateUrl: './buy-page.component.html',
   styleUrl: './buy-page.component.css',
 })
@@ -17,9 +16,7 @@ export class BuyPageComponent {
 
   showPanel;
   constructor(public ethersService: EthersService) {}
-  ngOnInit(): void {
-    this.ethersService.checkAndChangeNetwork();
-  }
+  ngOnInit(): void {}
 
   async showMintPanelFunc(panelType) {
     if (panelType === 'buyForHoney') {
@@ -49,7 +46,7 @@ export class BuyPageComponent {
       ticker: '$HONEY',
       buyText: 'BUY FOR $HONEY',
       purchaseInfoText:
-        "Purchase a maximum amount of 20 Cubs per wallet for $HONEY token, Berachain's native stablecoin!  There will be a maximum supply of only 5000 Cubs for $HONEY, the rest will need to be compounded or bought for $FUZZ or bonded for $HONEY.",
+        "Purchase a maximum amount of 20 Cubs per wallet for $HONEY token, Berachain's native stablecoin!  There will be a maximum supply of only 5000 Cubs for $HONEY, the rest will need to be compounded, bought for $FUZZ or bonded for $HONEY.",
     };
   }
 

@@ -289,6 +289,10 @@ export const beraFarmABI = [
     type: 'event',
   },
   {
+    stateMutability: 'payable',
+    type: 'fallback',
+  },
+  {
     inputs: [
       {
         internalType: 'address',
@@ -715,6 +719,25 @@ export const beraFarmABI = [
     type: 'function',
   },
   {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_user',
+        type: 'address',
+      },
+    ],
+    name: 'getWalletCompoundCost',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
     inputs: [],
     name: 'honeyCostFirstBatch',
     outputs: [
@@ -1014,6 +1037,10 @@ export const beraFarmABI = [
     stateMutability: 'nonpayable',
     type: 'function',
   },
+  {
+    stateMutability: 'payable',
+    type: 'receive',
+  },
 ];
 
 export const tokenABI = [
@@ -1224,6 +1251,19 @@ export const tokenABI = [
     type: 'function',
   },
   {
+    inputs: [],
+    name: 'beraFarmAddress',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
     inputs: [
       {
         internalType: 'address',
@@ -1363,6 +1403,25 @@ export const tokenABI = [
     type: 'function',
   },
   {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'toCheck_',
+        type: 'address',
+      },
+    ],
+    name: 'isControllerAddress',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
     inputs: [],
     name: 'liquidityPool',
     outputs: [
@@ -1487,6 +1546,19 @@ export const tokenABI = [
     type: 'function',
   },
   {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_beraFarmAddress',
+        type: 'address',
+      },
+    ],
+    name: 'setBeraFarmAddress',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
     inputs: [],
     name: 'symbol',
     outputs: [
@@ -1494,6 +1566,19 @@ export const tokenABI = [
         internalType: 'string',
         name: '',
         type: 'string',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'totalBurned',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
     ],
     stateMutability: 'view',

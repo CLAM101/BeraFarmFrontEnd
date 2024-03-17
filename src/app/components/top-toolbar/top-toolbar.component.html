@@ -30,6 +30,12 @@
     <h3 class="text-xl">{{ getCubsText }}</h3>
   </button>
   <button
+    (mousedown)="router.navigate(['playerDashboard'])"
+    class="border-8 border-zinc-950 opacity-100 h-full w-1/4 active:opacity-15 z-20 RobotoMonoBold font-black"
+  >
+    <h3 class="text-xl">PLAYER DAHSBOARD</h3>
+  </button>
+  <button
     (click)="router.navigate([''])"
     class="rounded-r-md border-8 border-zinc-950 opacity-100 h-full w-1/6 active:opacity-15 z-20 RobotoMonoBold font-black"
   >

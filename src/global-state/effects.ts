@@ -13,7 +13,7 @@ import { EthersService } from 'src/app/services/ethers-service/ethers-service.se
 export class ContractEffects {
   constructor(
     private actions$: Actions,
-    private ethersService: EthersService // Assuming you have a service for interacting with Ethereum
+    private ethersService: EthersService
   ) {}
 
   reinitializeContracts$ = createEffect(() =>

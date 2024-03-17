@@ -1,0 +1,70 @@
+<div
+  class="w-full flex flex-row justify-center items-center relative z-0 h-screen"
+>
+  <div
+    class="w-full h-screen flex justify-center items-center relative z-0"
+    style="
+      background-image: url('../../../assets/images/mint-page-background.png');
+      background-repeat: repeat-y;
+      background-size: cover;
+    "
+  ></div>
+
+  <div
+    class="bg-opacity-85 select-none mt-14 flex flex-row absolute h-156 w-190 text-center justify-center items-center border-zinc-950 bg-yellow-300 border-8 rounded-md"
+  >
+    <div
+      class="flex flex-col text-center items-center justify-center h-156 w-80"
+    >
+      <h1 class="select-none text-3xl RobotoMonoBold font-black mb-10">
+        OWNED CUBS {{ playerCubBalance }}
+      </h1>
+      <div
+        class="grid grid-cols-5 h-144 w-156 border-zinc-950 border-8 m-3 text-left items-start justify-start"
+      >
+        <div
+          *ngFor="let cub of ownedCubsArray"
+          class="relative w-28 h-28 text-center items-center border-zinc-950 border-8 m-3"
+        >
+          <img src="../../../assets/images/bear-cub.webp" alt="" />
+        </div>
+        <div
+          *ngIf="!playerCubBalance"
+          class="w-155 h-128 text-center ml-8 mt-52"
+        >
+          <h1 class="select-none text-3xl RobotoMonoBold font-black mb-10">
+            YOU CURRENTLY OWN NO CUBS GOT TO GET CUBS TO START EARNING REWARDS
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col text-center items-center h-156 w-80">
+      <div class="h-128 w-75 mt-10">
+        <h1 class="select-none text-3xl RobotoMonoBold font-black mb-10">
+          CURRENT $FUZZ PRICE ${{ currentFuzzPrice }}
+        </h1>
+        <h1 class="select-none text-3xl RobotoMonoBold font-black mb-10">
+          REMAINING CUB SUPPLY {{ remainingCubSupply }}
+        </h1>
+        <h1 class="select-none text-3xl RobotoMonoBold font-black mb-10">
+          EMISSIONS PER CUB {{ emissionsPerCub }}
+        </h1>
+        <h1 class="select-none text-3xl RobotoMonoBold font-black mb-10">
+          YOUR CURRENT DAILY REWARDS {{ currentDailyRewards }} $FUZZ
+        </h1>
+        <h1 class="select-none text-3xl RobotoMonoBold font-black mb-10">
+          UNCLAIMED REWARDS {{ unclaimedRewards }} $FUZZ
+        </h1>
+        <h1 class="select-none text-3xl RobotoMonoBold font-black mb-10">
+          TOTAL $FUZZ BURNED {{ totalBurned }}
+        </h1>
+        <h1 class="select-none text-3xl RobotoMonoBold font-black mb-10">
+          CURRENT CUB PRICE IN $FUZZ {{ currentCubPriceForFuzz }}
+        </h1>
+        <h1 class="select-none text-3xl RobotoMonoBold font-black mb-10">
+          YOUR COST TO COMPOUND IN $FUZZ {{ playerCompoundCost }}
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>

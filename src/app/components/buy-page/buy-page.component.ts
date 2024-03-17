@@ -19,6 +19,7 @@ export class BuyPageComponent {
   ngOnInit(): void {}
 
   async showMintPanelFunc(panelType) {
+    this.ethersService.checkAndChangeNetwork();
     if (panelType === 'buyForHoney') {
       this.mintPanel.panelType = 'buyForHoney';
       await this.configureBuyForHoney();

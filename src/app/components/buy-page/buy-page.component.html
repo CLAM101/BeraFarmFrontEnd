@@ -1,28 +1,16 @@
-<div class="w-full h-screen flex justify-center items-center relative z-0">
-  <img
-    class="h-full w-full absolute z-0"
-    src="../../../assets/images/background.png"
-    alt=""
-  />
-
-  <div *ngIf="!mintPanel.showMintPanel" class="absolute flex flex-col w-144">
-    <button
-      (click)="showMintPanelFunc('buyForHoney')"
-      class="bg-opacity-85 mt-11 rounded-md border-8 border-zinc-950 opacity-100 h-28 w-full active:opacity-15 z-20 RobotoMonoBold font-black bg-yellow-300"
-    >
-      <h3 class="text-3xl">BUY CUBS FOR $HONEY</h3>
+<div
+  class="no-scrollbar relative z-0 flex h-screen w-full items-center justify-center align-middle"
+>
+  <div
+    *ngIf="!mintPanel.showMintPanel"
+    class="relative mb-50 flex w-full flex-col items-center justify-center"
+  >
+    <button (click)="showMintPanelFunc('buyForHoney')" class="buy-button">
+      BUY CUBS FOR $HONEY
     </button>
-    <button
-      (click)="showMintPanelFunc('buyForFuzz')"
-      class="bg-opacity-85 mt-11 rounded-md border-8 border-zinc-950 opacity-100 h-28 w-full active:opacity-15 z-20 RobotoMonoBold font-black bg-yellow-300"
-    >
-      <h3 class="text-3xl">BUY CUBS FOR $FUZZ</h3>
-    </button>
-    <button
-      (click)="showMintPanelFunc('bondForHoney')"
-      class="bg-opacity-85 mt-11 rounded-md border-8 border-zinc-950 opacity-100 h-28 w-full active:opacity-15 z-20 RobotoMonoBold font-black bg-yellow-300"
-    >
-      <h3 class="text-3xl">BOND CUBS FOR $HONEY</h3>
+    <button (click)="showMintPanelFunc('buyForFuzz')" class="buy-button">BUY CUBS FOR $FUZZ</button>
+    <button (click)="showMintPanelFunc('bondForHoney')" class="buy-button">
+      BOND CUBS FOR $HONEY
     </button>
   </div>
 

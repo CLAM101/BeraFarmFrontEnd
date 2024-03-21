@@ -33,7 +33,7 @@ export class PlayerDashboardComponent {
 
   constructor(
     private ethersService: EthersService,
-    private gameService: GameServiceService
+    private gameService: GameServiceService,
   ) {}
   async ngOnInit(): Promise<void> {
     const {
@@ -57,43 +57,31 @@ export class PlayerDashboardComponent {
     this.fuzzTokenContract = fuzzTokenContract;
     this.fuzzTokenMethodCaller = fuzzTokenMethodCaller;
 
-    this.playerCubBalance = await this.gameService.getCubBalance(
-      this.beraCubContract
-    );
+    this.playerCubBalance = await this.gameService.getCubBalance(this.beraCubContract);
 
-    this.currentFuzzPrice = await this.gameService.getFuzzPrice(
-      this.beraFarmContract
-    );
+    this.currentFuzzPrice = await this.gameService.getFuzzPrice(this.beraFarmContract);
 
     this.remainingCubSupply = await this.gameService.getGeneralRemainingSupply(
-      this.beraCubContract
+      this.beraCubContract,
     );
 
-    this.emissionsPerCub = await this.gameService.getEmissionsPerCub(
-      this.beraFarmContract
-    );
+    this.emissionsPerCub = await this.gameService.getEmissionsPerCub(this.beraFarmContract);
 
     this.ownedCubsArray = this.generateOwnedCubsArray();
 
     this.currentDailyRewards = this.calculateCurrentDailyRewards();
 
-    this.unclaimedRewards = await this.gameService.getUnclaimedRewards(
-      this.beraFarmContract
-    );
+    const rewards = await this.gameService.getUnclaimedRewards(this.beraFarmContract);
 
-    this.totalBurned = await this.gameService.getTotalBurned(
-      this.fuzzTokenContract
-    );
+    this.unclaimedRewards = parseFloat(rewards.toFixed(2));
+
+    this.totalBurned = await this.gameService.getTotalBurned(this.fuzzTokenContract);
 
     this.currentCubPriceForFuzz = parseFloat(
-      ethers.formatEther(
-        await this.gameService.getCostPerCubFuzz(this.beraFarmContract)
-      )
+      ethers.formatEther(await this.gameService.getCostPerCubFuzz(this.beraFarmContract)),
     );
 
-    this.playerCompoundCost = await this.gameService.getPlayerCompoundCost(
-      this.beraFarmContract
-    );
+    this.playerCompoundCost = await this.gameService.getPlayerCompoundCost(this.beraFarmContract);
   }
 
   generateOwnedCubsArray() {

@@ -1,44 +1,23 @@
-<div
-  class="rounded-md bg-opacity-85 h-16 flex justify-between w-80 mt-7 z-10 absolute bg-yellow-300 ml-12"
->
-  <button
-    (mousedown)="ethersService.connectWallet()"
-    class="rounded-l-md border-8 border-zinc-950 opacity-100 h-full w-1/4 active:opacity-15 z-20 RobotoMonoBold font-black"
-  >
-    <h3 class="text-xl">{{ connectWalletText }}</h3>
+<div [ngClass]="[' no-scrollbar relative flex items-center justify-between align-middle', 'z-10 ']">
+  <button (mousedown)="ethersService.connectWallet()" class="toolbar-button">
+    {{ connectWalletText }}
   </button>
-  <div class="h-full w-5/12 border-8 border-zinc-950">
-    <h1
-      class="mt-2 text-balance RobotoMonoBold font-black justify-center items-center ml-14 select-none"
-    >
-      IT AIN'T MUCH BUT..... YEAH IT AIN'T MUCH
-    </h1>
-  </div>
+  <div class="toolbar-button">IT AIN'T MUCH BUT..... YEAH IT AIN'T MUCH</div>
 
-  <button
-    (mousedown)="mouseDown('getFuzz')"
-    (mouseup)="mouseUp('getFuzz')"
-    class="border-8 border-zinc-950 opacity-100 w-1/4 h-full active:opacity-15 z-20 RobotoMonoBold font-black"
-  >
-    <h3 class="text-xl">{{ getFuzzText }}</h3>
+  <button (mousedown)="mouseDown('getFuzz')" (mouseup)="mouseUp('getFuzz')" class="toolbar-button">
+    {{ getFuzzText }}
   </button>
   <button
     (mousedown)="router.navigate(['buyPage'])"
     (mouseup)="mouseUp('getCubs')"
-    class="border-8 border-zinc-950 opacity-100 h-full w-1/4 active:opacity-15 z-20 RobotoMonoBold font-black"
+    class="toolbar-button"
   >
-    <h3 class="text-xl">{{ getCubsText }}</h3>
+    {{ getCubsText }}
   </button>
-  <button
-    (mousedown)="router.navigate(['playerDashboard'])"
-    class="border-8 border-zinc-950 opacity-100 h-full w-1/4 active:opacity-15 z-20 RobotoMonoBold font-black"
-  >
-    <h3 class="text-xl">PLAYER DAHSBOARD</h3>
+  <button (mousedown)="router.navigate(['playerDashboard'])" class="toolbar-button">
+    PLAYER DAHSBOARD
   </button>
-  <button
-    (click)="router.navigate([''])"
-    class="rounded-r-md border-8 border-zinc-950 opacity-100 h-full w-1/6 active:opacity-15 z-20 RobotoMonoBold font-black"
-  >
-    <h3 class="text-xl">{{ homeText }}</h3>
+  <button (click)="router.navigate([''])" class="toolbar-button">
+    {{ homeText }}
   </button>
 </div>

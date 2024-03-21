@@ -2,24 +2,128 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "Minecraftia";
-  src: url("./assets/fonts/Minecraftia-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "RobotoMono-Bold";
-  src: url("./assets/fonts/RobotoMono-Bold.ttf") format("truetype");
-}
-
 @layer utilities {
-  /* Hide scrollbar for Chrome, Safari and Opera */
+  @font-face {
+    font-family: 'Minecraftia';
+    src: url('./assets/fonts/Minecraftia-Regular.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'RobotoMonoBold';
+    src: url('./assets/fonts/RobotoMono-Bold.ttf') format('truetype');
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  /* Hide scrollbar for IE, Edge and Firefox */
+
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+  .buy-button {
+    @apply w-70% rounded-md  border-8 border-zinc-950 bg-yellow-300 bg-opacity-85 font-RobotoMonoBold font-black opacity-100 active:opacity-15;
+  }
+
+  .toolbar-button {
+    @apply z-20 w-20% rounded-md border-8 border-zinc-950 bg-yellow-300 bg-opacity-85 font-RobotoMonoBold font-black opacity-100 active:opacity-15;
+  }
+
+  .action-button {
+    @apply mt-7 h-20 w-128 select-none rounded-md border-8 border-zinc-950 font-RobotoMonoBold text-3xl font-black active:opacity-15;
+  }
+
+  .main-mint-panel {
+    @apply relative flex h-144 w-160 select-none flex-row items-center justify-center rounded-md border-8 border-zinc-950 bg-yellow-300 bg-opacity-85 text-center;
+  }
+
+  .info-text {
+    @apply select-none font-RobotoMonoBold  font-black;
+  }
+
+  .mint-panel-bear-img {
+    @apply relative mt-3 flex h-64 w-64 select-none rounded-md border-8 border-zinc-950;
+  }
+
+  .heading-text {
+    @apply mt-10 select-none font-RobotoMonoBold  font-black;
+  }
+
+  @screen xs {
+    /* Toolbar */
+    .toolbar-button {
+      @apply text-3xs ml-0.2 h-18  border-4;
+    }
+
+    /* Buy Page */
+    .buy-button {
+      @apply mt-10 h-28  border-4;
+    }
+
+    /* Mint Panel Elements */
+    .action-button {
+      @apply z-20 h-14 w-40 text-sm;
+    }
+    .main-mint-panel {
+      @apply h-120 w-80;
+    }
+    .info-text {
+      @apply text-2xs mt-3;
+    }
+    .mint-panel-bear-img {
+      @apply h-20 w-20;
+    }
+    .heading-text {
+      @apply text-xl;
+    }
+  }
+
+  @screen sm {
+    s .buy-button {
+      @apply mt-4 h-28  border-4;
+    }
+    .toolbar-button {
+      @apply text-2xs  h-18  border-4;
+    }
+  }
+
+  @screen md {
+    .buy-button {
+      @apply mt-10 h-28  border-8;
+    }
+    .toolbar-button {
+      @apply text-2xs ml-0.2 h-18  border-8;
+    }
+  }
+
+  @screen lg {
+    .buy-button {
+      @apply mt-5 h-38  border-8;
+    }
+    .toolbar-button {
+      @apply ml-0.2 h-18  border-8 text-sm;
+    }
+  }
+
+  @screen xl {
+    .buy-button {
+      @apply mt-5 h-38  border-8 text-lg;
+    }
+    .toolbar-button {
+      @apply ml-0.2 h-18  border-8 text-lg;
+    }
+  }
+
+  @screen xxl {
+    .buy-button {
+      @apply mt-5 h-38 w-70% border-8 text-2xl;
+    }
+    .toolbar-button {
+      @apply ml-0.2 h-18  border-8 text-lg;
+    }
+  }
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }

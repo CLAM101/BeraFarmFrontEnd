@@ -1,6 +1,6 @@
 <div *ngIf="showMintPanel" class="main-mint-panel">
-  <div *ngIf="mintPanelConfig" class="flex h-144 w-80 flex-col items-center text-center">
-    <h1 class="meading-text">
+  <div *ngIf="mintPanelConfig" class="mint-panel-first">
+    <h1 class="heading-text">
       {{ mintPanelConfig.mintPanelTitle }}
     </h1>
 
@@ -25,13 +25,8 @@
 
     <h1>{{ mintPanelConfig.remainingSupply }}</h1>
 
-    <div
-      class="mt-3 flex select-none flex-row items-center justify-end rounded-md border-8 border-zinc-950 text-center"
-    >
-      <button
-        (click)="decrMintAmount()"
-        class="mr-20 select-none border-r-8 border-zinc-950 active:opacity-15"
-      >
+    <div class="mint-panel-inc-dcr-button-panel">
+      <button (click)="decrMintAmount()" class="decr-button">
         <img
           src="../../../assets/minus-sign-of-a-line-in-horizontal-position-svgrepo-com.svg"
           alt="Plus SVG"
@@ -40,23 +35,20 @@
 
       <h1 class="RobotoMonoBold text-3xl font-black">{{ mintAmount }}</h1>
 
-      <button
-        (click)="incrMintAmount()"
-        class="ml-20 select-none border-l-8 border-zinc-950 active:opacity-15"
-      >
+      <button (click)="incrMintAmount()" class="incr-button">
         <img src="../../../assets/plus-svgrepo-com.svg" alt="Plus SVG" />
       </button>
     </div>
   </div>
-  <div *ngIf="mintPanelConfig" class="flex h-144 w-80 flex-col items-center justify-end">
-    <div class="w-75 flex h-72 flex-col items-center justify-center">
+  <div *ngIf="mintPanelConfig" class="mint-panel-second">
+    <div class="mint-panel-second-info-section">
       <h1 class="heading-text leading-relaxed">YOUR CUB BALANCE: {{ walletCubBalance }}</h1>
       <h1 class="info-text leading-relaxed">
         {{ mintPanelConfig.purchaseInfoText }}
       </h1>
     </div>
 
-    <div class="mt-10 flex h-72 w-full flex-col items-center justify-center">
+    <div class="mint-panel-second-button-section">
       <button
         *ngIf="!allowanceSufficient"
         (click)="

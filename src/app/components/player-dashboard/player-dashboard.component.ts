@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { EthersService } from 'src/app/services/ethers-service/ethers-service.service';
 import { GameServiceService } from 'src/app/services/game-service/game-service.service';
 import { CommonModule } from '@angular/common';
@@ -30,11 +30,14 @@ export class PlayerDashboardComponent {
   totalBurned: number;
   currentCubPriceForFuzz: number;
   playerCompoundCost: number;
+  showCubGrid;
 
   constructor(
     private ethersService: EthersService,
     private gameService: GameServiceService,
   ) {}
+
+  @HostListener('window:resize', ['$event'])
   async ngOnInit(): Promise<void> {
     const {
       beraFarmContract,
@@ -67,8 +70,6 @@ export class PlayerDashboardComponent {
 
     this.emissionsPerCub = await this.gameService.getEmissionsPerCub(this.beraFarmContract);
 
-    this.ownedCubsArray = this.generateOwnedCubsArray();
-
     this.currentDailyRewards = this.calculateCurrentDailyRewards();
 
     const rewards = await this.gameService.getUnclaimedRewards(this.beraFarmContract);
@@ -82,6 +83,8 @@ export class PlayerDashboardComponent {
     );
 
     this.playerCompoundCost = await this.gameService.getPlayerCompoundCost(this.beraFarmContract);
+
+    this.checkSizeAndGenerateCubs();
   }
 
   generateOwnedCubsArray() {
@@ -90,6 +93,22 @@ export class PlayerDashboardComponent {
       ownedCubs.push(i);
     }
     return ownedCubs;
+  }
+
+  onResize(event) {
+    this.checkSizeAndGenerateCubs();
+  }
+
+  private checkScreenSize(width: number) {
+    this.showCubGrid = width >= 850;
+  }
+
+  checkSizeAndGenerateCubs() {
+    this.checkScreenSize(window.innerWidth);
+
+    if (this.showCubGrid) {
+      this.ownedCubsArray = this.generateOwnedCubsArray();
+    }
   }
 
   calculateCurrentDailyRewards() {

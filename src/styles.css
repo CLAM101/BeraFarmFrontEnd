@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
+@layer components {
   @font-face {
     font-family: 'Minecraftia';
     src: url('./assets/fonts/Minecraftia-Regular.ttf') format('truetype');
@@ -13,14 +13,10 @@
     src: url('./assets/fonts/RobotoMono-Bold.ttf') format('truetype');
   }
 
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
+  .action-button {
+    @apply h-20 w-128 select-none rounded-md  border-zinc-950 font-RobotoMonoBold text-3xl font-black active:opacity-15;
   }
 
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
   .buy-button {
     @apply w-70% rounded-md  border-8 border-zinc-950 bg-yellow-300 bg-opacity-85 font-RobotoMonoBold font-black opacity-100 active:opacity-15;
   }
@@ -29,30 +25,10 @@
     @apply z-20 w-20% rounded-md border-8 border-zinc-950 bg-yellow-300 bg-opacity-85 font-RobotoMonoBold font-black opacity-100 active:opacity-15;
   }
 
-  .action-button {
-    @apply mt-7 h-20 w-128 select-none rounded-md border-8 border-zinc-950 font-RobotoMonoBold text-3xl font-black active:opacity-15;
-  }
-
-  .main-mint-panel {
-    @apply relative flex h-144 w-160 select-none flex-row items-center justify-center rounded-md border-8 border-zinc-950 bg-yellow-300 bg-opacity-85 text-center;
-  }
-
-  .info-text {
-    @apply select-none font-RobotoMonoBold  font-black;
-  }
-
-  .mint-panel-bear-img {
-    @apply relative mt-3 flex h-64 w-64 select-none rounded-md border-8 border-zinc-950;
-  }
-
-  .heading-text {
-    @apply mt-10 select-none font-RobotoMonoBold  font-black;
-  }
-
   @screen xs {
     /* Toolbar */
     .toolbar-button {
-      @apply text-3xs ml-0.2 h-18  border-4;
+      @apply ml-0.2 h-18 border-4  text-3xs;
     }
 
     /* Buy Page */
@@ -60,39 +36,34 @@
       @apply mt-10 h-28  border-4;
     }
 
-    /* Mint Panel Elements */
     .action-button {
-      @apply z-20 h-14 w-40 text-sm;
-    }
-    .main-mint-panel {
-      @apply h-120 w-80;
-    }
-    .info-text {
-      @apply text-2xs mt-3;
-    }
-    .mint-panel-bear-img {
-      @apply h-20 w-20;
-    }
-    .heading-text {
-      @apply text-xl;
+      @apply z-20 h-16 w-58 border-4 text-sm;
     }
   }
 
   @screen sm {
-    s .buy-button {
+    .buy-button {
       @apply mt-4 h-28  border-4;
     }
     .toolbar-button {
-      @apply text-2xs  h-18  border-4;
+      @apply h-18  border-4  text-3xs;
+    }
+
+    .action-button {
+      @apply z-20 h-16 w-68  text-sm;
     }
   }
 
   @screen md {
     .buy-button {
-      @apply mt-10 h-28  border-8;
+      @apply mt-10 h-28  border-4;
     }
     .toolbar-button {
-      @apply text-2xs ml-0.2 h-18  border-8;
+      @apply ml-0.2 h-18 border-4  text-2xs;
+    }
+
+    .action-button {
+      @apply z-20 h-22 w-110  text-lg;
     }
   }
 
@@ -103,6 +74,10 @@
     .toolbar-button {
       @apply ml-0.2 h-18  border-8 text-sm;
     }
+
+    .action-button {
+      @apply z-20 h-20 w-130 border-4 text-2xl;
+    }
   }
 
   @screen xl {
@@ -110,7 +85,10 @@
       @apply mt-5 h-38  border-8 text-lg;
     }
     .toolbar-button {
-      @apply ml-0.2 h-18  border-8 text-lg;
+      @apply ml-0.2 h-18  border-8 text-sm;
+    }
+    .action-button {
+      @apply z-20 h-30 w-90 border-8 text-3xl;
     }
   }
 
@@ -120,6 +98,117 @@
     }
     .toolbar-button {
       @apply ml-0.2 h-18  border-8 text-lg;
+    }
+    .action-button {
+      @apply z-20 h-30 w-100 border-8 text-3xl;
+    }
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .medium-heading-text {
+    @apply select-none font-RobotoMonoBold text-3xl font-black;
+  }
+
+  .small-heading-text {
+    @apply select-none font-RobotoMonoBold text-2xl font-black;
+  }
+
+  .border-background {
+    @apply border-only bg-yellow-300 bg-opacity-85;
+  }
+
+  .border-only {
+    @apply rounded-md border-zinc-950;
+  }
+
+  .all-center {
+    @apply items-center justify-center text-center;
+  }
+
+  .all-start {
+    @apply items-start justify-start text-start;
+  }
+
+  .all-end {
+    @apply items-end justify-end;
+  }
+
+  .flex-col-set {
+    @apply flex flex-col;
+  }
+
+  .flex-row-set {
+    @apply flex flex-row;
+  }
+
+  @screen xs {
+    .medium-heading-text {
+      @apply select-none font-RobotoMonoBold text-sm font-black;
+    }
+
+    .small-heading-text {
+      @apply select-none font-RobotoMonoBold text-xs font-black;
+    }
+    .border-only {
+      @apply border-4;
+    }
+  }
+
+  @screen sm {
+    .medium-heading-text {
+      @apply select-none font-RobotoMonoBold text-sm font-black;
+    }
+    .small-heading-text {
+      @apply select-none font-RobotoMonoBold text-xs font-black;
+    }
+  }
+
+  @screen md {
+    .medium-heading-text {
+      @apply select-none font-RobotoMonoBold text-lg font-black;
+    }
+
+    .small-heading-text {
+      @apply select-none font-RobotoMonoBold text-base font-black;
+    }
+  }
+
+  @screen lg {
+    .medium-heading-text {
+      @apply select-none font-RobotoMonoBold text-xl font-black;
+    }
+
+    .small-heading-text {
+      @apply select-none font-RobotoMonoBold text-lg font-black;
+    }
+  }
+
+  @screen xl {
+    .medium-heading-text {
+      @apply select-none font-RobotoMonoBold text-2xl font-black;
+    }
+
+    .small-heading-text {
+      @apply select-none font-RobotoMonoBold text-xl font-black;
+    }
+  }
+
+  @screen xxl {
+    .medium-heading-text {
+      @apply select-none font-RobotoMonoBold text-2xl font-black;
+    }
+
+    .small-heading-text {
+      @apply select-none font-RobotoMonoBold text-xl font-black;
     }
   }
 }

@@ -3,27 +3,28 @@ module.exports = {
   content: ['./src/**/*.{html,ts}'],
   theme: {
     screens: {
-      xs: '350px', // Adding a custom smaller breakpoint
-      sm: '430px',
-      md: '768px',
+      xs: '350px',
+      sm: '390px',
+      md: '740px',
       lg: '1024px',
       xl: '1280px',
       xxl: '1536px',
-      // Add more breakpoints if needed
     },
+
     extend: {
       fontFamily: {
-        custom: ['Minecraftia', 'sans-serif'], // Add your custom font here
+        custom: ['Minecraftia', 'sans-serif'],
         RobotoMonoBold: ['RobotoMono-Bold', 'sans-serif'],
       },
 
       fontSize: {
-        '2xs': '.625rem', // 10px
-        '3xs': '.5rem', // 8px
-        '4xs': '.375rem', // 6px
-        '5xs': '.25rem', // 4px
-        '6xs': '.125rem', // 2px
+        '2xs': '.625rem',
+        '3xs': '.5rem',
+        '4xs': '.375rem',
+        '5xs': '.25rem',
+        '6xs': '.125rem',
       },
+
       spacing: {
         0.1: '0.025rem',
         0.2: '0.05rem',
@@ -129,6 +130,18 @@ module.exports = {
         172: '65rem',
         174: '66rem',
         176: '67rem',
+        178: '68rem',
+        180: '69rem',
+        182: '70rem',
+        184: '71rem',
+        186: '72rem',
+        188: '73rem',
+        190: '74rem',
+        192: '75rem',
+        194: '76rem',
+        196: '77rem',
+        198: '78rem',
+        200: '79rem',
         '5%': '5%',
         '10%': '10%',
         '15%': '15%',
@@ -149,8 +162,6 @@ module.exports = {
         '90%': '90%',
         '95%': '95%',
         '100%': '100%',
-
-        // Add more custom sizes as needed
       },
     },
   },

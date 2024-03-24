@@ -1,0 +1,313 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .action-button {
+    @apply mt-7 h-20 w-128 select-none rounded-md  border-zinc-950 font-RobotoMonoBold text-3xl font-black active:opacity-15;
+  }
+
+  .main-mint-panel {
+    @apply relative flex h-144 w-160 select-none flex-row items-center justify-center rounded-md  border-zinc-950 bg-yellow-300 bg-opacity-85 text-center;
+  }
+
+  .info-text {
+    @apply select-none font-RobotoMonoBold  font-black;
+  }
+
+  .mint-panel-bear-img {
+    @apply relative mt-3 flex  select-none rounded-md  border-zinc-950;
+  }
+
+  .mint-panel-first {
+    @apply flex   items-center text-center;
+  }
+
+  .mint-panel-second {
+    @apply flex   items-center justify-end;
+  }
+
+  .mint-panel-second-info-section {
+    @apply mt-6 flex  flex-col items-center justify-center;
+  }
+
+  .heading-text {
+    @apply select-none font-RobotoMonoBold  font-black;
+  }
+
+  .incr-button {
+    @apply ml-20 select-none  border-zinc-950 active:opacity-15;
+  }
+
+  .decr-button {
+    @apply mr-20 select-none  border-zinc-950 active:opacity-15;
+  }
+
+  .mint-panel-inc-dcr-button-panel {
+    @apply mt-3 flex select-none flex-row items-center justify-end rounded-md  border-zinc-950 text-center;
+  }
+
+  .mint-panel-second-button-section {
+    @apply flex  w-full flex-col items-center justify-center;
+  }
+
+  @screen xs {
+    .action-button {
+      @apply z-20 h-38 w-58 border-4 text-sm;
+    }
+    .main-mint-panel {
+      @apply flex h-120 w-80 flex-col border-4;
+    }
+    .info-text {
+      @apply mt-3 text-2xs;
+    }
+    .mint-panel-bear-img {
+      @apply h-20 w-20 border-4;
+    }
+    .mint-panel-first {
+      @apply h-70 w-80 flex-col items-center justify-start text-center;
+    }
+
+    .mint-panel-inc-dcr-button-panel {
+      @apply mt-3 flex select-none flex-row items-center justify-end rounded-md border-4 border-zinc-950 text-center;
+    }
+    .mint-panel-second {
+      @apply h-90 w-80 flex-col items-center justify-start;
+    }
+    .mint-panel-second-info-section {
+      @apply flex h-38 w-72 flex-col items-center justify-start;
+    }
+
+    .mint-panel-second-button-section {
+      @apply h-38;
+    }
+    .heading-text {
+      @apply mt-3 text-xl;
+    }
+
+    .incr-button {
+      @apply ml-20 select-none border-l-4 border-zinc-950 active:opacity-15;
+    }
+
+    .decr-button {
+      @apply mr-20 select-none border-r-4 border-zinc-950 active:opacity-15;
+    }
+  }
+
+  @screen sm {
+    .action-button {
+      @apply z-20 h-38 w-68 border-4 text-sm;
+    }
+    .main-mint-panel {
+      @apply flex h-140 w-88 flex-col border-4;
+    }
+    .info-text {
+      @apply mt-3 text-xs;
+    }
+    .mint-panel-bear-img {
+      @apply h-24 w-24 border-4;
+    }
+    .mint-panel-first {
+      @apply h-84 w-80 flex-col items-center justify-start text-center;
+    }
+
+    .mint-panel-inc-dcr-button-panel {
+      @apply mt-10 flex select-none flex-row items-center justify-end rounded-md border-4 border-zinc-950 text-center;
+    }
+    .mint-panel-second {
+      @apply h-90 w-80 flex-col items-center justify-center;
+    }
+    .mint-panel-second-info-section {
+      @apply flex h-38 w-72 flex-col items-center justify-start;
+    }
+
+    .mint-panel-second-button-section {
+      @apply h-38;
+    }
+    .heading-text {
+      @apply mt-3 text-xl;
+    }
+
+    .incr-button {
+      @apply ml-20 select-none border-l-4 border-zinc-950 active:opacity-15;
+    }
+
+    .decr-button {
+      @apply mr-20 select-none border-r-4 border-zinc-950 active:opacity-15;
+    }
+  }
+
+  @screen md {
+    .heading-text {
+      @apply mt-3 text-2xl;
+    }
+
+    .action-button {
+      @apply z-20 h-48 w-110 border-4 text-base;
+    }
+    .main-mint-panel {
+      @apply flex h-158 w-120 flex-col border-4;
+    }
+    .info-text {
+      @apply mt-3 text-base;
+    }
+    .mint-panel-bear-img {
+      @apply h-44 w-44 border-4;
+    }
+    .mint-panel-first {
+      @apply h-100 w-100 flex-col items-center justify-start text-center;
+    }
+
+    .mint-panel-second {
+      @apply h-100 w-100 flex-col items-center justify-start;
+    }
+    .mint-panel-second-info-section {
+      @apply flex h-38 w-88 flex-col items-center justify-start;
+    }
+
+    .mint-panel-second-button-section {
+      @apply mt-18 h-48;
+    }
+
+    .mint-panel-inc-dcr-button-panel {
+      @apply mt-10 flex select-none flex-row items-center justify-end rounded-md border-4 border-zinc-950 text-center;
+    }
+    .incr-button {
+      @apply ml-40 select-none border-l-4 border-zinc-950 active:opacity-15;
+    }
+
+    .decr-button {
+      @apply mr-40 select-none border-r-4 border-zinc-950 active:opacity-15;
+    }
+  }
+
+  @screen lg {
+    .heading-text {
+      @apply mt-3 text-3xl;
+    }
+
+    .action-button {
+      @apply z-20 h-48 w-130 border-4 text-2xl;
+    }
+    .main-mint-panel {
+      @apply flex h-176 w-150 flex-col justify-start border-4;
+    }
+    .info-text {
+      @apply mt-3 text-lg;
+    }
+    .mint-panel-bear-img {
+      @apply h-58 w-58 border-4;
+    }
+    .mint-panel-first {
+      @apply mt-6 h-100 w-full flex-col items-center justify-start text-center;
+    }
+
+    .mint-panel-second {
+      @apply h-100 w-full flex-col items-center justify-start;
+    }
+    .mint-panel-second-info-section {
+      @apply flex h-38 w-120 flex-col items-center justify-start;
+    }
+
+    .mint-panel-second-button-section {
+      @apply mt-22 h-66;
+    }
+
+    .mint-panel-inc-dcr-button-panel {
+      @apply mt-8 flex select-none flex-row items-center justify-end rounded-md border-4 border-zinc-950 text-center;
+    }
+    .incr-button {
+      @apply ml-58 select-none border-l-4 border-zinc-950 active:opacity-15;
+    }
+
+    .decr-button {
+      @apply mr-58 select-none border-r-4 border-zinc-950 active:opacity-15;
+    }
+  }
+
+  @screen xl {
+    .heading-text {
+      @apply mb-5 text-3xl;
+    }
+
+    .action-button {
+      @apply z-20 h-30 w-110 border-8 text-3xl;
+    }
+    .main-mint-panel {
+      @apply mb-30 flex h-130 w-190 flex-row justify-center border-8;
+    }
+    .info-text {
+      @apply mt-3 text-xl;
+    }
+    .mint-panel-bear-img {
+      @apply h-54 w-54 border-8;
+    }
+    .mint-panel-first {
+      @apply mt-6 h-full w-1/2 flex-col items-center justify-start text-center;
+    }
+
+    .mint-panel-second {
+      @apply h-full w-1/2 flex-col items-center justify-start;
+    }
+    .mint-panel-second-info-section {
+      @apply flex h-74 w-100 flex-col items-center justify-center;
+    }
+
+    .mint-panel-second-button-section {
+      @apply h-66;
+    }
+
+    .mint-panel-inc-dcr-button-panel {
+      @apply mt-20 flex select-none flex-row items-center justify-end rounded-md border-8 border-zinc-950 text-center;
+    }
+    .incr-button {
+      @apply ml-44 h-28 select-none border-l-8 border-zinc-950 active:opacity-15;
+    }
+    .decr-button {
+      @apply mr-44 h-28 select-none border-r-8 border-zinc-950 active:opacity-15;
+    }
+  }
+
+  @screen xxl {
+    .heading-text {
+      @apply mb-5 text-3xl;
+    }
+
+    .action-button {
+      @apply z-20 h-30 w-110 border-8 text-3xl;
+    }
+    .main-mint-panel {
+      @apply mb-14 flex h-130 w-190 flex-row justify-center border-8;
+    }
+    .info-text {
+      @apply mt-3 text-xl;
+    }
+    .mint-panel-bear-img {
+      @apply h-58 w-58 border-8;
+    }
+    .mint-panel-first {
+      @apply mt-6 h-full w-1/2 flex-col items-center justify-start text-center;
+    }
+
+    .mint-panel-second {
+      @apply h-full w-1/2 flex-col items-center justify-start;
+    }
+    .mint-panel-second-info-section {
+      @apply flex h-74 w-100 flex-col items-center justify-center;
+    }
+
+    .mint-panel-second-button-section {
+      @apply h-66;
+    }
+
+    .mint-panel-inc-dcr-button-panel {
+      @apply mt-20 flex select-none flex-row items-center justify-end rounded-md border-8 border-zinc-950 text-center;
+    }
+    .incr-button {
+      @apply ml-44 h-28 select-none border-l-8 border-zinc-950 active:opacity-15;
+    }
+    .decr-button {
+      @apply mr-44 h-28 select-none border-r-8 border-zinc-950 active:opacity-15;
+    }
+  }
+}

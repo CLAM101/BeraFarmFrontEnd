@@ -1,236 +1,152 @@
-<div class="relative z-0 flex h-95% w-full items-center justify-center">
+<div class="flex-col-set relative z-0 flex h-screen w-full items-center justify-center">
   <div
-    class="relative z-0 flex h-screen w-full items-center justify-center"
-    style="
-      background-image: url('../../../assets/images/mint-page-background.png');
-      background-repeat: repeat-y;
-      background-size: cover;
-    "
+    class="z10 no-scrollbar border-only relative z-0 m-14 flex h-screen w-10/12 items-center justify-center rounded-xl bg-yellow-300 bg-opacity-85"
+    (click)="showInfo()"
+    *ngIf="!infoPage"
   >
-    <div
-      class="z10 no-scrollbar relative z-0 flex h-128 w-6/12 items-center justify-center overflow-y-auto rounded-xl bg-yellow-300 bg-opacity-85"
-      (click)="showInfo()"
-      *ngIf="!infoPage"
-    >
-      <h1
-        class="RobotoMonoBold z-40 select-none text-center text-5xl font-black leading-normal text-black"
-      >
-        Welcome to the $FUZZ farm, click here to learn more!
+    <h1 class="large-heading-text z-40">Welcome to the $FUZZ farm, click here to learn more!</h1>
+  </div>
+  <div
+    *ngIf="infoPage"
+    class="z10 no-scrollbar border-only relative z-0 mt-16 flex h-85% w-9/12 items-center justify-center overflow-auto rounded-xl bg-yellow-300 bg-opacity-85"
+  >
+    <div class="flex h-full w-11/12 flex-col text-center">
+      <h1 class="medium-heading-text z-40 leading-10">
+        Henlo Berachain enjoyer, we have been expecting you!
       </h1>
-    </div>
-    <div
-      *ngIf="infoPage"
-      class="z10 no-scrollbar relative z-0 flex h-155 w-9/12 items-center justify-center overflow-y-auto rounded-xl bg-yellow-300 bg-opacity-85"
-    >
-      <div class="mt-16 flex h-full w-11/12 flex-col">
-        <h1 class="RobotoMonoBold z-40 text-center text-2xl font-black leading-normal text-black">
-          Well hello Berachain enjoyer, we have been expecting you!
-        </h1>
 
-        <h1
-          class="RobotoMonoBold z-40 mt-5 text-center text-lg font-black leading-normal text-black"
-        >
-          Welcome to number one place to farm $FUZZ on Berachain... well the only place really.
-        </h1>
+      <h1 class="medium-heading-text z-40 mt-6 leading-10">
+        Welcome to number one place to farm $FUZZ on Berachain... well the only place really.
+      </h1>
 
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          What is $FUZZ you ask, well if I'm honest and I generally am, it's a pretty worthless
-          ERC20 token, well that is unless you degenerates buy the shit out of it. In that case it
-          would perhaps be worth something for a short while, or longer who knows
-        </h1>
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          I know what your next question is, how do I attain this this potentially temporarily not
-          worthless ERC20 token? Well my inquisitive potential $FUZZ farming friend.... you're in
-          luck, you can attain it by buying and staking an equally worthless bear cub NFT hmmmm...
-          sorry I mean digital collectible for 5 $HONEY, Bera chain's native stable coin!
-        </h1>
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          But wait Fuzz dev, what will you do with my 5 hard earned $HONEY tokens which are
-          definitely not as worthless as your bear cub digital collectible nor your equally
-          worthless $FUZZ Token. Great question again friend Ill use it to provide liquidity for
-          $FUZZ of course, because I am way too much of a cheap skate to LP and inflationary token
-          with my own money, I mean already spent like three weeks building this shit. However if we
-          can get this thing to take off some of you will definitely maybe make some money, some of
-          you won't though unfortunately but thats life ain't it! This way we can all take a little
-          bit of risk LPing an inflationary token and some of us win, a true PVP death match!
-        </h1>
+      <h1 class="paragraph-text mb-5 mt-5 leading-10">
+        What is $FUZZ you ask, well if I'm honest and I generally am, it's a pretty worthless ERC20
+        token, well that is unless you degenerates buy the shit out of it. In that case it would
+        perhaps be worth something for a short while, or longer who knows
+      </h1>
+      <h1 class="paragraph-text mb-5 leading-10">
+        I know what your next question is, how do I attain this this potentially temporarily not
+        worthless ERC20 token? Well my inquisitive potential $FUZZ farming friend.... you're in
+        luck, you can attain it by buying and staking an equally worthless bear cub NFT hmmmm...
+        sorry I mean digital collectible for 5 $HONEY, Bera chain's native stable coin!
+      </h1>
+      <h1 class="paragraph-text mb-5 leading-10">
+        But wait Fuzz dev, what will you do with my 5 hard earned $HONEY tokens which are definitely
+        not as worthless as your bear cub digital collectible nor your equally worthless $FUZZ
+        Token. Great question again friend Ill use it to provide liquidity for $FUZZ of course,
+        because I am way too much of a cheap skate to LP and inflationary token with my own money, I
+        mean already spent like three weeks building this shit. However if we can get this thing to
+        take off some of you will definitely maybe make some money, some of you won't though
+        unfortunately but thats life ain't it! This way we can all take a little bit of risk LPing
+        an inflationary token and some of us win, a true PVP death match!
+      </h1>
 
-        <h1
-          class="RobotoMonoBold z-40 m-3 text-center text-2xl font-black leading-normal text-black"
-        >
-          Lets break down the initial testnet launch process
-        </h1>
-        <h1
-          class="RobotoMonoBold z-40 m-3 text-center text-lg font-black leading-normal text-black"
-        >
-          The first 100 testnet testers will each be awarded 5 cubs for mainnet launch so best to
-          get in early as possible.
-        </h1>
-        <h1
-          class="RobotoMonoBold z-40 m-3 text-center text-lg font-black leading-normal text-black"
-        >
-          The current setup may change a bit once we have completed the testnet phase. Ill be
-          looking to my early testers to help me refine the farm ahead of mainnet launch.
-        </h1>
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          1. All contracts are deployed at the same time, the Bear Cub NFT (limited to 15k supply),
-          the Fuzz Token (Max Supply 10 Million but not all minted at once) and the farm contract.
-        </h1>
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          2. I wait for at least 1250 cubs to be minted, once this is complete I deploy the
-          $FUZZ/$HONEY LP and activate emissions.
-        </h1>
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          3. You degenerates start earning $FUZZ and then using $FUZZ you will be able to compound
-          your staked cubs to a max of 20 cubs per wallet, all $FUZZ used for compounding is burned
-          but you will be able to use the full earned amount without tax. If you choose to claim and
-          not compound, 15% of your claimed $FUZZ is burned on claim. All non compounded cubs up to
-          the max supply will either need to be bought for $HONEY if before the initial 5000 have
-          been minted, for $FUZZ or bonded for honey at 10% discount if the initial 5000 have minted
-          otherwise you can buy existing cubs on secondary.
-        </h1>
+      <h1 class="medium-heading-text z-40 m-3 leading-10">
+        Lets break down the initial testnet launch process
+      </h1>
+      <h1 class="small-heading-text z-40 m-3 leading-10">
+        The first 100 testnet testers will each be awarded 5 cubs for mainnet launch so best to get
+        in early as possible.
+      </h1>
+      <h1 class="small-heading-text z-40 m-3 leading-10">
+        The current setup may change a bit once we have completed the testnet phase. Ill be looking
+        to my early testers to help me refine the farm ahead of mainnet launch.
+      </h1>
+      <h1 class="paragraph-text mb-5 leading-10">
+        1. All contracts are deployed at the same time, the Bear Cub NFT (limited to 15k supply),
+        the Fuzz Token (Max Supply 10 Million but not all minted at once) and the farm contract.
+      </h1>
+      <h1 class="paragraph-text mb-5 leading-10">
+        2. I wait for at least 1250 cubs to be minted, once this is complete I deploy the
+        $FUZZ/$HONEY LP and activate emissions.
+      </h1>
+      <h1 class="paragraph-text mb-5 leading-10">
+        3. You degenerates start earning $FUZZ and then using $FUZZ you will be able to compound
+        your staked cubs to a max of 20 cubs per wallet, all $FUZZ used for compounding is burned
+        but you will be able to use the full earned amount without tax. If you choose to claim and
+        not compound, 15% of your claimed $FUZZ is burned on claim. All non compounded cubs up to
+        the max supply will either need to be bought for $HONEY if before the initial 5000 have been
+        minted, for $FUZZ or bonded for honey at 10% discount if the initial 5000 have minted
+        otherwise you can buy existing cubs on secondary.
+      </h1>
 
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          5. Further to this I will continue to build out the Fuzz farm ecosystem, lol, ecosystem.
-          You will need $FUZZ to participate further, the only component of the $FUZZ farm ecosystem
-          that will require purchase with $HONEY will be the first 5000 cubs. This is to seed
-          liquidity for the beginnings of the ecosystem.
-        </h1>
+      <h1 class="paragraph-text mb-5 leading-10">
+        5. Further to this I will continue to build out the Fuzz farm ecosystem, lol, ecosystem. You
+        will need $FUZZ to participate further, the only component of the $FUZZ farm ecosystem that
+        will require purchase with $HONEY will be the first 5000 cubs. This is to seed liquidity for
+        the beginnings of the ecosystem.
+      </h1>
 
-        <h1
-          class="RobotoMonoBold z-40 m-6 text-center text-2xl font-black leading-normal text-black"
-        >
-          A Quick Summary of the details
-        </h1>
+      <h1 class="medium-heading-text z-40 leading-10">A Quick Summary of the details</h1>
 
-        <h1
-          class="RobotoMonoBold z-40 m-3 text-center text-lg font-black leading-normal text-black"
-        >
-          Supply and pricing:
-        </h1>
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          Fuzz Token Supply: 10 Million, Bear Cub Collectibles supply: 15 000 Fist 5000 cubs broken
-          down as First 2500 at 5 $HONEY, second 2500 at 10 $HONEY and the remaining will either be
-          compounded by initial owners, bonded for $HONEY or bought for $FUZZ at the highest current
-          compound cost. All proceeds from the initial sale will got to making $FUZZ as liquid as
-          possible.
-        </h1>
-        <h1
-          class="RobotoMonoBold z-40 m-3 text-center text-lg font-black leading-normal text-black"
-        >
-          Rewards & Taxes:
-        </h1>
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          Emissions will be set at 6 $FUZZ per staked cub, emissions will be turned on from the
-          first 1250 cubs minted as well as initial liquidity provision provided. You will be able
-          to begin compounding straight after emissions are turned on but will also be allowed to
-          buy more cubs for $HONEY should you wish. This will continue until the max supply of cubs
-          has been reached. Once the max supply of cubs is reached you will still continue to earn
-          $FUZZ but emissions will be reduced to take pressure off the token, each claim will still
-          come with a 15% tax which will be burned. At this point it will be important to hold on to
-          your $FUZZ as you will need it for the next phase of the Fuzz Farm when Tree Houses will
-          be released, Tree Houses will exclusively be bought in $FUZZ, more on those later.
-        </h1>
-        <h1
-          class="RobotoMonoBold z-40 m-3 text-center text-lg font-black leading-normal text-black"
-        >
-          Compounding and Claims:
-        </h1>
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          First compound will cost 5 $FUZZ, second 10 $FUZZ third 15 $FUZZ up until 25 $FUZZ after
-          which compounds will be for a fixed price of 25 $FUZZ until you reach your max limit of 20
-          cubs per wallet, compounds will be recorded per wallet all $FUZZ used for compounding will
-          be burned. Should you choose to claim rather than compound you will be charged a 15% tax
-          on your claim, the tax will be burned.
-        </h1>
-        <h1
-          class="RobotoMonoBold z-40 m-3 text-center text-lg font-black leading-normal text-black"
-        >
-          Bonding:
-        </h1>
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          Along with the option to purchase cubs for $FUZZ you will also have the option to bond
-          cubs with $HONEY for a 10% discount. All honey collected from bonding will also be used to
-          deepen $FUZZ liquidity.
-        </h1>
-        <h1
-          class="RobotoMonoBold z-40 m-3 text-center text-lg font-black leading-normal text-black"
-        >
-          Liquidity Provision:
-        </h1>
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          1 million $FUZZ will be put aside for initial liquidity provision, any remaining after the
-          liquidity mining event will be burned. Now I know you fuckers, you will butt fuck my
-          liquidity pool on the initial LP provision so this is how it will work, you will not be
-          able to purchase any $FUZZ unless you own at least two cubs up until the first 5000 cubs
-          have been minted and for the first 48 hours no person will be able to purchase more than
-          1% of the circulating supply of $FUZZ, we will call this the hibernation period. This will
-          give me enough time to deploy enough liquidity to make sure you fucking degenerates don't
-          destroy the pool or pull any of your sniping bullshit. Every time liquidity is added the
-          keys will be burned immediately.
-        </h1>
-        <h1
-          class="RobotoMonoBold z-40 m-3 text-center text-lg font-black leading-normal text-black"
-        >
-          Other Bits:
-        </h1>
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          Something to note, you will not need to actively stake your cubs, as soon as a cub enters
-          your wallet you will begin earning $FUZZ, this also means that if you sell your cub before
-          claiming any outstanding $FUZZ rewards you will loose all of your unclaimed $FUZZ so be
-          sure to claim before you sell or transfer a cub to another wallet.
-        </h1>
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          If you have any other questions ask them in the Discord, also there is no Telegram that
-          shit is trash. Ill add a channel if enough of you bitch about the project not having one.
-        </h1>
-        <h1
-          class="RobotoMonoBold z-40 m-3 text-center text-lg font-black leading-normal text-black"
-        >
-          Disclaimer:
-        </h1>
-        <h1
-          class="text-md RobotoMonoBold z-40 m-3 text-center font-black leading-normal text-black"
-        >
-          Please don't bet your or your granny's farm on this project, this is not a sustainable
-          financial product and if you are retarded enough to think it is, that is entirely your
-          problem.
-        </h1>
-      </div>
+      <h1 class="medium-heading-text z-40 m-3 leading-10">Supply and pricing:</h1>
+      <h1 class="paragraph-text mb-5 leading-10">
+        Fuzz Token Supply: 10 Million, Bear Cub Collectibles supply: 15 000 Fist 5000 cubs broken
+        down as First 2500 at 5 $HONEY, second 2500 at 10 $HONEY and the remaining will either be
+        compounded by initial owners, bonded for $HONEY or bought for $FUZZ at the highest current
+        compound cost. All proceeds from the initial sale will got to making $FUZZ as liquid as
+        possible.
+      </h1>
+      <h1 class="medium-heading-text z-40 m-3 leading-10">Rewards & Taxes:</h1>
+      <h1 class="paragraph-text mb-5 leading-10">
+        Emissions will be set at 6 $FUZZ per staked cub, emissions will be turned on from the first
+        1250 cubs minted as well as initial liquidity provision provided. You will be able to begin
+        compounding straight after emissions are turned on but will also be allowed to buy more cubs
+        for $HONEY should you wish. This will continue until the max supply of cubs has been
+        reached. Once the max supply of cubs is reached you will still continue to earn $FUZZ but
+        emissions will be reduced to take pressure off the token, each claim will still come with a
+        15% tax which will be burned. At this point it will be important to hold on to your $FUZZ as
+        you will need it for the next phase of the Fuzz Farm when Tree Houses will be released, Tree
+        Houses will exclusively be bought in $FUZZ, more on those later.
+      </h1>
+      <h1 class="medium-heading-text z-40 m-3 leading-10">Compounding and Claims:</h1>
+      <h1 class="paragraph-text mb-5 leading-10">
+        First compound will cost 5 $FUZZ, second 10 $FUZZ third 15 $FUZZ up until 25 $FUZZ after
+        which compounds will be for a fixed price of 25 $FUZZ until you reach your max limit of 20
+        cubs per wallet, compounds will be recorded per wallet all $FUZZ used for compounding will
+        be burned. Should you choose to claim rather than compound you will be charged a 15% tax on
+        your claim, the tax will be burned.
+      </h1>
+      <h1 class="medium-heading-text z-40 m-3 leading-10">Bonding:</h1>
+      <h1 class="paragraph-text mb-5 leading-10">
+        Along with the option to purchase cubs for $FUZZ you will also have the option to bond cubs
+        with $HONEY for a 10% discount. All honey collected from bonding will also be used to deepen
+        $FUZZ liquidity.
+      </h1>
+      <h1 class="medium-heading-text z-40 m-3 leading-10">Liquidity Provision:</h1>
+      <h1 class="paragraph-text mb-5 leading-10">
+        1 million $FUZZ will be put aside for initial liquidity provision, any remaining after the
+        liquidity mining event will be burned. Now I know you fuckers, you will butt fuck my
+        liquidity pool on the initial LP provision so this is how it will work, you will not be able
+        to purchase any $FUZZ unless you own at least two cubs up until the first 5000 cubs have
+        been minted and for the first 48 hours no person will be able to purchase more than 1% of
+        the circulating supply of $FUZZ, we will call this the hibernation period. This will give me
+        enough time to deploy enough liquidity to make sure you fucking degenerates don't destroy
+        the pool or pull any of your sniping bullshit. Every time liquidity is added the keys will
+        be burned immediately.
+      </h1>
+      <h1 class="medium-heading-text z-40 m-3 leading-10">Other Bits:</h1>
+      <h1 class="paragraph-text mb-5 leading-10">
+        Something to note, you will not need to actively stake your cubs, as soon as a cub enters
+        your wallet you will begin earning $FUZZ, this also means that all recorded rewards will
+        stay attached to your wallet even if you transfer your cubs, as soon as the cubs are
+        transferred your rewards will be updated and will still be available to claim based on how
+        long each cub spent in your wallet.
+      </h1>
+      <h1 class="paragraph-text mb-5 leading-10">
+        If you have any other questions ask them in the Discord, also there is no Telegram that shit
+        is trash. Ill add a channel if enough of you bitch about the project not having one.
+      </h1>
+      <h1 class="medium-heading-text z-40 m-3 leading-10">Disclaimer:</h1>
+      <h1 class="paragraph-text mb-5 leading-10">
+        Please don't bet your or your granny's farm on this project, this is not a sustainable
+        financial product and if you are retarded enough to think it is, that is entirely your
+        problem.
+      </h1>
     </div>
   </div>
 
-  <div
-    class="absolute bottom-5 flex w-52 flex-row justify-between rounded-3xl bg-yellow-300 bg-opacity-85 p-5"
-  >
+  <div class="border-only bottom-5 mt-10 flex w-52 justify-between bg-yellow-300 bg-opacity-85 p-5">
     <img
       (click)="openExternalLink('https://discord.gg/GyCA6FGP')"
       class="w-h-12 relative h-12 active:opacity-15"

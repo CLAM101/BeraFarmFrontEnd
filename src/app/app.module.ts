@@ -10,6 +10,7 @@ import { BuyPageComponent } from './components/buy-page/buy-page.component';
 import { AppRoutingModule } from './app-routing-module';
 import { reducers } from 'src/global-state/reducers';
 import { ContractEffects } from 'src/global-state/effects';
+import { LoadingPopupComponent } from './components/loading-popup/loading-popup.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ContractEffects } from 'src/global-state/effects';
     TopToolbarComponent, // Any other components you have
     HomePageComponent, // Any other components you have
     BuyPageComponent,
+    LoadingPopupComponent,
 
     // Any other components you have
   ],

@@ -78,4 +78,8 @@
       <button (click)="close()" class="action-button">BACK</button>
     </div>
   </div>
+
+  <div>
+    <app-loading-popup (closePopupClick)="closePopUpClick($event)"></app-loading-popup>
+  </div>
 </div>

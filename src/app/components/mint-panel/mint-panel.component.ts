@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MintConfig } from 'src/app/services/minting-service/mint-config-models';
@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { selectAllContracts } from 'src/global-state/selectors';
 import { reinitializeContracts } from 'src/global-state/actions';
 import { GameServiceService } from 'src/app/services/game-service/game-service.service';
+import { LoadingPopupComponent } from '../loading-popup/loading-popup.component';
 @Component({
   selector: 'app-mint-panel',
 
@@ -16,6 +17,7 @@ import { GameServiceService } from 'src/app/services/game-service/game-service.s
   styleUrl: './mint-panel.component.css',
 })
 export class MintPanelComponent {
+  @ViewChild(LoadingPopupComponent) loadingPopup: LoadingPopupComponent;
   mintPanelConfig: MintConfig;
   showMintPanel = false;
   mintAmount = 0;
@@ -37,12 +39,15 @@ export class MintPanelComponent {
   costPerCub: number;
   $contracts: any;
   currentAllowance;
+  loading = false;
+  loadingText = 'Loading...';
+  transactionResponse: string;
 
   constructor(
     public router: Router,
     public ethersService: EthersService,
     private store: Store,
-    private gameService: GameServiceService
+    private gameService: GameServiceService,
   ) {}
   async ngOnInit(): Promise<void> {
     const {
@@ -66,9 +71,7 @@ export class MintPanelComponent {
     this.fuzzTokenContract = fuzzTokenContract;
     this.fuzzTokenMethodCaller = fuzzTokenMethodCaller;
 
-    this.walletCubBalance = await this.gameService.getCubBalance(
-      this.beraCubContract
-    );
+    this.walletCubBalance = await this.gameService.getCubBalance(this.beraCubContract);
     this.getMintCost();
   }
   open() {
@@ -81,8 +84,7 @@ export class MintPanelComponent {
   setupContracts() {}
 
   incrMintAmount() {
-    if (this.mintAmount < 20 && this.mintAmount + this.walletCubBalance < 20)
-      this.mintAmount++;
+    if (this.mintAmount < 20 && this.mintAmount + this.walletCubBalance < 20) this.mintAmount++;
     this.checkAllowance();
     this.getMintCost();
   }
@@ -107,18 +109,23 @@ export class MintPanelComponent {
       const approvalAmount = await this.getTransactionCostHoney();
 
       if (approvalAmount === 0) return;
-      const approvalTx = await this.honeyMethodCaller.approve(
-        beraFarm,
-        approvalAmount
-      );
+      const approvalTx = await this.honeyMethodCaller.approve(beraFarm, approvalAmount);
+      this.loadingPopup.visible = true;
+      this.loadingPopup.loadingStart = true;
 
-      await approvalTx.wait();
+      const approveTxResponse = await approvalTx.wait();
 
-      alert('Tokens Approved');
+      this.loadingPopup.loadingStart = false;
+      this.loadingPopup.response = 'Tokens Approved';
+
       this.allowanceSufficient = true;
     } catch (err) {
       console.log('error approving spend', err);
     }
+  }
+
+  closePopUpClick(e) {
+    this.loadingPopup.visible = false;
   }
 
   async getMintCost() {
@@ -131,9 +138,7 @@ export class MintPanelComponent {
       const fetchedCost = await this.getTransactionCostFuzz();
       this.mintCost = fetchedCost;
       this.costPerCub = parseFloat(
-        ethers.formatEther(
-          await this.gameService.getCostPerCubFuzz(this.beraFarmContract)
-        )
+        ethers.formatEther(await this.gameService.getCostPerCubFuzz(this.beraFarmContract)),
       );
     }
     if (this.panelType === 'bondForHoney') {
@@ -148,14 +153,10 @@ export class MintPanelComponent {
       this.remainingSupply = await this.getRemainingSupplyHoney();
     }
     if (this.panelType === 'buyForFuzz') {
-      this.remainingSupply = await this.gameService.getGeneralRemainingSupply(
-        this.beraCubContract
-      );
+      this.remainingSupply = await this.gameService.getGeneralRemainingSupply(this.beraCubContract);
     }
     if (this.panelType === 'bondForHoney') {
-      this.remainingSupply = await this.gameService.getGeneralRemainingSupply(
-        this.beraCubContract
-      );
+      this.remainingSupply = await this.gameService.getGeneralRemainingSupply(this.beraCubContract);
     }
   }
 
@@ -173,13 +174,8 @@ export class MintPanelComponent {
   async approveSpendBond() {
     try {
       await this.ethersService.checkAndChangeNetwork();
-      const approvalAmount = ethers.parseEther(
-        await this.getTransactionCostBond()
-      );
-      const approvalTx = await this.honeyMethodCaller.approve(
-        beraFarm,
-        approvalAmount
-      );
+      const approvalAmount = ethers.parseEther(await this.getTransactionCostBond());
+      const approvalTx = await this.honeyMethodCaller.approve(beraFarm, approvalAmount);
 
       await approvalTx.wait();
       this.allowanceSufficient = true;
@@ -192,16 +188,14 @@ export class MintPanelComponent {
   async approveSpendFuzz() {
     try {
       await this.ethersService.checkAndChangeNetwork();
-      const approvalAmount = ethers.parseEther(
-        await this.getTransactionCostFuzz()
-      );
-      const approvalTx = await this.fuzzTokenMethodCaller.approve(
-        beraFarm,
-        approvalAmount
-      );
+      const approvalAmount = ethers.parseEther(await this.getTransactionCostFuzz());
+      const approvalTx = await this.fuzzTokenMethodCaller.approve(beraFarm, approvalAmount);
+      this.loadingPopup.visible = true;
+      this.loadingPopup.loadingStart = true;
 
       await approvalTx.wait();
 
+      this.loadingPopup.response = 'Tokens Approved';
       alert('Tokens Approved');
       this.allowanceSufficient = true;
     } catch (err) {
@@ -212,7 +206,7 @@ export class MintPanelComponent {
   async checkAllowanceHoney() {
     const currentPlayerAllowance = await this.honeyContract.allowance(
       window.ethereum.selectedAddress,
-      beraFarm
+      beraFarm,
     );
 
     let mintAmountCost;
@@ -237,11 +231,8 @@ export class MintPanelComponent {
   async checkAllowanceFuzz(): Promise<void> {
     const currentPlayerAllowance = parseFloat(
       ethers.formatEther(
-        await this.fuzzTokenContract.allowance(
-          window.ethereum.selectedAddress,
-          beraFarm
-        )
-      )
+        await this.fuzzTokenContract.allowance(window.ethereum.selectedAddress, beraFarm),
+      ),
     );
 
     const mintAmountCost = parseFloat(await this.getTransactionCostFuzz());
@@ -258,9 +249,7 @@ export class MintPanelComponent {
   async buyBeraCubsForHoney() {
     try {
       await this.ethersService.checkAndChangeNetwork();
-      const buyTx = await this.beraFarmMethodCaller.buyBeraCubsHoney(
-        this.mintAmount
-      );
+      const buyTx = await this.beraFarmMethodCaller.buyBeraCubsHoney(this.mintAmount);
       const confirmation = await buyTx.wait();
       alert('Bought For Honey');
       this.allowanceSufficient = false;
@@ -272,9 +261,7 @@ export class MintPanelComponent {
   }
 
   async postBuyDetailUpdate() {
-    this.walletCubBalance = await this.gameService.getCubBalance(
-      this.beraCubContract
-    );
+    this.walletCubBalance = await this.gameService.getCubBalance(this.beraCubContract);
     await this.setRemainingSupply();
     await this.getMintCost();
     this.mintAmount = 0;
@@ -284,9 +271,7 @@ export class MintPanelComponent {
   async buyBeraCubsForFuzz() {
     try {
       await this.ethersService.checkAndChangeNetwork();
-      const buyTx = await this.beraFarmMethodCaller.buyBeraCubsFuzz(
-        this.mintAmount
-      );
+      const buyTx = await this.beraFarmMethodCaller.buyBeraCubsFuzz(this.mintAmount);
       const confirmation = await buyTx.wait();
       await this.postBuyDetailUpdate();
     } catch (err) {
@@ -297,9 +282,7 @@ export class MintPanelComponent {
   async bondForHoney() {
     try {
       await this.ethersService.checkAndChangeNetwork();
-      const bondTx = await this.beraFarmMethodCaller.bondBeraCubs(
-        this.mintAmount
-      );
+      const bondTx = await this.beraFarmMethodCaller.bondBeraCubs(this.mintAmount);
       const confirmation = await bondTx.wait();
       await this.postBuyDetailUpdate();
     } catch (err) {
@@ -310,9 +293,7 @@ export class MintPanelComponent {
   async getTransactionCostHoney() {
     const currentTotalSupply = await this.beraCubContract.totalSupply();
 
-    const convertedTotalSupply = parseInt(
-      ethers.formatUnits(currentTotalSupply, 0)
-    );
+    const convertedTotalSupply = parseInt(ethers.formatUnits(currentTotalSupply, 0));
 
     const totalSupplyPlusAmount = convertedTotalSupply + this.mintAmount;
 
@@ -321,7 +302,7 @@ export class MintPanelComponent {
     return await this.beraFarmContract.getHoneyBuyTransactionCost(
       convertedTotalSupply,
       totalSupplyPlusAmount,
-      this.mintAmount
+      this.mintAmount,
     );
   }
 
@@ -334,15 +315,11 @@ export class MintPanelComponent {
   }
 
   async getBondCost(): Promise<number> {
-    return parseFloat(
-      ethers.formatEther(await this.beraFarmContract.getBondCost())
-    );
+    return parseFloat(ethers.formatEther(await this.beraFarmContract.getBondCost()));
   }
 
   async getTransactionCostFuzz(): Promise<string> {
-    const currentMintCost = await this.gameService.getCostPerCubFuzz(
-      this.beraFarmContract
-    );
+    const currentMintCost = await this.gameService.getCostPerCubFuzz(this.beraFarmContract);
 
     const mintCost = parseFloat(ethers.formatEther(currentMintCost));
 
@@ -354,15 +331,11 @@ export class MintPanelComponent {
   async getRemainingSupplyHoney() {
     const currentTotalSupply = await this.beraCubContract.totalSupply();
 
-    const convertedTotalSupply = parseInt(
-      ethers.formatUnits(currentTotalSupply, 0)
-    );
+    const convertedTotalSupply = parseInt(ethers.formatUnits(currentTotalSupply, 0));
 
     const maxHoneySupply = await this.beraFarmContract.maxSupplyForHoney();
 
-    const convertedHoneySupply = parseInt(
-      ethers.formatUnits(maxHoneySupply, 0)
-    );
+    const convertedHoneySupply = parseInt(ethers.formatUnits(maxHoneySupply, 0));
 
     return convertedHoneySupply - convertedTotalSupply < 0
       ? 0
@@ -372,9 +345,7 @@ export class MintPanelComponent {
   async getGeneralRemainingSupply() {
     const currentTotalSupply = await this.beraCubContract.totalSupply();
 
-    const convertedTotalSupply = parseInt(
-      ethers.formatUnits(currentTotalSupply, 0)
-    );
+    const convertedTotalSupply = parseInt(ethers.formatUnits(currentTotalSupply, 0));
 
     const maxSupply = await this.beraCubContract.maxSupply();
 

@@ -1,9 +1,6 @@
 import { Component, Directive, Input, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MintPanelComponent } from '../mint-panel/mint-panel.component';
 import { EthersService } from 'src/app/services/ethers-service/ethers-service.service';
-import { beraFarm } from 'src/app/services/ethers-service/contracts';
-import { ethers } from 'ethers';
 
 @Component({
   selector: 'app-buy-page',

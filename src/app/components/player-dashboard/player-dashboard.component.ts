@@ -27,7 +27,7 @@ export class PlayerDashboardComponent {
   emissionsPerCub: number;
   currentDailyRewards: number;
   unclaimedRewards: number;
-  totalBurned: number;
+  totalBurned: string;
   currentCubPriceForFuzz: number;
   playerCompoundCost: number;
   showCubGrid;
@@ -39,6 +39,27 @@ export class PlayerDashboardComponent {
 
   @HostListener('window:resize', ['$event'])
   async ngOnInit(): Promise<void> {
+    await this.initializeContracts();
+    await this.initializeDashboard();
+  }
+
+  generateOwnedCubsArray() {
+    const ownedCubs = [];
+    for (let i = 0; i < this.playerCubBalance; i++) {
+      ownedCubs.push(i);
+    }
+    return ownedCubs;
+  }
+
+  onResize(event) {
+    this.checkSizeAndGenerateCubs();
+  }
+
+  private checkScreenSize(width: number) {
+    this.showCubGrid = width >= 850;
+  }
+
+  private async initializeContracts() {
     const {
       beraFarmContract,
       beraFarmMethodCaller,
@@ -59,7 +80,9 @@ export class PlayerDashboardComponent {
     this.honeyMethodCaller = honeyMethodCaller;
     this.fuzzTokenContract = fuzzTokenContract;
     this.fuzzTokenMethodCaller = fuzzTokenMethodCaller;
+  }
 
+  private async initializeDashboard() {
     this.playerCubBalance = await this.gameService.getCubBalance(this.beraCubContract);
 
     this.currentFuzzPrice = await this.gameService.getFuzzPrice(this.beraFarmContract);
@@ -76,7 +99,7 @@ export class PlayerDashboardComponent {
 
     this.unclaimedRewards = parseFloat(rewards.toFixed(2));
 
-    this.totalBurned = await this.gameService.getTotalBurned(this.fuzzTokenContract);
+    this.totalBurned = (await this.gameService.getTotalBurned(this.fuzzTokenContract)).toFixed(2);
 
     this.currentCubPriceForFuzz = parseFloat(
       ethers.formatEther(await this.gameService.getCostPerCubFuzz(this.beraFarmContract)),
@@ -87,27 +110,38 @@ export class PlayerDashboardComponent {
     this.checkSizeAndGenerateCubs();
   }
 
-  generateOwnedCubsArray() {
-    const ownedCubs = [];
-    for (let i = 0; i < this.playerCubBalance; i++) {
-      ownedCubs.push(i);
-    }
-    return ownedCubs;
-  }
-
-  onResize(event) {
-    this.checkSizeAndGenerateCubs();
-  }
-
-  private checkScreenSize(width: number) {
-    this.showCubGrid = width >= 850;
-  }
-
   checkSizeAndGenerateCubs() {
     this.checkScreenSize(window.innerWidth);
 
     if (this.showCubGrid) {
       this.ownedCubsArray = this.generateOwnedCubsArray();
+    }
+  }
+
+  async compoundCub() {
+    try {
+      const compoundTx = await this.beraFarmMethodCaller.compoundBeraCubs();
+
+      await compoundTx.wait();
+
+      alert('Cub successfully compounded');
+
+      await this.initializeDashboard();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async claimRewards() {
+    try {
+      const claimRewardsTx = await this.beraFarmMethodCaller.claim();
+
+      await claimRewardsTx.wait();
+
+      alert('Rewards successfully claimed');
+      await this.initializeDashboard();
+    } catch (err) {
+      console.log(err);
     }
   }
 

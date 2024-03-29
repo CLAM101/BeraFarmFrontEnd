@@ -1,23 +1,38 @@
-<div [ngClass]="[' no-scrollbar relative flex items-center justify-between align-middle', 'z-10 ']">
-  <button (mousedown)="ethersService.connectWallet()" class="toolbar-button">
-    {{ connectWalletText }}
-  </button>
-  <div class="toolbar-button">IT AIN'T MUCH BUT..... YEAH IT AIN'T MUCH</div>
+<div class="mt-4 flex w-full justify-center">
+  <div class="flex-row-set border-background z-10 h-20 w-90% justify-between">
+    <button
+      class="small-heading-text w-full border-r-4 border-zinc-950 active:opacity-15"
+      (click)="ethersService.connectWallet()"
+    >
+      {{ connectWalletText }}
+    </button>
 
-  <button (mousedown)="mouseDown('getFuzz')" (mouseup)="mouseUp('getFuzz')" class="toolbar-button">
-    {{ getFuzzText }}
-  </button>
-  <button
-    (mousedown)="router.navigate(['buyPage'])"
-    (mouseup)="mouseUp('getCubs')"
-    class="toolbar-button"
-  >
-    {{ getCubsText }}
-  </button>
-  <button (mousedown)="router.navigate(['playerDashboard'])" class="toolbar-button">
-    PLAYER DAHSBOARD
-  </button>
-  <button (click)="router.navigate([''])" class="toolbar-button">
-    {{ homeText }}
-  </button>
+    <button class="paragraph-text w-full border-r-4 border-zinc-950">
+      IT AIN'T MUCH BUT..... YEAH IT AIN'T MUCH
+    </button>
+
+    <button
+      class="small-heading-text w-full border-r-4 border-zinc-950 active:opacity-15"
+      (mousedown)="mouseDown('getFuzz')"
+      (mouseup)="mouseUp('getFuzz')"
+    >
+      {{ getFuzzText }}
+    </button>
+    <button
+      class="small-heading-text w-full border-r-4 border-zinc-950 active:opacity-15"
+      (mousedown)="router.navigate(['buyPage'])"
+      (mouseup)="mouseUp('getCubs')"
+    >
+      {{ getCubsText }}
+    </button>
+    <button
+      class="small-heading-text w-full border-r-4 border-zinc-950 active:opacity-15"
+      (mousedown)="router.navigate(['playerDashboard'])"
+    >
+      PLAYER DAHSBOARD
+    </button>
+    <button class="small-heading-text w-full active:opacity-15" (click)="router.navigate([''])">
+      {{ homeText }}
+    </button>
+  </div>
 </div>

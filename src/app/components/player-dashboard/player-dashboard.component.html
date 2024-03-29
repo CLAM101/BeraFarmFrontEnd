@@ -1,67 +1,76 @@
-<div class="all-center xl:flex-row-set xxl:flex-row-set flex-row-set relative z-0 h-screen w-full">
+<div
+  class="all-center xl:flex-row-set xxl:flex-row-set flex-col-set relative z-0 h-screen w-full overflow-auto"
+>
   <div
     [ngClass]="[
-      'border-background  absolute  ',
-      'select-none ',
+      'border-background  no-scrollbar  absolute',
+      'select-none overflow-auto',
       'all-center',
-      ' xl:flex-row-set xxl:flex-row-set h-95% w-95% xs:h-90% xs:w-95% sm:mb-16 sm:h-120 sm:w-95% md:mt-10 md:h-95% md:w-95%'
+      'xl:flex-row-set xxl:flex-col-set h-95% w-90% xs:h-90% xs:w-90% sm:mb-16 sm:h-120 sm:w-90% md:mt-10 md:h-95% md:w-90%'
     ]"
   >
+    <div class="mb-20">
+      <h1 class="large-heading-text">Welcome To Your Player Dashboard</h1>
+    </div>
+
     <div
-      class="flex-col-set all-center mt-5% xl:mt-0 xl:h-full xl:w-40% xxl:mt-0 xxl:h-full xxl:w-40%"
+      class="all-center sm:flex-col-set xs:flex-col-set md:flex-col-set lg:flex-col-set xl:flex-row-set xxl:flex-row-set m-5"
     >
-      <h1 class="medium-heading-text">OWNED CUBS {{ playerCubBalance }}</h1>
       <div
-        *ngIf="showCubGrid"
-        class="all-start border-only mt-5% grid grid-cols-10 xl:grid-cols-5 xxl:grid-cols-5"
+        class="flex-col-set all-center border-zinc-950 xl:mt-0 xl:h-full xl:w-40% xxl:mt-0 xxl:h-full xxl:w-40%"
       >
-        <div *ngFor="let cub of ownedCubsArray" class="all-center relative m-3">
-          <img
-            class="border-only h-14 w-14 border-4 xl:h-20 xl:w-20 xxl:h-20 xxl:w-20"
-            src="../../../assets/images/bear-cub.webp"
-            alt=""
-          />
+        <h1 class="medium-heading-text">OWNED CUBS {{ playerCubBalance }}</h1>
+        <div
+          *ngIf="showCubGrid && playerCubBalance"
+          class="all-start mt-5% grid h-85% w-85% grid-cols-10 xl:grid-cols-5 xxl:grid-cols-5"
+        >
+          <div *ngFor="let cub of ownedCubsArray" class="all-center relative m-3">
+            <img
+              class="border-only h-14 w-14 border-4 xl:h-20 xl:w-20 xxl:h-20 xxl:w-20"
+              src="../../../assets/images/bear-cub.webp"
+              alt=""
+            />
+          </div>
         </div>
-        <div *ngIf="!playerCubBalance" class="w-155 ml-8 mt-52 text-center">
+
+        <div *ngIf="!playerCubBalance" class="all-center flex h-85% w-85% border-zinc-950">
           <h1 class="medium-heading-text">
-            YOU CURRENTLY OWN NO CUBS GOT TO GET CUBS TO START EARNING REWARDS
+            YOU CURRENTLY OWN NO CUBS GO TO GET CUBS TO START EARNING REWARDS
           </h1>
         </div>
       </div>
-    </div>
-    <div
-      class="all-center flex-col-set w-full lg:mt-5% xl:mt-0 xl:h-full xl:w-30% xxl:mt-0 xxl:h-full xxl:w-30%"
-    >
-      <div>
-        <h1 class="medium-heading-text mt-5%">CURRENT $FUZZ PRICE ${{ currentFuzzPrice }}</h1>
-        <h1 class="medium-heading-text mt-5%">REMAINING CUB SUPPLY {{ remainingCubSupply }}</h1>
-        <h1 class="medium-heading-text mt-5%">EMISSIONS PER CUB {{ emissionsPerCub }}</h1>
-        <h1 class="medium-heading-text mt-5%">
-          YOUR CURRENT DAILY REWARDS {{ currentDailyRewards }} $FUZZ
-        </h1>
+      <div
+        class="all-center flex-col-set w-full border-zinc-950 p-10 lg:mt-5% xl:mt-0 xl:h-full xl:w-30% xxl:mt-0 xxl:h-full xxl:w-30%"
+      >
+        <div>
+          <h1 class="medium-heading-text mt-5%">CURRENT $FUZZ PRICE ${{ currentFuzzPrice }}</h1>
+          <h1 class="medium-heading-text mt-5%">REMAINING CUB SUPPLY {{ remainingCubSupply }}</h1>
+          <h1 class="medium-heading-text mt-5%">EMISSIONS PER CUB {{ emissionsPerCub }}</h1>
+          <h1 class="medium-heading-text mt-5%">
+            YOUR CURRENT DAILY REWARDS {{ currentDailyRewards }} $FUZZ
+          </h1>
 
-        <h1 class="medium-heading-text mt-5%">TOTAL $FUZZ BURNED {{ totalBurned }}</h1>
-        <h1 class="medium-heading-text mt-5%">
-          CURRENT CUB PRICE IN $FUZZ {{ currentCubPriceForFuzz }}
-        </h1>
+          <h1 class="medium-heading-text mt-5%">TOTAL $FUZZ BURNED {{ totalBurned }}</h1>
+          <h1 class="medium-heading-text mt-5%">
+            CURRENT CUB PRICE IN $FUZZ {{ currentCubPriceForFuzz }}
+          </h1>
+        </div>
       </div>
-    </div>
 
-    <div
-      class="xl:all-center xxl:all-center mt-5% md:mt-20% lg:mt-10% xl:mt-0 xl:h-full xl:w-35% xxl:mt-0 xxl:h-full xxl:w-35%"
-    >
-      <h1 class="medium-heading-text xl:mt:-42 xxl:mt-42">
-        YOUR COST TO COMPOUND IN $FUZZ {{ playerCompoundCost }}
-      </h1>
-      <h1 class="small-heading-text">
-        A portion of your unclaimed rewards will be used to purchase another cub
-      </h1>
-      <button class="action-button mb-5%">Compound</button>
-      <h1 class="medium-heading-text">UNCLAIMED REWARDS {{ unclaimedRewards }} $FUZZ</h1>
-      <h1 class="small-heading-text">
-        If you choose to claim your rewards you will be charged a 5% tax on your claim.
-      </h1>
-      <button class="action-button">Claim Rewards</button>
+      <div
+        class="xl:all-center xxl:all-center m-5 p-10 md:mt-20% lg:mt-10% xl:mt-0 xl:h-full xl:w-35% xxl:mt-0 xxl:h-full xxl:w-35%"
+      >
+        <h1 class="medium-heading-text">YOUR COST TO COMPOUND IN $FUZZ {{ playerCompoundCost }}</h1>
+        <h1 class="small-heading-text">
+          A portion of your unclaimed rewards will be used to purchase another cub
+        </h1>
+        <button (click)="compoundCub()" class="action-button mb-5%">Compound</button>
+        <h1 class="medium-heading-text">UNCLAIMED REWARDS {{ unclaimedRewards }} $FUZZ</h1>
+        <h1 class="small-heading-text">
+          If you choose to claim your rewards you will be charged a 5% tax on your claim.
+        </h1>
+        <button (click)="claimRewards()" class="action-button">Claim Rewards</button>
+      </div>
     </div>
   </div>
 </div>

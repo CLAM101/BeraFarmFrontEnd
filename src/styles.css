@@ -18,11 +18,11 @@
   }
 
   .buy-button {
-    @apply w-70% rounded-md  border-8 border-zinc-950 bg-yellow-300 bg-opacity-85 font-RobotoMonoBold font-black opacity-100 active:opacity-15;
+    @apply w-70% rounded-md  border-4 border-zinc-950 bg-yellow-300 bg-opacity-85 font-RobotoMonoBold font-black opacity-100 active:opacity-15;
   }
 
   .toolbar-button {
-    @apply z-20 w-20% rounded-md border-8 border-zinc-950 bg-yellow-300 bg-opacity-85 font-RobotoMonoBold font-black opacity-100 active:opacity-15;
+    @apply z-20 w-20% rounded-md border-4 border-zinc-950 bg-yellow-300 bg-opacity-85 font-RobotoMonoBold font-black opacity-100 active:opacity-15;
   }
 
   @screen xs {
@@ -50,7 +50,7 @@
     }
 
     .action-button {
-      @apply z-20 h-16 w-68  text-sm;
+      @apply z-20 h-16 w-68 border-4  text-sm;
     }
   }
 
@@ -63,16 +63,16 @@
     }
 
     .action-button {
-      @apply z-20 h-22 w-110  text-lg;
+      @apply z-20 h-22 w-110 border-4  text-lg;
     }
   }
 
   @screen lg {
     .buy-button {
-      @apply mt-5 h-38  border-8;
+      @apply mt-5 h-38  border-4;
     }
     .toolbar-button {
-      @apply ml-0.2 h-18  border-8 text-sm;
+      @apply ml-0.2 h-18  border-4 text-sm;
     }
 
     .action-button {
@@ -82,25 +82,25 @@
 
   @screen xl {
     .buy-button {
-      @apply mt-5 h-38  border-8 text-lg;
+      @apply mt-5 h-38  border-4 text-lg;
     }
     .toolbar-button {
-      @apply ml-0.2 h-18  border-8 text-sm;
+      @apply ml-0.2 h-18  border-4 text-sm;
     }
     .action-button {
-      @apply z-20 h-30 w-90 border-8 text-3xl;
+      @apply z-20 h-30 w-90 border-4 text-3xl;
     }
   }
 
   @screen xxl {
     .buy-button {
-      @apply mt-5 h-38 w-70% border-8 text-2xl;
+      @apply mt-5 h-38 w-70% border-4 text-2xl;
     }
     .toolbar-button {
-      @apply ml-0.2 h-18  border-8 text-lg;
+      @apply ml-0.2 h-18  border-4 text-lg;
     }
     .action-button {
-      @apply z-20 h-30 w-100 border-8 text-3xl;
+      @apply z-20 h-30 w-100 border-4 text-3xl;
     }
   }
 }
@@ -114,12 +114,20 @@
     scrollbar-width: none;
   }
 
+  .large-heading-text {
+    @apply all-center  select-none font-RobotoMonoBold  font-black leading-normal text-black;
+  }
+
   .medium-heading-text {
     @apply select-none font-RobotoMonoBold text-3xl font-black;
   }
 
   .small-heading-text {
     @apply select-none font-RobotoMonoBold text-2xl font-black;
+  }
+
+  .paragraph-text {
+    @apply font-RobotoMonoBold font-black leading-normal text-black;
   }
 
   .border-background {
@@ -151,12 +159,18 @@
   }
 
   @screen xs {
+    .large-heading-text {
+      @apply text-lg;
+    }
     .medium-heading-text {
       @apply select-none font-RobotoMonoBold text-sm font-black;
     }
 
     .small-heading-text {
       @apply select-none font-RobotoMonoBold text-xs font-black;
+    }
+    .paragraph-text {
+      @apply text-3xs;
     }
     .border-only {
       @apply border-4;
@@ -164,15 +178,24 @@
   }
 
   @screen sm {
+    .large-heading-text {
+      @apply text-xl;
+    }
     .medium-heading-text {
       @apply select-none font-RobotoMonoBold text-sm font-black;
     }
     .small-heading-text {
       @apply select-none font-RobotoMonoBold text-xs font-black;
     }
+    .paragraph-text {
+      @apply text-3xs;
+    }
   }
 
   @screen md {
+    .large-heading-text {
+      @apply text-2xl;
+    }
     .medium-heading-text {
       @apply select-none font-RobotoMonoBold text-lg font-black;
     }
@@ -180,9 +203,15 @@
     .small-heading-text {
       @apply select-none font-RobotoMonoBold text-base font-black;
     }
+    .paragraph-text {
+      @apply text-sm;
+    }
   }
 
   @screen lg {
+    .large-heading-text {
+      @apply text-3xl;
+    }
     .medium-heading-text {
       @apply select-none font-RobotoMonoBold text-xl font-black;
     }
@@ -190,29 +219,49 @@
     .small-heading-text {
       @apply select-none font-RobotoMonoBold text-lg font-black;
     }
+    .paragraph-text {
+      @apply text-base;
+    }
   }
 
   @screen xl {
+    .large-heading-text {
+      @apply text-4xl;
+    }
     .medium-heading-text {
       @apply select-none font-RobotoMonoBold text-2xl font-black;
     }
 
     .small-heading-text {
       @apply select-none font-RobotoMonoBold text-xl font-black;
+    }
+    .paragraph-text {
+      @apply text-base;
     }
   }
 
   @screen xxl {
+    .large-heading-text {
+      @apply text-5xl;
+    }
     .medium-heading-text {
       @apply select-none font-RobotoMonoBold text-2xl font-black;
     }
 
     .small-heading-text {
       @apply select-none font-RobotoMonoBold text-xl font-black;
+    }
+    .paragraph-text {
+      @apply text-base;
     }
   }
 }
 
 body::-webkit-scrollbar {
   display: none;
+  overflow: auto;
+}
+
+html {
+  overflow: auto;
 }

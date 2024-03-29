@@ -1,5 +1,5 @@
 <div
-  class="no-scrollbar relative z-0 flex h-screen w-full items-center justify-center align-middle"
+  class="no-scrollbar flex-col-set relative z-0 h-screen w-full items-center justify-center align-middle"
 >
   <div
     *ngIf="!mintPanel.showMintPanel"
@@ -14,5 +14,5 @@
     </button>
   </div>
 
-  <app-mint-panel #mintPanel></app-mint-panel>
+  <div class="mt-20"><app-mint-panel #mintPanel></app-mint-panel></div>
 </div>

@@ -110,13 +110,12 @@ export class MintPanelComponent {
 
       if (approvalAmount === 0) return;
       const approvalTx = await this.honeyMethodCaller.approve(beraFarm, approvalAmount);
-      this.loadingPopup.visible = true;
-      this.loadingPopup.loadingStart = true;
+
+      this.startLoading();
 
       const approveTxResponse = await approvalTx.wait();
 
-      this.loadingPopup.loadingStart = false;
-      this.loadingPopup.response = 'Tokens Approved';
+      this.finishLoading('Tokens Approved');
 
       this.allowanceSufficient = true;
     } catch (err) {
@@ -126,6 +125,16 @@ export class MintPanelComponent {
 
   closePopUpClick(e) {
     this.loadingPopup.visible = false;
+  }
+
+  startLoading() {
+    this.loadingPopup.visible = true;
+    this.loadingPopup.loadingStart = true;
+  }
+
+  finishLoading(message: string) {
+    this.loadingPopup.loadingStart = false;
+    this.loadingPopup.response = message;
   }
 
   async getMintCost() {
@@ -177,9 +186,11 @@ export class MintPanelComponent {
       const approvalAmount = ethers.parseEther(await this.getTransactionCostBond());
       const approvalTx = await this.honeyMethodCaller.approve(beraFarm, approvalAmount);
 
+      this.startLoading();
       await approvalTx.wait();
+
+      this.finishLoading('Tokens Approved');
       this.allowanceSufficient = true;
-      alert('Tokens Approved');
     } catch (err) {
       console.log('error approving spend for bond', err);
     }
@@ -190,13 +201,11 @@ export class MintPanelComponent {
       await this.ethersService.checkAndChangeNetwork();
       const approvalAmount = ethers.parseEther(await this.getTransactionCostFuzz());
       const approvalTx = await this.fuzzTokenMethodCaller.approve(beraFarm, approvalAmount);
-      this.loadingPopup.visible = true;
-      this.loadingPopup.loadingStart = true;
+      this.startLoading();
 
       await approvalTx.wait();
+      this.finishLoading('Tokens Approved');
 
-      this.loadingPopup.response = 'Tokens Approved';
-      alert('Tokens Approved');
       this.allowanceSufficient = true;
     } catch (err) {
       console.log('error approving spend', err);
@@ -250,8 +259,12 @@ export class MintPanelComponent {
     try {
       await this.ethersService.checkAndChangeNetwork();
       const buyTx = await this.beraFarmMethodCaller.buyBeraCubsHoney(this.mintAmount);
+
+      this.startLoading();
       const confirmation = await buyTx.wait();
-      alert('Bought For Honey');
+
+      this.finishLoading('BeraCub Purchase Successful');
+
       this.allowanceSufficient = false;
       this.mintAmount = 0;
       await this.postBuyDetailUpdate();
@@ -272,7 +285,11 @@ export class MintPanelComponent {
     try {
       await this.ethersService.checkAndChangeNetwork();
       const buyTx = await this.beraFarmMethodCaller.buyBeraCubsFuzz(this.mintAmount);
+
+      this.startLoading();
       const confirmation = await buyTx.wait();
+
+      this.finishLoading('BeraCub Purchase Successful');
       await this.postBuyDetailUpdate();
     } catch (err) {
       alert(`Buy For Fuzz Failed ${err}`);
@@ -283,7 +300,11 @@ export class MintPanelComponent {
     try {
       await this.ethersService.checkAndChangeNetwork();
       const bondTx = await this.beraFarmMethodCaller.bondBeraCubs(this.mintAmount);
+
+      this.startLoading();
       const confirmation = await bondTx.wait();
+
+      this.finishLoading('BeraCub Bonded Successfully');
       await this.postBuyDetailUpdate();
     } catch (err) {
       alert(`Bond For Honey Failed ${err}`);

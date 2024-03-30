@@ -11,26 +11,24 @@ import { AppRoutingModule } from './app-routing-module';
 import { reducers } from 'src/global-state/reducers';
 import { ContractEffects } from 'src/global-state/effects';
 import { LoadingPopupComponent } from './components/loading-popup/loading-popup.component';
-
+import { PlayerDashboardComponent } from './components/player-dashboard/player-dashboard.component';
 @NgModule({
   declarations: [
-    AppComponent, // Declare your AppComponent
-    MintPanelComponent, // Any other components you have
-    TopToolbarComponent, // Any other components you have
-    HomePageComponent, // Any other components you have
+    AppComponent,
+    MintPanelComponent,
+    TopToolbarComponent,
+    HomePageComponent,
     BuyPageComponent,
     LoadingPopupComponent,
-
-    // Any other components you have
+    PlayerDashboardComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     StoreModule.forRoot({ fuzzFarmState: reducers }),
-    EffectsModule.forRoot([ContractEffects]), // Initialize NgRx Effects if you have any
-    // Other module imports
+    EffectsModule.forRoot([ContractEffects]),
   ],
-  providers: [], // Global services
-  bootstrap: [AppComponent], // Bootstrap your AppComponent
+  providers: [],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -261,10 +261,10 @@
       @apply mt-20 flex select-none flex-row items-center justify-end rounded-md border-4 border-zinc-950 text-center;
     }
     .incr-button {
-      @apply ml-44 h-28 select-none border-l-8 border-zinc-950 active:opacity-15;
+      @apply ml-44 h-28 select-none border-l-4 border-zinc-950 active:opacity-15;
     }
     .decr-button {
-      @apply mr-44 h-28 select-none border-r-8 border-zinc-950 active:opacity-15;
+      @apply mr-44 h-28 select-none border-r-4 border-zinc-950 active:opacity-15;
     }
   }
 
@@ -304,10 +304,10 @@
       @apply mt-20 flex select-none flex-row items-center justify-end rounded-md border-4 border-zinc-950 text-center;
     }
     .incr-button {
-      @apply ml-44 h-28 select-none border-l-8 border-zinc-950 active:opacity-15;
+      @apply ml-44 h-28 select-none border-l-4 border-zinc-950 active:opacity-15;
     }
     .decr-button {
-      @apply mr-44 h-28 select-none border-r-8 border-zinc-950 active:opacity-15;
+      @apply mr-44 h-28 select-none border-r-4 border-zinc-950 active:opacity-15;
     }
   }
 }

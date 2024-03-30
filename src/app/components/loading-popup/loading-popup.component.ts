@@ -10,7 +10,7 @@ export class LoadingPopupComponent {
   @Output() closePopupClick = new EventEmitter<any>();
   loadingText: string;
   loadingStart = true;
-  response: string;
+  response: { message: string; success: boolean };
   visible = false;
 
   constructor() {}
@@ -19,5 +19,19 @@ export class LoadingPopupComponent {
 
   closePopUpClick(e) {
     this.closePopupClick.emit(e);
+  }
+
+  startLoading(text: string) {
+    this.loadingText = text;
+    this.visible = true;
+    this.loadingStart = true;
+  }
+
+  finishLoading(message: string, success: boolean) {
+    this.loadingStart = false;
+    this.response = {
+      message,
+      success,
+    };
   }
 }

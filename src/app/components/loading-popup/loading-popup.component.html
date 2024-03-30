@@ -2,7 +2,9 @@
   *ngIf="visible"
   class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40"
 >
-  <div class="border-background all-center flex h-90 w-110">
+  <div
+    class="border-background all-center m-5 flex xs:h-60 xs:w-60 sm:h-60 sm:w-60 md:h-90 md:w-90 lg:h-100 lg:w-100 xl:h-90 xl:w-100"
+  >
     <div *ngIf="loadingStart" class="flex">
       <svg
         aria-hidden="true"
@@ -25,14 +27,32 @@
     </div>
 
     <div *ngIf="!loadingStart" class="flex-col-set flex h-full w-full justify-between">
-      <h1 class="medium-heading-text mt-10">{{ response }}</h1>
+      <h1 class="medium-heading-text m-4">{{ response.message }}</h1>
 
-      <button
-        (click)="closePopUpClick($event)"
-        class="border-only w-85%% medium-heading-text m-5 h-20%"
-      >
-        CONTINUE
-      </button>
+      <div class="flex w-full items-start justify-center">
+        <img
+          *ngIf="response.success"
+          class="border-only xs:h-16 xs:w-16 sm:h-16 sm:w-16 md:h-30 md:w-30 lg:h-30 lg:w-30 xl:h-38 xl:w-38"
+          src="../../../assets/images/success-bear.webp"
+          alt="success-bear"
+        />
+
+        <img
+          *ngIf="!response.success"
+          class="border-only xs:h-16 xs:w-16 sm:h-16 sm:w-16 md:h-30 md:w-30 lg:h-30 lg:w-30 xl:h-38 xl:w-38"
+          src="../../../assets/images/failed-bear.webp"
+          alt="failed-bear"
+        />
+      </div>
+
+      <div class="all-center flex h-20% w-full">
+        <button
+          (click)="closePopUpClick($event)"
+          class="border-only all-center medium-heading-text mb-5 flex h-full w-85%"
+        >
+          CONTINUE
+        </button>
+      </div>
     </div>
   </div>
 </div>

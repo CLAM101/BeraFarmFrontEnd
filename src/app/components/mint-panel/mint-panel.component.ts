@@ -12,7 +12,6 @@ import { GameServiceService } from 'src/app/services/game-service/game-service.s
 import { LoadingPopupComponent } from '../loading-popup/loading-popup.component';
 @Component({
   selector: 'app-mint-panel',
-
   templateUrl: './mint-panel.component.html',
   styleUrl: './mint-panel.component.css',
 })
@@ -109,32 +108,121 @@ export class MintPanelComponent {
       const approvalAmount = await this.getTransactionCostHoney();
 
       if (approvalAmount === 0) return;
+      this.loadingPopup.startLoading('Approving Spend');
       const approvalTx = await this.honeyMethodCaller.approve(beraFarm, approvalAmount);
-
-      this.startLoading();
 
       const approveTxResponse = await approvalTx.wait();
 
-      this.finishLoading('Tokens Approved');
+      this.loadingPopup.finishLoading('Tokens Approved', true);
 
       this.allowanceSufficient = true;
     } catch (err) {
+      this.loadingPopup.finishLoading(
+        `Approval Failed ${err.reason || 'Please try again or log a ticket in Discord'}`,
+        false,
+      );
+    }
+  }
+
+  async approveSpendBond() {
+    try {
+      await this.ethersService.checkAndChangeNetwork();
+      const approvalAmount = ethers.parseEther(await this.getTransactionCostBond());
+      const approvalTx = await this.honeyMethodCaller.approve(beraFarm, approvalAmount);
+
+      this.loadingPopup.startLoading('Approving Spend');
+      await approvalTx.wait();
+
+      this.loadingPopup.finishLoading('Tokens Approved', true);
+      this.allowanceSufficient = true;
+    } catch (err) {
+      this.loadingPopup.finishLoading(
+        `Approval Failed ${err.reason || 'Please try again or log a ticket in Discord'}`,
+        false,
+      );
+    }
+  }
+
+  async approveSpendFuzz() {
+    try {
+      await this.ethersService.checkAndChangeNetwork();
+      const approvalAmount = ethers.parseEther(await this.getTransactionCostFuzz());
+      const approvalTx = await this.fuzzTokenMethodCaller.approve(beraFarm, approvalAmount);
+      this.loadingPopup.startLoading('Approving Spend');
+
+      await approvalTx.wait();
+      this.loadingPopup.finishLoading('Tokens Approved', true);
+
+      this.allowanceSufficient = true;
+    } catch (err) {
+      this.loadingPopup.finishLoading(
+        `Approval Failed ${err.reason || 'Please try again or log a ticket in Discord'}`,
+        false,
+      );
       console.log('error approving spend', err);
+    }
+  }
+
+  async buyBeraCubsForHoney() {
+    try {
+      await this.ethersService.checkAndChangeNetwork();
+      this.loadingPopup.startLoading('Purchasing BeraCubs');
+      const buyTx = await this.beraFarmMethodCaller.buyBeraCubsHoney(this.mintAmount);
+
+      const confirmation = await buyTx.wait();
+
+      this.loadingPopup.finishLoading('BeraCub Purchase Successful', true);
+
+      this.allowanceSufficient = false;
+      this.mintAmount = 0;
+      await this.postBuyDetailUpdate();
+    } catch (err) {
+      this.loadingPopup.finishLoading(
+        `BeraCub Purchase Failed: ${err.reason || 'Please try again or log a ticket in Discord'}`,
+        false,
+      );
+    }
+  }
+
+  async buyBeraCubsForFuzz() {
+    try {
+      await this.ethersService.checkAndChangeNetwork();
+      this.loadingPopup.startLoading('Purchasing BeraCubs');
+      const buyTx = await this.beraFarmMethodCaller.buyBeraCubsFuzz(this.mintAmount);
+
+      const confirmation = await buyTx.wait();
+
+      this.loadingPopup.finishLoading('BeraCub Purchase Successful', true);
+      await this.postBuyDetailUpdate();
+    } catch (err) {
+      this.loadingPopup.finishLoading(
+        `BeraCub Purchase Failed: ${err.reason || 'Please try again or log a ticket in Discord'}`,
+        false,
+      );
+    }
+  }
+
+  async bondForHoney() {
+    try {
+      await this.ethersService.checkAndChangeNetwork();
+
+      this.loadingPopup.startLoading('Bonding BeraCubs');
+      const bondTx = await this.beraFarmMethodCaller.bondBeraCubs(this.mintAmount);
+
+      const confirmation = await bondTx.wait();
+
+      this.loadingPopup.finishLoading('BeraCub Bond Successful', true);
+      await this.postBuyDetailUpdate();
+    } catch (err) {
+      this.loadingPopup.finishLoading(
+        `BeraCub Bond Failed: ${err.reason || 'Please try again or log a ticket in Discord'}`,
+        false,
+      );
     }
   }
 
   closePopUpClick(e) {
     this.loadingPopup.visible = false;
-  }
-
-  startLoading() {
-    this.loadingPopup.visible = true;
-    this.loadingPopup.loadingStart = true;
-  }
-
-  finishLoading(message: string) {
-    this.loadingPopup.loadingStart = false;
-    this.loadingPopup.response = message;
   }
 
   async getMintCost() {
@@ -178,37 +266,6 @@ export class MintPanelComponent {
     }
     if (this.panelType === 'bondForHoney') {
       this.checkAllowanceHoney();
-    }
-  }
-  async approveSpendBond() {
-    try {
-      await this.ethersService.checkAndChangeNetwork();
-      const approvalAmount = ethers.parseEther(await this.getTransactionCostBond());
-      const approvalTx = await this.honeyMethodCaller.approve(beraFarm, approvalAmount);
-
-      this.startLoading();
-      await approvalTx.wait();
-
-      this.finishLoading('Tokens Approved');
-      this.allowanceSufficient = true;
-    } catch (err) {
-      console.log('error approving spend for bond', err);
-    }
-  }
-
-  async approveSpendFuzz() {
-    try {
-      await this.ethersService.checkAndChangeNetwork();
-      const approvalAmount = ethers.parseEther(await this.getTransactionCostFuzz());
-      const approvalTx = await this.fuzzTokenMethodCaller.approve(beraFarm, approvalAmount);
-      this.startLoading();
-
-      await approvalTx.wait();
-      this.finishLoading('Tokens Approved');
-
-      this.allowanceSufficient = true;
-    } catch (err) {
-      console.log('error approving spend', err);
     }
   }
 
@@ -255,60 +312,12 @@ export class MintPanelComponent {
     }
   }
 
-  async buyBeraCubsForHoney() {
-    try {
-      await this.ethersService.checkAndChangeNetwork();
-      const buyTx = await this.beraFarmMethodCaller.buyBeraCubsHoney(this.mintAmount);
-
-      this.startLoading();
-      const confirmation = await buyTx.wait();
-
-      this.finishLoading('BeraCub Purchase Successful');
-
-      this.allowanceSufficient = false;
-      this.mintAmount = 0;
-      await this.postBuyDetailUpdate();
-    } catch (err) {
-      alert(`Buy For Honey Failed ${err}`);
-    }
-  }
-
   async postBuyDetailUpdate() {
     this.walletCubBalance = await this.gameService.getCubBalance(this.beraCubContract);
     await this.setRemainingSupply();
     await this.getMintCost();
     this.mintAmount = 0;
     this.mintCost = '0';
-  }
-
-  async buyBeraCubsForFuzz() {
-    try {
-      await this.ethersService.checkAndChangeNetwork();
-      const buyTx = await this.beraFarmMethodCaller.buyBeraCubsFuzz(this.mintAmount);
-
-      this.startLoading();
-      const confirmation = await buyTx.wait();
-
-      this.finishLoading('BeraCub Purchase Successful');
-      await this.postBuyDetailUpdate();
-    } catch (err) {
-      alert(`Buy For Fuzz Failed ${err}`);
-    }
-  }
-
-  async bondForHoney() {
-    try {
-      await this.ethersService.checkAndChangeNetwork();
-      const bondTx = await this.beraFarmMethodCaller.bondBeraCubs(this.mintAmount);
-
-      this.startLoading();
-      const confirmation = await bondTx.wait();
-
-      this.finishLoading('BeraCub Bonded Successfully');
-      await this.postBuyDetailUpdate();
-    } catch (err) {
-      alert(`Bond For Honey Failed ${err}`);
-    }
   }
 
   async getTransactionCostHoney() {

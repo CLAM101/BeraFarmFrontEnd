@@ -1,17 +1,18 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { EthersService } from 'src/app/services/ethers-service/ethers-service.service';
 import { GameServiceService } from 'src/app/services/game-service/game-service.service';
 import { CommonModule } from '@angular/common';
 import { ethers } from 'ethers';
+import { LoadingPopupComponent } from '../loading-popup/loading-popup.component';
 
 @Component({
   selector: 'app-player-dashboard',
-  standalone: true,
-  imports: [CommonModule],
+
   templateUrl: './player-dashboard.component.html',
   styleUrl: './player-dashboard.component.css',
 })
 export class PlayerDashboardComponent {
+  @ViewChild(LoadingPopupComponent) loadingPopup: LoadingPopupComponent;
   beraFarmContract;
   fuzzTokenContract;
   beraCubContract;
@@ -49,6 +50,10 @@ export class PlayerDashboardComponent {
       ownedCubs.push(i);
     }
     return ownedCubs;
+  }
+
+  closePopUpClick(e) {
+    this.loadingPopup.visible = false;
   }
 
   onResize(event) {
@@ -120,28 +125,30 @@ export class PlayerDashboardComponent {
 
   async compoundCub() {
     try {
+      this.loadingPopup.startLoading('Compounding Cub');
       const compoundTx = await this.beraFarmMethodCaller.compoundBeraCubs();
 
       await compoundTx.wait();
 
-      alert('Cub successfully compounded');
+      this.loadingPopup.finishLoading('Cub successfully compounded', true);
 
       await this.initializeDashboard();
     } catch (err) {
-      console.log(err);
+      this.loadingPopup.finishLoading(`Error compounding Cub: ${err.reason}`, false);
     }
   }
 
   async claimRewards() {
     try {
+      this.loadingPopup.startLoading('Claiming rewards');
       const claimRewardsTx = await this.beraFarmMethodCaller.claim();
 
       await claimRewardsTx.wait();
 
-      alert('Rewards successfully claimed');
+      this.loadingPopup.finishLoading('Rewards successfully claimed', true);
       await this.initializeDashboard();
     } catch (err) {
-      console.log(err);
+      this.loadingPopup.finishLoading(`Error claiming rewards: ${err.reason}`, false);
     }
   }
 

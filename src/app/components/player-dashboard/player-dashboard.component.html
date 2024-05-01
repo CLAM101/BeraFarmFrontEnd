@@ -1,15 +1,15 @@
 <div
-  class="all-center xl:flex-row-set xxl:flex-row-set flex-col-set relative z-0 h-screen w-full overflow-auto"
+  class="all-center xl:flex-row-set xxl:flex-row-set flex-col-set no-scrollbar relative z-0 h-full w-full overflow-auto"
 >
   <div
     [ngClass]="[
-      'border-background  no-scrollbar  absolute',
+      'border-background  no-scrollbar  ',
       'select-none overflow-auto',
       'all-center',
-      'xl:flex-row-set xxl:flex-col-set h-95% w-90% xs:h-90% xs:w-90% sm:mb-16 sm:h-120 sm:w-90% md:mt-10 md:h-95% md:w-90%'
+      'xl:flex-row-set xxl:flex-col-set  xs:h-90% xs:w-90% sm:mt-14 sm:h-120 sm:w-90% md:mt-10 md:h-95% md:w-90% xl:mt-6 xl:h-90% xxl:mt-6 xxl:h-90%'
     ]"
   >
-    <div class="mb-20">
+    <div class="mt-8">
       <h1 class="large-heading-text">Welcome To Your Player Dashboard</h1>
     </div>
 
@@ -22,7 +22,7 @@
         <h1 class="medium-heading-text">OWNED CUBS {{ playerCubBalance }}</h1>
         <div
           *ngIf="showCubGrid && playerCubBalance"
-          class="all-start mt-5% grid h-85% w-85% grid-cols-10 xl:grid-cols-5 xxl:grid-cols-5"
+          class="all-start w-87% mt-5% grid h-85% grid-cols-10 xl:grid-cols-5 xxl:grid-cols-5"
         >
           <div *ngFor="let cub of ownedCubsArray" class="all-center relative m-3">
             <img

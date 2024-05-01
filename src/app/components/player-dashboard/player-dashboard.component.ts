@@ -76,7 +76,6 @@ export class PlayerDashboardComponent {
       fuzzTokenMethodCaller,
     } = await this.ethersService.setupContracts();
 
-    // Assign to component properties
     this.beraFarmContract = beraFarmContract;
     this.beraFarmMethodCaller = beraFarmMethodCaller;
     this.beraCubContract = beraCubContract;

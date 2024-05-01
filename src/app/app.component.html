@@ -4,8 +4,9 @@
     background-repeat: repeat-y;
     background-size: cover;
   "
-  class="no-scrollbar flex-col-set h-full overflow-auto"
+  class="no-scrollbar flex-col-set h-screen justify-between overflow-auto"
 >
   <app-top-toolbar></app-top-toolbar>
-  <router-outlet></router-outlet>
+
+  <div class="h-full w-full"><router-outlet></router-outlet></div>
 </div>

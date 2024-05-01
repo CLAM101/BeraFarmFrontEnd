@@ -234,7 +234,7 @@
       @apply z-20 h-30 w-110 border-4 text-3xl;
     }
     .main-mint-panel {
-      @apply mb-30 flex h-130 w-190 flex-row justify-center border-4;
+      @apply flex h-130 w-190 flex-row justify-center border-4;
     }
     .info-text {
       @apply mt-3 text-xl;

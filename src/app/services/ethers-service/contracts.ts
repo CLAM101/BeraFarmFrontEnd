@@ -1,4 +1,4 @@
-export const beraFarm = '0xD5ac451B0c50B9476107823Af206eD814a2e2580'
-export const mockHoney = '0x5c74c94173F05dA1720953407cbb920F3DF9f887'
-export const fuzzToken = '0x720472c8ce72c2A2D711333e064ABD3E6BbEAdd3'
-export const beraCub = '0xAA292E8611aDF267e563f334Ee42320aC96D0463'
+export const beraFarm = '0xA7c59f010700930003b33aB25a7a0679C860f29c';
+export const mockHoney = '0x34B40BA116d5Dec75548a9e9A8f15411461E8c70';
+export const fuzzToken = '0x07882Ae1ecB7429a84f1D53048d35c4bB2056877';
+export const beraCub = '0xc96304e3c037f81dA488ed9dEa1D8F2a48278a75';

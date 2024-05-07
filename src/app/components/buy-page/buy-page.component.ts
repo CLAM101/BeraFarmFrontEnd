@@ -11,12 +11,14 @@ import { EthersService } from 'src/app/services/ethers-service/ethers-service.se
 export class BuyPageComponent {
   @ViewChild(MintPanelComponent) mintPanel: MintPanelComponent;
 
-  showPanel;
+  showPanel = false;
   constructor(public ethersService: EthersService) {}
   ngOnInit(): void {}
 
   async showMintPanelFunc(panelType) {
+    debugger;
     this.ethersService.checkAndChangeNetwork();
+
     if (panelType === 'buyForHoney') {
       this.mintPanel.panelType = 'buyForHoney';
       await this.configureBuyForHoney();
@@ -32,7 +34,7 @@ export class BuyPageComponent {
       await this.configureBondForHoney();
     }
 
-    this.mintPanel.open();
+    this.showPanel = true;
   }
 
   async configureBuyForHoney() {

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MintConfig } from 'src/app/services/minting-service/mint-config-models';
@@ -42,6 +42,8 @@ export class MintPanelComponent {
   loadingText = 'Loading...';
   transactionResponse: string;
 
+  @Output() closePanel = new EventEmitter();
+
   constructor(
     public router: Router,
     public ethersService: EthersService,
@@ -77,7 +79,7 @@ export class MintPanelComponent {
     this.showMintPanel = true;
   }
   close() {
-    this.showMintPanel = false;
+    this.closePanel.emit();
   }
 
   setupContracts() {}
@@ -128,9 +130,10 @@ export class MintPanelComponent {
     try {
       await this.ethersService.checkAndChangeNetwork();
       const approvalAmount = ethers.parseEther(await this.getTransactionCostBond());
+      if (approvalAmount === ethers.parseEther('0')) return;
+      this.loadingPopup.startLoading('Approving Spend');
       const approvalTx = await this.honeyMethodCaller.approve(beraFarm, approvalAmount);
 
-      this.loadingPopup.startLoading('Approving Spend');
       await approvalTx.wait();
 
       this.loadingPopup.finishLoading('Tokens Approved', true);
@@ -147,8 +150,9 @@ export class MintPanelComponent {
     try {
       await this.ethersService.checkAndChangeNetwork();
       const approvalAmount = ethers.parseEther(await this.getTransactionCostFuzz());
-      const approvalTx = await this.fuzzTokenMethodCaller.approve(beraFarm, approvalAmount);
+      if (approvalAmount === ethers.parseEther('0')) return;
       this.loadingPopup.startLoading('Approving Spend');
+      const approvalTx = await this.fuzzTokenMethodCaller.approve(beraFarm, approvalAmount);
 
       await approvalTx.wait();
       this.loadingPopup.finishLoading('Tokens Approved', true);

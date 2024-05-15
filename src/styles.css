@@ -63,7 +63,7 @@
     }
 
     .action-button {
-      @apply z-20 h-22 w-110 border-4  text-lg;
+      @apply z-20 h-18 w-110 border-4  text-lg;
     }
   }
 
@@ -76,7 +76,7 @@
     }
 
     .action-button {
-      @apply z-20 h-20 w-130 border-4 text-2xl;
+      @apply z-20 h-20 w-110 border-4 text-2xl;
     }
   }
 
@@ -88,7 +88,7 @@
       @apply ml-0.2 h-18  border-4 text-sm;
     }
     .action-button {
-      @apply z-20 h-30 w-90 border-4 text-3xl;
+      @apply z-20 h-30 w-120 border-4 text-3xl;
     }
   }
 
@@ -100,7 +100,7 @@
       @apply ml-0.2 h-18  border-4 text-lg;
     }
     .action-button {
-      @apply z-20 h-30 w-100 border-4 text-3xl;
+      @apply z-20 h-30 w-130 border-4 text-3xl;
     }
   }
 }
@@ -259,9 +259,10 @@
 
 body::-webkit-scrollbar {
   display: none;
-  overflow: auto;
 }
 
 html {
-  overflow: auto;
+  background-image: url('./assets/images/mint-page-background.png');
+  background-repeat: repeat-y repeat-x;
+  background-size: 100% 100%;
 }

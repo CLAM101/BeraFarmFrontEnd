@@ -1,101 +1,104 @@
-<div
-  *ngIf="mintPanelConfig"
-  class="border-background no-scrollbar z-0 flex h-full flex-col items-center justify-center overflow-auto xs:flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row"
->
-  <div class="flex-col-set h-full flex-1 items-center justify-between text-center">
-    <div class="flex-col-set mt-6 h-1/3 w-full items-center justify-between">
-      <h1 class="medium-heading-text flex-2">
-        {{ mintPanelConfig.mintPanelTitle }}
-      </h1>
+<ng-container *ngIf="mintPanelConfig">
+  <div
+    class="border-background no-scrollbar xs:flex-col-set sm:flex-col-set md:flex-col-set lg:flex-row-set xl: flex-row-set xxl:flex-row-set h-75vh z-0 mt-5% justify-center"
+  >
+    <div class="flex-col-set m-4 flex-1 items-center justify-between text-center">
+      <div class="flex-col-set mt-6 h-1/3 w-full items-center justify-between">
+        <h1 class="medium-heading-text flex-2">
+          {{ mintPanelConfig.mintPanelTitle }}
+        </h1>
 
-      <img
-        class="flex-2 border-only h-30 w-30 border-4"
-        src="../../../assets/images/bear-cub.webp"
-        alt="Bear Cub Image"
-      />
-    </div>
+        <img
+          class="flex-2 border-only border-4 xs:h-14 xs:w-14 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-30 lg:w-30 xl:h-34 xl:w-34 xxl:h-40 xxl:w-40"
+          src="../../../assets/images/bear-cub.webp"
+          alt="Bear Cub Image"
+        />
+      </div>
 
-    <div class="flex-col-set mt-6 h-1/3 w-full items-center justify-between">
-      <h1 class="small-heading-text flex-2">
-        REMAINING SUPPLY FOR {{ mintPanelConfig.ticker }} :
-        {{ remainingSupply }}
-      </h1>
-      <h1 class="small-heading-text flex-2">
-        COST PER CUB: {{ costPerCub }} {{ mintPanelConfig.ticker }}
-      </h1>
+      <div class="flex-col-set mt-6 h-1/3 w-full items-center justify-between">
+        <h1 class="small-heading-text flex-2">
+          REMAINING SUPPLY FOR {{ mintPanelConfig.ticker }} :
+          {{ remainingSupply }}
+        </h1>
+        <h1 class="small-heading-text flex-2">
+          COST PER CUB: {{ costPerCub }} {{ mintPanelConfig.ticker }}
+        </h1>
 
-      <h1 class="small-heading-text flex-2">
-        TRANSACTION TOTAL: {{ mintCost }} {{ mintPanelConfig.ticker }}
-      </h1>
+        <h1 class="small-heading-text flex-2">
+          TRANSACTION TOTAL: {{ mintCost }} {{ mintPanelConfig.ticker }}
+        </h1>
 
-      <h1 class="small-heading-text flex-2">REMAINING SUPPLY {{ remainingSupply }}</h1>
-    </div>
+        <h1 class="small-heading-text flex-2">REMAINING SUPPLY {{ remainingSupply }}</h1>
+      </div>
 
-    <div class="flex-col-set mt-6 h-1/3 w-full items-center justify-between">
-      <div
-        class="border-only flex-2 mt-3 flex select-none flex-row items-center justify-end rounded-md text-center"
-      >
-        <button
-          (click)="decrMintAmount()"
-          class="mr-20 select-none border-r-4 border-zinc-950 active:opacity-15"
+      <div class="flex-col-set h-1/3 w-full items-center justify-center">
+        <div
+          class="border-only flex-2 flex select-none flex-row items-center justify-center rounded-md text-center"
         >
-          <img
-            src="../../../assets/minus-sign-of-a-line-in-horizontal-position-svgrepo-com.svg"
-            alt="Plus SVG"
-          />
-        </button>
+          <button
+            (click)="decrMintAmount()"
+            class="mr-20 select-none border-r-4 border-zinc-950 active:opacity-15"
+          >
+            <img
+              src="../../../assets/minus-sign-of-a-line-in-horizontal-position-svgrepo-com.svg"
+              alt="Plus SVG"
+            />
+          </button>
 
-        <h1 class="RobotoMonoBold text-3xl font-black">{{ mintAmount }}</h1>
+          <h1 class="RobotoMonoBold text-3xl font-black">{{ mintAmount }}</h1>
 
-        <button
-          (click)="incrMintAmount()"
-          class="ml-20 select-none border-l-4 border-zinc-950 active:opacity-15"
-        >
-          <img src="../../../assets/plus-svgrepo-com.svg" alt="Plus SVG" />
-        </button>
+          <button
+            (click)="incrMintAmount()"
+            class="ml-20 select-none border-l-4 border-zinc-950 active:opacity-15"
+          >
+            <img src="../../../assets/plus-svgrepo-com.svg" alt="Plus SVG" />
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <div *ngIf="mintPanelConfig" class="flex-col-set h-full flex-1 items-center justify-center">
-    <div class="mt-6 flex flex-col items-center justify-center">
-      <h1 class="heading-text leading-relaxed">YOUR CUB BALANCE: {{ walletCubBalance }}</h1>
-      <h1 class="info-text leading-relaxed">
-        {{ mintPanelConfig.purchaseInfoText }}
-      </h1>
+    <div *ngIf="mintPanelConfig" class="flex-col-set h-full flex-1 items-center justify-between">
+      <div class="mt-6 flex h-1/2 flex-col items-center justify-evenly">
+        <h1 class="medium-heading-text leading-relaxed">
+          YOUR CUB BALANCE: {{ walletCubBalance }}
+        </h1>
+        <h1 class="small-heading-text text-center leading-relaxed">
+          {{ mintPanelConfig.purchaseInfoText }}
+        </h1>
+      </div>
+
+      <div class="flex-col-set mb-4 h-1/2 w-full items-center justify-center">
+        <button
+          *ngIf="!allowanceSufficient"
+          (click)="
+            panelType === 'buyForHoney'
+              ? approveSpendHoney()
+              : panelType === 'bondForHoney'
+                ? approveSpendBond()
+                : approveSpendFuzz()
+          "
+          class="action-button m-2"
+        >
+          {{ mintPanelConfig.approveText }}
+        </button>
+        <button
+          *ngIf="allowanceSufficient"
+          (click)="
+            panelType === 'buyForHoney'
+              ? buyBeraCubsForHoney()
+              : panelType === 'bondForHoney'
+                ? bondForHoney()
+                : buyBeraCubsForFuzz()
+          "
+          class="action-button m-2"
+        >
+          {{ mintPanelConfig.buyText }}
+        </button>
+        <button (click)="close()" class="action-button">BACK</button>
+      </div>
     </div>
 
-    <div class="flex-col-set w-full items-center justify-center">
-      <button
-        *ngIf="!allowanceSufficient"
-        (click)="
-          panelType === 'buyForHoney'
-            ? approveSpendHoney()
-            : panelType === 'bondForHoney'
-              ? approveSpendBond()
-              : approveSpendFuzz()
-        "
-        class="action-button"
-      >
-        {{ mintPanelConfig.approveText }}
-      </button>
-      <button
-        *ngIf="allowanceSufficient"
-        (click)="
-          panelType === 'buyForHoney'
-            ? buyBeraCubsForHoney()
-            : panelType === 'bondForHoney'
-              ? bondForHoney()
-              : buyBeraCubsForFuzz()
-        "
-        class="action-button"
-      >
-        {{ mintPanelConfig.buyText }}
-      </button>
-      <button (click)="close()" class="action-button">BACK</button>
+    <div>
+      <app-loading-popup (closePopupClick)="closePopUpClick($event)"></app-loading-popup>
     </div>
   </div>
-
-  <div>
-    <app-loading-popup (closePopupClick)="closePopUpClick($event)"></app-loading-popup>
-  </div>
-</div>
+</ng-container>

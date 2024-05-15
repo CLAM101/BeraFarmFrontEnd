@@ -61,7 +61,7 @@ export class PlayerDashboardComponent {
   }
 
   private checkScreenSize(width: number) {
-    this.showCubGrid = width >= 850;
+    this.showCubGrid = width >= 1280;
   }
 
   private async initializeContracts() {

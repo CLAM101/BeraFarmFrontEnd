@@ -1,6 +1,8 @@
-<div class="flex-col-set relative z-0 flex h-full w-full items-center justify-between">
+<div
+  class="flex-col-set h-screen3 relative z-0 flex w-full items-center justify-center overflow-auto"
+>
   <div
-    class="z10 no-scrollbar border-only relative z-0 mt-6 flex h-80% w-10/12 items-center justify-between rounded-xl bg-yellow-300 bg-opacity-85"
+    class="z10 no-scrollbar border-only relative z-0 flex h-75% w-10/12 items-center justify-center rounded-xl bg-yellow-300 bg-opacity-85"
     (click)="showInfo()"
     *ngIf="!infoPage"
   >
@@ -8,7 +10,7 @@
   </div>
   <div
     *ngIf="infoPage"
-    class="z10 no-scrollbar border-only relative z-0 mt-6 flex h-80% w-10/12 items-center justify-center overflow-auto rounded-xl bg-yellow-300 bg-opacity-85"
+    class="z10 no-scrollbar border-only relative z-0 mt-6 flex h-75% w-10/12 items-center justify-center overflow-auto rounded-xl bg-yellow-300 bg-opacity-85"
   >
     <div class="flex h-full w-11/12 flex-col text-center">
       <h1 class="medium-heading-text z-40 leading-10">
@@ -146,7 +148,9 @@
     </div>
   </div>
 
-  <div class="border-only bottom-5 mb-4 flex w-52 justify-between bg-yellow-300 bg-opacity-85 p-5">
+  <div
+    class="border-only mt-5vh bottom-5 flex w-52 justify-between bg-yellow-300 bg-opacity-85 p-5"
+  >
     <img
       (click)="openExternalLink('https://discord.gg/GyCA6FGP')"
       class="w-h-12 relative h-12 active:opacity-15"

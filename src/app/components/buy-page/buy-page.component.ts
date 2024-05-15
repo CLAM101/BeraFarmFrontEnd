@@ -16,7 +16,6 @@ export class BuyPageComponent {
   ngOnInit(): void {}
 
   async showMintPanelFunc(panelType) {
-    debugger;
     this.ethersService.checkAndChangeNetwork();
 
     if (panelType === 'buyForHoney') {
@@ -35,6 +34,10 @@ export class BuyPageComponent {
     }
 
     this.showPanel = true;
+  }
+
+  closePanel() {
+    this.showPanel = false;
   }
 
   async configureBuyForHoney() {

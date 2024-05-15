@@ -1,5 +1,5 @@
-<div class="flex h-full w-full">
-  <div class="flex-col-set h-full w-full items-center justify-center" *ngIf="!showPanel">
+<div style="height: 78vh" class="flex w-screen items-center justify-center">
+  <div class="flex-col-set w-full items-center justify-center" *ngIf="!showPanel">
     <button (click)="showMintPanelFunc('buyForHoney')" class="buy-button">
       BUY CUBS FOR $HONEY
     </button>
@@ -9,10 +9,7 @@
     </button>
   </div>
 
-  <div
-    [class.hidden]="!showPanel"
-    class="flex h-full w-full items-center justify-center text-center"
-  >
-    <app-mint-panel #mintPanel></app-mint-panel>
+  <div class="h flex h-full w-80% items-center" [class.hidden]="!showPanel">
+    <app-mint-panel (closePanel)="closePanel()" #mintPanel></app-mint-panel>
   </div>
 </div>

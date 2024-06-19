@@ -12,8 +12,26 @@ export class BuyPageComponent {
   @ViewChild(MintPanelComponent) mintPanel: MintPanelComponent;
 
   showPanel = false;
+  enableHoneyBuy = false;
+  enableFuzzBuy = false;
+  enableHoneyBond = false;
+  beraFarmContract;
+
   constructor(public ethersService: EthersService) {}
-  ngOnInit(): void {}
+  async ngOnInit(): Promise<void> {
+    const { beraFarmContract } = await this.ethersService.setupContracts();
+
+    this.beraFarmContract = beraFarmContract;
+
+    await this.showAndHideBuyButtons();
+  }
+
+  async showAndHideBuyButtons() {
+    debugger;
+    this.enableHoneyBuy = await this.beraFarmContract.checkHoneyOpen();
+    this.enableFuzzBuy = await this.beraFarmContract.checkFuzzOpen();
+    this.enableHoneyBond = await this.beraFarmContract.checkBondingOpen();
+  }
 
   async showMintPanelFunc(panelType) {
     this.ethersService.checkAndChangeNetwork();
@@ -38,6 +56,7 @@ export class BuyPageComponent {
 
   closePanel() {
     this.showPanel = false;
+    this.showAndHideBuyButtons();
   }
 
   async configureBuyForHoney() {

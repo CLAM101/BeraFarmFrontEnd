@@ -41,6 +41,7 @@ export class MintPanelComponent {
   loading = false;
   loadingText = 'Loading...';
   transactionResponse: string;
+  remainingSupplyFor: number;
 
   @Output() closePanel = new EventEmitter();
 
@@ -251,13 +252,20 @@ export class MintPanelComponent {
 
   async setRemainingSupply() {
     if (this.panelType === 'buyForHoney') {
-      this.remainingSupply = await this.getRemainingSupplyHoney();
+      this.remainingSupplyFor = await this.getRemainingSupplyHoney();
+      this.remainingSupply = await this.gameService.getGeneralRemainingSupply(this.beraCubContract);
     }
     if (this.panelType === 'buyForFuzz') {
       this.remainingSupply = await this.gameService.getGeneralRemainingSupply(this.beraCubContract);
+      const remainingHoney = await this.getRemainingSupplyHoney();
+      this.remainingSupplyFor =
+        (await this.gameService.getGeneralRemainingSupply(this.beraCubContract)) - remainingHoney;
     }
     if (this.panelType === 'bondForHoney') {
       this.remainingSupply = await this.gameService.getGeneralRemainingSupply(this.beraCubContract);
+      const remainingHoney = await this.getRemainingSupplyHoney();
+      this.remainingSupplyFor =
+        (await this.gameService.getGeneralRemainingSupply(this.beraCubContract)) - remainingHoney;
     }
   }
 

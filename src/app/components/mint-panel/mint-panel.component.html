@@ -1,6 +1,6 @@
 <ng-container *ngIf="mintPanelConfig">
   <div
-    class="border-background no-scrollbar xs:flex-col-set sm:flex-col-set md:flex-col-set lg:flex-row-set xl: flex-row-set xxl:flex-row-set h-75vh z-0 mt-5% justify-center"
+    class="border-background no-scrollbar xs:flex-col-set sm:flex-col-set md:flex-col-set lg:flex-row-set xl: flex-row-set xxl:flex-row-set z-0 mt-5% h-75vh justify-center"
   >
     <div class="flex-col-set m-4 flex-1 items-center justify-between text-center">
       <div class="flex-col-set mt-6 h-1/3 w-full items-center justify-between">
@@ -18,7 +18,7 @@
       <div class="flex-col-set mt-6 h-1/3 w-full items-center justify-between">
         <h1 class="small-heading-text flex-2">
           REMAINING SUPPLY FOR {{ mintPanelConfig.ticker }} :
-          {{ remainingSupply }}
+          {{ remainingSupplyFor }}
         </h1>
         <h1 class="small-heading-text flex-2">
           COST PER CUB: {{ costPerCub }} {{ mintPanelConfig.ticker }}
@@ -28,7 +28,7 @@
           TRANSACTION TOTAL: {{ mintCost }} {{ mintPanelConfig.ticker }}
         </h1>
 
-        <h1 class="small-heading-text flex-2">REMAINING SUPPLY {{ remainingSupply }}</h1>
+        <h1 class="small-heading-text flex-2">TOTAL REMAINING SUPPLY {{ remainingSupply }}</h1>
       </div>
 
       <div class="flex-col-set h-1/3 w-full items-center justify-center">

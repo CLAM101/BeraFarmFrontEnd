@@ -3,22 +3,17 @@ export const beraFarmABI = [
     inputs: [
       {
         internalType: 'address',
-        name: '_beraCubNftContract',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
-        name: '_fuzz',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
         name: '_honey',
         type: 'address',
       },
       {
         internalType: 'address',
-        name: '_pair',
+        name: '_bexAddress',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: '_pool',
         type: 'address',
       },
       {
@@ -60,11 +55,6 @@ export const beraFarmABI = [
         internalType: 'uint256',
         name: '_limitBeforeFullTokenTrading',
         type: 'uint256',
-      },
-      {
-        internalType: 'address',
-        name: '_factory',
-        type: 'address',
       },
       {
         internalType: 'uint256',
@@ -324,6 +314,19 @@ export const beraFarmABI = [
     type: 'function',
   },
   {
+    inputs: [],
+    name: 'beraCubNftContract',
+    outputs: [
+      {
+        internalType: 'contract IBERACUB',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
     inputs: [
       {
         internalType: 'uint256',
@@ -425,6 +428,45 @@ export const beraFarmABI = [
       },
     ],
     stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'checkBondingOpen',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'checkFuzzOpen',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'checkHoneyOpen',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
     type: 'function',
   },
   {
@@ -546,6 +588,19 @@ export const beraFarmABI = [
     outputs: [
       {
         internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'fuzz',
+    outputs: [
+      {
+        internalType: 'contract IFUZZTOKEN',
         name: '',
         type: 'address',
       },
@@ -910,6 +965,19 @@ export const beraFarmABI = [
   },
   {
     inputs: [],
+    name: 'pool',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'renounceOwnership',
     outputs: [],
     stateMutability: 'nonpayable',
@@ -924,6 +992,19 @@ export const beraFarmABI = [
       },
     ],
     name: 'setBondDiscount',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_beraCubNftContract',
+        type: 'address',
+      },
+    ],
+    name: 'setCubNFTContract',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -970,12 +1051,38 @@ export const beraFarmABI = [
   {
     inputs: [
       {
+        internalType: 'address',
+        name: '_fuzz',
+        type: 'address',
+      },
+    ],
+    name: 'setFuzzTokenAddress',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
         internalType: 'bool',
         name: '_isLive',
         type: 'bool',
       },
     ],
     name: 'setPlatformState',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_pool',
+        type: 'address',
+      },
+    ],
+    name: 'setPool',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',

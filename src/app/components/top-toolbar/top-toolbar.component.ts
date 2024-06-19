@@ -26,7 +26,7 @@ export class TopToolbarComponent {
   constructor(
     public router: Router,
     public ethersService: EthersService,
-    private store: Store
+    private store: Store,
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -34,10 +34,10 @@ export class TopToolbarComponent {
     this.provider = this.ethersService.getProvider();
     this.ethersService.checkAndChangeNetwork();
     this.ethersService.onNetworkChanged();
-    if (window.ethereum.selectedAddress && window.ethereum.isConnected()) {
-      this.ethersService.connectWallet();
-    } else {
-    }
+    // if (window.ethereum.selectedAddress && window.ethereum.isConnected()) {
+    //   this.ethersService.connectWallet();
+    // } else {
+    // }
   }
 
   //capture the event emitted when suer changes network and log which network user changed to
@@ -55,6 +55,10 @@ export class TopToolbarComponent {
       this.getCubsText = 'GET CUBS';
       return;
     }
+  }
+
+  connectWallet() {
+    this.ethersService.connectWallet();
   }
 
   mouseDown(button: string) {

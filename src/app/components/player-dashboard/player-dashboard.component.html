@@ -9,8 +9,8 @@
       ' xxl:flex-col-set h-full xs:w-90%    md:w-90%  '
     ]"
   >
-    <div class="mt-8">
-      <h1 class="large-heading-text">Welcome To Your Player Dashboard</h1>
+    <div class="w-full items-start justify-start space-y-4 text-left">
+      <h1 class="large-heading-text">PLAYER DASHBOARD</h1>
     </div>
 
     <div
@@ -38,15 +38,14 @@
         </div>
       </div>
       <div class="flex-col-set h-full flex-1 justify-evenly space-y-4">
-        <h1 class="medium-heading-text">CURRENT $FUZZ PRICE ${{ currentFuzzPrice }}</h1>
-        <h1 class="medium-heading-text">REMAINING CUB SUPPLY {{ remainingCubSupply }}</h1>
-        <h1 class="medium-heading-text">EMISSIONS PER CUB {{ emissionsPerCub }}</h1>
-        <h1 class="medium-heading-text">
-          YOUR CURRENT DAILY REWARDS {{ currentDailyRewards }} $FUZZ
-        </h1>
+        <h1 class="small-heading-text">CURRENT $FUZZ PRICE ${{ currentFuzzPrice }}</h1>
+        <h1 class="small-heading-text">REMAINING CUB SUPPLY {{ remainingCubSupply }}</h1>
+        <h1 class="small-heading-text">EMISSIONS PER CUB {{ emissionsPerCub }}</h1>
+        <h1 class="small-heading-text">CURRENT TOTAL EMISSIONS {{ currentTotalEmissions }}</h1>
+        <h1 class="small-heading-text">YOUR DAILY REWARDS {{ currentDailyRewards }} $FUZZ</h1>
 
-        <h1 class="medium-heading-text">TOTAL $FUZZ BURNED {{ totalBurned }}</h1>
-        <h1 class="medium-heading-text">CURRENT CUB PRICE IN $FUZZ {{ currentCubPriceForFuzz }}</h1>
+        <h1 class="small-heading-text">TOTAL $FUZZ BURNED {{ totalBurned }}</h1>
+        <h1 class="small-heading-text">CURRENT CUB PRICE IN $FUZZ {{ currentCubPriceForFuzz }}</h1>
       </div>
 
       <div class="flex h-full flex-1 flex-col items-center justify-between space-y-4">
@@ -60,7 +59,7 @@
             (click)="compoundCub()"
             class="large-heading-text border-only mb-5% h-10vh w-35vh select-none rounded-md font-RobotoMonoBold text-3xl font-black active:opacity-15 xl:w-45vh xxl:w-55vh"
           >
-            Compound
+            COMPOUND
           </button>
         </div>
 
@@ -73,7 +72,7 @@
             (click)="claimRewards()"
             class="large-heading-text border-only h-10vh w-35vh select-none rounded-md font-RobotoMonoBold text-3xl font-black active:opacity-15 xl:w-45vh xxl:w-55vh"
           >
-            Claim Rewards
+            CLAIM
           </button>
         </div>
       </div>

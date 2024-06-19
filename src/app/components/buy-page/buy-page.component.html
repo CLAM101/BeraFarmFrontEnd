@@ -1,11 +1,37 @@
 <div style="height: 78vh" class="flex w-screen items-center justify-center">
   <div class="flex-col-set w-full items-center justify-center" *ngIf="!showPanel">
-    <button (click)="showMintPanelFunc('buyForHoney')" class="buy-button">
-      BUY CUBS FOR $HONEY
+    <button
+      [disabled]="!enableHoneyBuy"
+      (click)="showMintPanelFunc('buyForHoney')"
+      class="buy-button"
+      [ngClass]="{
+        'cursor-not-allowed opacity-70': !enableHoneyBuy,
+        'cursor-pointer opacity-100': enableHoneyBuy
+      }"
+    >
+      {{ enableHoneyBuy ? 'BUY CUBS FOR $HONEY' : '$HONEY BUY UNAVAILABLE' }}
     </button>
-    <button (click)="showMintPanelFunc('buyForFuzz')" class="buy-button">BUY CUBS FOR $FUZZ</button>
-    <button (click)="showMintPanelFunc('bondForHoney')" class="buy-button">
-      BOND CUBS FOR $HONEY
+    <button
+      [disabled]="!enableFuzzBuy"
+      (click)="showMintPanelFunc('buyForFuzz')"
+      class="buy-button"
+      [ngClass]="{
+        'cursor-not-allowed opacity-70': !enableFuzzBuy,
+        'cursor-pointer opacity-100': enableFuzzBuy
+      }"
+    >
+      {{ enableFuzzBuy ? 'BUY CUBS FOR $FUZZ' : '$FUZZ BUY UNAVAILABLE' }}
+    </button>
+    <button
+      [disabled]="!enableHoneyBond"
+      (click)="showMintPanelFunc('bondForHoney')"
+      class="buy-button"
+      [ngClass]="{
+        'cursor-not-allowed opacity-70': !enableHoneyBond,
+        'cursor-pointer opacity-100': enableHoneyBond
+      }"
+    >
+      {{ enableHoneyBond ? 'BOND CUBS FOR $HONEY' : '$HONEY BOND UNAVAILABLE' }}
     </button>
   </div>
 

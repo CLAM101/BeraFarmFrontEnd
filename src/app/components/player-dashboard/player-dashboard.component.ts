@@ -31,6 +31,7 @@ export class PlayerDashboardComponent {
   totalBurned: string;
   currentCubPriceForFuzz: number;
   playerCompoundCost: number;
+  currentTotalEmissions: number;
   showCubGrid;
 
   constructor(
@@ -110,6 +111,11 @@ export class PlayerDashboardComponent {
     );
 
     this.playerCompoundCost = await this.gameService.getPlayerCompoundCost(this.beraFarmContract);
+
+    this.currentTotalEmissions = await this.gameService.getTotalCurrentEmissions(
+      this.beraCubContract,
+      this.beraFarmContract,
+    );
 
     this.checkSizeAndGenerateCubs();
   }

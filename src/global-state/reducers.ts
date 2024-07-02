@@ -6,6 +6,7 @@ export interface FuzzFarmState {
   fuzzTokenContract: any;
   beraCubContract: any;
   honeyContract: any;
+  nftMarketContract: any;
 }
 
 export const initialState: FuzzFarmState = {
@@ -13,6 +14,7 @@ export const initialState: FuzzFarmState = {
   fuzzTokenContract: null,
   beraCubContract: null,
   honeyContract: null,
+  nftMarketContract: null,
 };
 
 const reducer = createReducer(
@@ -21,20 +23,18 @@ const reducer = createReducer(
     reinitializeContractsSuccess,
     (
       state,
-      { beraFarmContract, fuzzTokenContract, honeyContract, beraCubContract }
+      { beraFarmContract, fuzzTokenContract, honeyContract, beraCubContract, nftMarketContract },
     ) => ({
       ...state,
       beraFarmContract,
       fuzzTokenContract,
       honeyContract,
       beraCubContract,
-    })
-  )
+      nftMarketContract,
+    }),
+  ),
 );
 
-export function reducers(
-  fuzzFarmState: FuzzFarmState | undefined,
-  action: Action
-) {
+export function reducers(fuzzFarmState: FuzzFarmState | undefined, action: Action) {
   return reducer(fuzzFarmState, action);
 }

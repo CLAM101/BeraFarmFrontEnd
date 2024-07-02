@@ -1,0 +1,36 @@
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+  <div
+    class="border-background flex flex-col items-center justify-center text-center xs:h-60 xs:w-60 sm:h-60 sm:w-60 md:h-90 md:w-90 lg:h-100 lg:w-100 xl:h-120 xl:w-150"
+  >
+    <div class="flex h-5/6 w-full flex-col items-center justify-between">
+      <div class="flex h-3/4 w-full items-center justify-center">
+        <img
+          class="border-only border-4 xs:h-14 xs:w-14 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-30 lg:w-30 xl:h-34 xl:w-34 xxl:h-80 xxl:w-80"
+          src="../../../assets/images/bear-cub.webp"
+          alt="Bear Cub Image"
+        />
+      </div>
+      <h1 class="small-heading-text mb-2">CUBS AVAILABLE TO LIST {{ cubBalance }}</h1>
+      <div class="h-1/4 w-11/12">
+        <input
+          class="border-background no-spinner small-heading-text h-85% w-full text-center"
+          [(ngModel)]="listPrice"
+          type="number"
+          placeholder="ENTER LISTING PRICE"
+        />
+      </div>
+    </div>
+
+    <div class="mb-4 mt-auto flex h-1/6 w-11/12 flex-row justify-between">
+      <button (click)="listItem()" class="border-only medium-heading-text mr-4 h-full w-full">
+        LIST
+      </button>
+      <button (click)="closeModal()" class="border-only medium-heading-text ml-4 h-full w-full">
+        CLOSE
+      </button>
+    </div>
+  </div>
+  <div>
+    <app-loading-popup (closePopupClick)="closePopUpClick($event)"></app-loading-popup>
+  </div>
+</div>

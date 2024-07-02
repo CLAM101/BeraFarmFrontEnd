@@ -13,7 +13,7 @@ import { EthersService } from 'src/app/services/ethers-service/ethers-service.se
 export class ContractEffects {
   constructor(
     private actions$: Actions,
-    private ethersService: EthersService
+    private ethersService: EthersService,
   ) {}
 
   reinitializeContracts$ = createEffect(() =>
@@ -22,23 +22,22 @@ export class ContractEffects {
       switchMap(() =>
         from(this.ethersService.getProvider()).pipe(
           map((provider) => {
-            const beraFarmContract =
-              this.ethersService.getBeraFarmContract(provider);
-            const beraCubContract =
-              this.ethersService.getBeraCubContract(provider);
+            const beraFarmContract = this.ethersService.getBeraFarmContract(provider);
+            const beraCubContract = this.ethersService.getBeraCubContract(provider);
             const honeyContract = this.ethersService.getHoneyContract(provider);
-            const fuzzTokenContract =
-              this.ethersService.getTokenContract(provider);
+            const fuzzTokenContract = this.ethersService.getTokenContract(provider);
+            const nftMarketContract = this.ethersService.getNftMarketContract(provider);
             return reinitializeContractsSuccess({
               beraFarmContract,
               fuzzTokenContract,
               honeyContract,
               beraCubContract,
+              nftMarketContract,
             });
           }),
-          catchError((error) => of(reinitializeContractsFailure({ error })))
-        )
-      )
-    )
+          catchError((error) => of(reinitializeContractsFailure({ error }))),
+        ),
+      ),
+    ),
   );
 }

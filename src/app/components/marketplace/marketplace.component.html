@@ -1,0 +1,61 @@
+<div
+  class="flex-col-set relative z-0 flex h-screen3 w-full items-center justify-center overflow-auto"
+>
+  <div
+    class="z10 no-scrollbar border-only xs:flex-col-set sm:flex-col-set md:flex-col-set lg:flex-row-set xl: flex-row-set xxl:flex-row-set relative z-0 h-90% w-9/12 items-center justify-center overflow-auto rounded-xl rounded-b-md bg-yellow-300 bg-opacity-85"
+  >
+    <div class="flex-col-set h-full w-full flex-1 items-center">
+      <img
+        class="flex-2 mt-6 rounded-t-md border-4 border-zinc-950 xs:h-14 xs:w-14 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-30 lg:w-30 xl:h-34 xl:w-34 xxl:h-110 xxl:w-120"
+        src="../../../assets/images/bear-cub.webp"
+        alt="Bear Cub Image"
+      />
+      <div
+        class="flex h-1/5 flex-col rounded-b-md border-b-4 border-l-4 border-r-4 border-zinc-950 text-center xxl:w-120"
+      >
+        <div class="flex h-1/2 w-full items-center justify-center">
+          <h2 class="small-heading-text">A magical Beara CUB that emits $FUZZ for its owner!</h2>
+        </div>
+        <button
+          class="small-heading-text flex h-full w-full items-center justify-center border-t-4 border-zinc-950 text-center active:opacity-15"
+        >
+          BUY CUB FOR $FUZZ {{ mainItemPrice }}
+        </button>
+      </div>
+    </div>
+    <div
+      class="flex-col-set h-full flex-1 items-center justify-between border-l-4 border-zinc-950 text-center"
+    >
+      <div class="flex h-1/6 w-full items-center justify-center border-b-4 border-zinc-950">
+        <h1 class="large-heading-text">OTHER LISTINGS</h1>
+      </div>
+      <div class="no-scrollbar flex h-4/6 w-full flex-col items-center overflow-auto text-center">
+        <div
+          *ngFor="let listing of listingsArray"
+          class="broder-b-4 w-full border-t-4 border-zinc-950"
+        >
+          <h1>Token ID {{ listing.tokenId }}</h1>
+          <h1>Price {{ listing.price }}</h1>
+          <h1>Seller {{ listing.seller }}</h1>
+          <button class="small-heading-text">BUY CUB</button>
+        </div>
+      </div>
+
+      <div class="flex h-1/6 w-full items-center justify-center">
+        <button
+          (click)="openListingModal()"
+          class="small-heading-text flex h-full w-full items-center justify-center border-t-4 border-zinc-950 text-center active:opacity-15"
+        >
+          LIST A CUB FOR SALE
+        </button>
+      </div>
+    </div>
+  </div>
+  <app-listing-modal
+    *ngIf="showListingModal"
+    (nftMarketContract)="(nftMarketMethodCaller)"
+    (closeListingModal)="closeListingModal()"
+    [cubBalance]="playerCubBalance"
+  >
+  </app-listing-modal>
+</div>

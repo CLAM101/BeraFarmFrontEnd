@@ -27,7 +27,6 @@ export class BuyPageComponent {
   }
 
   async showAndHideBuyButtons() {
-    debugger;
     this.enableHoneyBuy = await this.beraFarmContract.checkHoneyOpen();
     this.enableFuzzBuy = await this.beraFarmContract.checkFuzzOpen();
     this.enableHoneyBond = await this.beraFarmContract.checkBondingOpen();

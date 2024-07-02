@@ -12,6 +12,9 @@ import { reducers } from 'src/global-state/reducers';
 import { ContractEffects } from 'src/global-state/effects';
 import { LoadingPopupComponent } from './components/loading-popup/loading-popup.component';
 import { PlayerDashboardComponent } from './components/player-dashboard/player-dashboard.component';
+import { MarketplaceComponent } from './components/marketplace/marketplace.component';
+import { ListingModalComponent } from './components/listing-modal/listing-modal.component';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,12 +24,15 @@ import { PlayerDashboardComponent } from './components/player-dashboard/player-d
     BuyPageComponent,
     LoadingPopupComponent,
     PlayerDashboardComponent,
+    MarketplaceComponent,
+    ListingModalComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     StoreModule.forRoot({ fuzzFarmState: reducers }),
     EffectsModule.forRoot([ContractEffects]),
+    FormsModule, // Add FormsModule to the imports array
   ],
   providers: [],
   bootstrap: [AppComponent],

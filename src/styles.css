@@ -25,6 +25,41 @@
     @apply z-20 w-20% rounded-md border-4 border-zinc-950 bg-yellow-300 bg-opacity-85 font-RobotoMonoBold font-black opacity-100 active:opacity-15;
   }
 
+  .no-spinner::-webkit-outer-spin-button,
+  .no-spinner::-webkit-inner-spin-button {
+    @apply appearance-none;
+    margin: 0;
+  }
+
+  .no-spinner {
+    -moz-appearance: textfield;
+  }
+
+  /* Custom styles for the placeholder text */
+  ::placeholder {
+    @apply text-black; /* Adjust the color class as needed */
+  }
+
+  /* For WebKit browsers */
+  input::placeholder {
+    @apply text-black;
+  }
+
+  /* For Mozilla Firefox */
+  input::-moz-placeholder {
+    @apply text-black;
+  }
+
+  /* For Internet Explorer 10+ */
+  input:-ms-input-placeholder {
+    @apply text-black;
+  }
+
+  /* For Microsoft Edge */
+  input::-ms-input-placeholder {
+    @apply text-black;
+  }
+
   @screen xs {
     /* Toolbar */
     .toolbar-button {

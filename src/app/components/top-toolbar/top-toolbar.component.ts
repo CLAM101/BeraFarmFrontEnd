@@ -14,7 +14,7 @@ export class TopToolbarComponent {
   soonText = 'COMING SOON';
   connectWalletText = 'CONNECT WALLET';
   getFuzzText = 'GET $FUZZ';
-  getCubsText = 'GET CUBS';
+  getCubsText = 'BUY CUBS';
   homeText = 'HOME';
 
   provider: any;

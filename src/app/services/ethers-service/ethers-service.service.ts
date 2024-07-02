@@ -1,8 +1,8 @@
 import { Attribute, Injectable } from '@angular/core';
 import { BrowserProvider, ethers } from 'ethers';
 import { Observable, Subject } from 'rxjs';
-import { beraFarm, fuzzToken, mockHoney, beraCub } from './contracts';
-import { beraFarmABI, tokenABI, standardERC20ABI, beraCubABI } from './abis';
+import { beraFarm, fuzzToken, mockHoney, beraCub, marketPlace } from './contracts';
+import { beraFarmABI, tokenABI, standardERC20ABI, beraCubABI, nftMarketABI } from './abis';
 import { Store } from '@ngrx/store';
 import { reinitializeContracts } from 'src/global-state/actions';
 import { selectAllContracts } from 'src/global-state/selectors';
@@ -16,8 +16,9 @@ interface Contracts {
   honeyMethodCaller: any;
   fuzzTokenContract: any;
   fuzzTokenMethodCaller: any;
+  nftMarketContract: any;
+  nftMarketMethodCaller: any;
 }
-
 @Injectable({
   providedIn: 'root',
 })
@@ -33,6 +34,8 @@ export class EthersService {
   honeyMethodCaller;
   fuzzTokenContract;
   fuzzTokenMethodCaller;
+  nftMarketContract;
+  nftMarketMethodCaller;
 
   async getProvider(): Promise<BrowserProvider> {
     return new ethers.BrowserProvider(window.ethereum);
@@ -52,6 +55,10 @@ export class EthersService {
 
   getBeraCubContract(provider: any) {
     return new ethers.Contract(beraCub, beraCubABI, provider);
+  }
+
+  getNftMarketContract(provider: any) {
+    return new ethers.Contract(marketPlace, nftMarketABI, provider);
   }
 
   //promt user to change networks if they are not on the correct network
@@ -99,7 +106,8 @@ export class EthersService {
         contracts.beraFarmContract &&
         contracts.honeyContract &&
         contracts.fuzzTokenContract &&
-        contracts.beraCubContract
+        contracts.beraCubContract &&
+        contracts.nftMarketContract
       ) {
         this.beraFarmContract = contracts.beraFarmContract;
         this.beraFarmMethodCaller = this.beraFarmContract.connect(signer);
@@ -109,6 +117,8 @@ export class EthersService {
         this.honeyMethodCaller = this.honeyContract.connect(signer);
         this.fuzzTokenContract = contracts.fuzzTokenContract;
         this.fuzzTokenMethodCaller = this.fuzzTokenContract.connect(signer);
+        this.nftMarketContract = contracts.nftMarketContract;
+        this.nftMarketMethodCaller = this.nftMarketContract.connect(signer);
       }
     });
 
@@ -121,6 +131,8 @@ export class EthersService {
       honeyMethodCaller: this.honeyMethodCaller,
       fuzzTokenContract: this.fuzzTokenContract,
       fuzzTokenMethodCaller: this.fuzzTokenMethodCaller,
+      nftMarketContract: this.nftMarketContract,
+      nftMarketMethodCaller: this.nftMarketMethodCaller,
     };
   }
 

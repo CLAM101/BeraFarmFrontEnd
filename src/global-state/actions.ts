@@ -3,7 +3,7 @@ import { createAction, props } from '@ngrx/store';
 export const reinitializeContracts = createAction('[Contracts] Reinitialize');
 export const networkChanged = createAction(
   '[Contracts] Network Changed',
-  props<{ networkId: number }>()
+  props<{ networkId: number }>(),
 );
 export const reinitializeContractsSuccess = createAction(
   '[Contracts] Reinitialize Success',
@@ -12,9 +12,10 @@ export const reinitializeContractsSuccess = createAction(
     fuzzTokenContract: any;
     honeyContract: any;
     beraCubContract: any;
-  }>()
+    nftMarketContract: any;
+  }>(),
 );
 export const reinitializeContractsFailure = createAction(
   '[Contracts] Reinitialize Failure',
-  props<{ error: any }>()
+  props<{ error: any }>(),
 );

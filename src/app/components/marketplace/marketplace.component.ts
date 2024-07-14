@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { GameServiceService } from 'src/app/services/game-service/game-service.service';
 import { EthersService } from 'src/app/services/ethers-service/ethers-service.service';
+import { ethers } from 'ethers';
+import { LoadingPopupComponent } from '../loading-popup/loading-popup.component';
 
 interface Listing {
+  id: string;
   seller: string;
-  tokenId: number;
+  nftContract: string;
+  tokenId: string;
   price: number;
-  nftAddress: string;
+  active: true;
 }
 
 @Component({
@@ -15,8 +19,9 @@ interface Listing {
   styleUrl: './marketplace.component.css',
 })
 export class MarketplaceComponent {
+  @ViewChild(LoadingPopupComponent) loadingPopup: LoadingPopupComponent;
   mainItemPrice: number;
-  listingsArray: Listing[];
+  listingsArray: any;
   showListingModal = false;
   playerCubBalance: number;
   currentFloorPrice: number;
@@ -32,6 +37,8 @@ export class MarketplaceComponent {
   fuzzTokenMethodCaller: any;
   nftMarketContract: any;
   nftMarketMethodCaller: any;
+  mainListing: Listing;
+  userAddress: string;
 
   constructor(
     private gameService: GameServiceService,
@@ -63,11 +70,30 @@ export class MarketplaceComponent {
     this.fuzzTokenMethodCaller = fuzzTokenMethodCaller;
     this.nftMarketContract = nftMarketContract;
     this.nftMarketMethodCaller = nftMarketMethodCaller;
+    debugger;
+    this.userAddress = window.ethereum.selectedAddress;
     await this.initializeMarketplace();
   }
 
-  setMainItemPrice(price: number) {
-    this.mainItemPrice = price;
+  async setupListings() {
+    const allListings = await this.getListings();
+
+    this.listingsArray = allListings
+      .map((listing: Listing) => ({
+        id: listing.id,
+        seller: listing.seller,
+        nftContract: listing.nftContract,
+        tokenId: listing.tokenId,
+        price: listing.price,
+        active: listing.active,
+      }))
+      .filter((listing) => listing.active);
+    debugger;
+    if (allListings.length) {
+      this.mainListing = this.listingsArray[0];
+
+      this.listingsArray = this.listingsArray.slice(1);
+    }
   }
 
   async getCubBalance() {
@@ -82,13 +108,51 @@ export class MarketplaceComponent {
     this.showListingModal = false;
   }
 
+  closePopUpClick($event) {
+    this.loadingPopup.visible = false;
+  }
+
   async getListings() {
-    this.listingsArray = await this.nftMarketContract.getActiveListings();
+    return await this.nftMarketContract.getActiveListings();
+  }
+
+  async buyCub(tokenId: string, listingId: string, price: number, seller: string) {
+    try {
+      this.loadingPopup.startLoading('Purchasing Cub');
+      if (this.userAddress.toLowerCase() === seller.toLowerCase()) {
+        this.loadingPopup.finishLoading('You cannot buy your own Cub', false);
+        return;
+      }
+      const buyTx = await this.nftMarketMethodCaller.buyItem(
+        this.beraCubContract,
+        tokenId,
+        listingId,
+        { value: price },
+      );
+
+      const confirmation = await buyTx.wait();
+
+      this.loadingPopup.finishLoading('Purchase Successful', true);
+      this.initializeMarketplace();
+    } catch (error) {
+      this.loadingPopup.finishLoading('Purchase Failed', false);
+    }
+  }
+
+  orderListingsByPrice() {
+    this.listingsArray = this.listingsArray.sort(
+      (a, b) => Number(ethers.formatEther(a.price)) - Number(ethers.formatEther(b.price)),
+    );
+  }
+
+  async refreshMarketplace(event) {
+    this.initializeMarketplace();
   }
 
   async initializeMarketplace() {
-    this.setMainItemPrice(0);
-    await this.getListings();
     await this.getCubBalance();
+
+    await this.setupListings();
+    this.orderListingsByPrice();
   }
 }

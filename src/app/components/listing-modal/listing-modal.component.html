@@ -10,7 +10,7 @@
           alt="Bear Cub Image"
         />
       </div>
-      <h1 class="small-heading-text mb-2">CUBS AVAILABLE TO LIST {{ cubBalance }}</h1>
+      <h1 class="small-heading-text mb-2">CUBS AVAILABLE TO LIST {{ ownedTokenIds?.length }}</h1>
       <div class="h-1/4 w-11/12">
         <input
           class="border-background no-spinner small-heading-text h-85% w-full text-center"
@@ -22,8 +22,19 @@
     </div>
 
     <div class="mb-4 mt-auto flex h-1/6 w-11/12 flex-row justify-between">
-      <button (click)="listItem()" class="border-only medium-heading-text mr-4 h-full w-full">
+      <button
+        *ngIf="cubsApproved"
+        (click)="listItem()"
+        class="border-only medium-heading-text mr-4 h-full w-full"
+      >
         LIST
+      </button>
+      <button
+        *ngIf="!cubsApproved"
+        (click)="approveCubsForMarketPlace()"
+        class="border-only medium-heading-text mr-4 h-full w-full"
+      >
+        APPROVE CUBS
       </button>
       <button (click)="closeModal()" class="border-only medium-heading-text ml-4 h-full w-full">
         CLOSE

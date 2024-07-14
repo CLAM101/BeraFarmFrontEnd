@@ -13,13 +13,17 @@
       <div
         class="flex h-1/5 flex-col rounded-b-md border-b-4 border-l-4 border-r-4 border-zinc-950 text-center xxl:w-120"
       >
-        <div class="flex h-1/2 w-full items-center justify-center">
-          <h2 class="small-heading-text">A magical Beara CUB that emits $FUZZ for its owner!</h2>
+        <div *ngIf="mainListing" class="flex h-1/2 w-full flex-col items-center justify-center">
+          <h2 class="small-heading-text">TokenId: {{ mainListing.tokenId }}</h2>
+          <h2 class="small-heading-text">Seller: {{ mainListing.seller }}</h2>
         </div>
         <button
+          (click)="
+            buyCub(mainListing.tokenId, mainListing.id, mainListing.price, mainListing.seller)
+          "
           class="small-heading-text flex h-full w-full items-center justify-center border-t-4 border-zinc-950 text-center active:opacity-15"
         >
-          BUY CUB FOR $FUZZ {{ mainItemPrice }}
+          BUY CUB FOR $FUZZ {{ mainListing?.price || 0 }}
         </button>
       </div>
     </div>
@@ -29,15 +33,27 @@
       <div class="flex h-1/6 w-full items-center justify-center border-b-4 border-zinc-950">
         <h1 class="large-heading-text">OTHER LISTINGS</h1>
       </div>
-      <div class="no-scrollbar flex h-4/6 w-full flex-col items-center overflow-auto text-center">
+      <div class="no-scrollbar flex h-4/6 w-full flex-col items-start overflow-auto text-left">
         <div
           *ngFor="let listing of listingsArray"
           class="broder-b-4 w-full border-t-4 border-zinc-950"
         >
-          <h1>Token ID {{ listing.tokenId }}</h1>
-          <h1>Price {{ listing.price }}</h1>
-          <h1>Seller {{ listing.seller }}</h1>
-          <button class="small-heading-text">BUY CUB</button>
+          <h1 class="small-heading-text">Token ID: {{ listing.tokenId }}</h1>
+          <h1 class="small-heading-text">Price: {{ listing.price }}</h1>
+          <h1 *ngIf="userAddress" class="small-heading-text">
+            Seller:
+            {{
+              this.userAddress.toLowerCase() === listing.seller.toLowerCase()
+                ? 'You'
+                : listing.seller
+            }}
+          </h1>
+          <button
+            (click)="buyCub(listing.tokenId, listing.id, listing.price, listing.seller)"
+            class="small-heading-text border-only mb-1 ml-1"
+          >
+            BUY CUB
+          </button>
         </div>
       </div>
 
@@ -53,9 +69,16 @@
   </div>
   <app-listing-modal
     *ngIf="showListingModal"
-    (nftMarketContract)="(nftMarketMethodCaller)"
+    [nftMarketMethodCaller]="nftMarketMethodCaller"
+    [beraCubMethodCaller]="beraCubMethodCaller"
     (closeListingModal)="closeListingModal()"
-    [cubBalance]="playerCubBalance"
+    (cubListed)="refreshMarketplace($event)"
+    [beraCubContract]="beraCubContract"
+    [listingsArray]="listingsArray"
+    [mainListing]="mainListing"
   >
   </app-listing-modal>
+</div>
+<div>
+  <app-loading-popup (closePopupClick)="closePopUpClick($event)"></app-loading-popup>
 </div>

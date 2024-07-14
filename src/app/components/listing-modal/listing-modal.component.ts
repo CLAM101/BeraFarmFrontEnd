@@ -102,7 +102,7 @@ export class ListingModalComponent {
       this.loadingPopup.finishLoading('Listing Successful', true);
       await this.initializeData();
       this.listPrice = null;
-      await this.initializeData();
+
       this.cubListed.emit(true);
     } catch (error) {
       console.log('error listing item', error);

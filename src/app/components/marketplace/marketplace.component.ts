@@ -70,7 +70,7 @@ export class MarketplaceComponent {
     this.fuzzTokenMethodCaller = fuzzTokenMethodCaller;
     this.nftMarketContract = nftMarketContract;
     this.nftMarketMethodCaller = nftMarketMethodCaller;
-    debugger;
+
     this.userAddress = window.ethereum.selectedAddress;
     await this.initializeMarketplace();
   }
@@ -88,7 +88,7 @@ export class MarketplaceComponent {
         active: listing.active,
       }))
       .filter((listing) => listing.active);
-    debugger;
+
     if (allListings.length) {
       this.mainListing = this.listingsArray[0];
 

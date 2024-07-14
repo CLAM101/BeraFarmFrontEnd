@@ -136,6 +136,24 @@ export class EthersService {
     };
   }
 
+  initializeWalletListener() {
+    window.ethereum.on('accountsChanged', (accounts: string[]) => {
+      if (accounts.length > 0) {
+        this.refreshPage();
+      }
+    });
+  }
+
+  refreshPage() {
+    window.location.reload();
+  }
+
+  removeMetaMaskListeners() {
+    if (window.ethereum && window.ethereum.removeListener) {
+      window.ethereum.removeListener('accountsChanged', this.refreshPage);
+    }
+  }
+
   async unSubscribeContracts() {
     this.$contracts.subscribe().unsubscribe();
   }

@@ -34,13 +34,16 @@ export class TopToolbarComponent {
     this.provider = this.ethersService.getProvider();
     this.ethersService.checkAndChangeNetwork();
     this.ethersService.onNetworkChanged();
-    // if (window.ethereum.selectedAddress && window.ethereum.isConnected()) {
-    //   this.ethersService.connectWallet();
-    // } else {
-    // }
+    this.ethersService.initializeWalletListener();
+    if (window.ethereum.selectedAddress && window.ethereum.isConnected()) {
+      this.ethersService.connectWallet();
+    } else {
+    }
   }
 
-  //capture the event emitted when suer changes network and log which network user changed to
+  ngOnDestroy() {
+    this.ethersService.removeMetaMaskListeners();
+  }
 
   mouseUp(button: string) {
     if (button === 'connectWallet') {

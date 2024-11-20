@@ -2,65 +2,86 @@
   class="flex-col-set relative z-0 flex h-screen3 w-full items-center justify-center overflow-auto"
 >
   <div
-    class="z10 no-scrollbar border-only xs:flex-col-set sm:flex-col-set md:flex-col-set lg:flex-row-set xl: flex-row-set xxl:flex-row-set relative z-0 h-90% w-9/12 items-center justify-center overflow-auto rounded-xl rounded-b-md bg-yellow-300 bg-opacity-85"
+    class="z10 no-scrollbar border-only xs:flex-col-set sm:flex-col-set md:flex-col-set lg:flex-row-set xl: flex-row-set xxl:flex-row-set relative z-0 h-90% w-10/12 items-center justify-center overflow-auto rounded-xl rounded-b-md bg-yellow-300 bg-opacity-85"
   >
-    <div class="flex-col-set h-full w-full flex-1 items-center">
-      <img
-        class="flex-2 mt-6 rounded-t-md border-4 border-zinc-950 xs:h-14 xs:w-14 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-30 lg:w-30 xl:h-34 xl:w-34 xxl:h-110 xxl:w-120"
-        src="../../../assets/images/bear-cub.webp"
-        alt="Bear Cub Image"
-      />
-      <div
-        class="flex h-1/5 flex-col rounded-b-md border-b-4 border-l-4 border-r-4 border-zinc-950 text-center xxl:w-120"
-      >
-        <div *ngIf="mainListing" class="flex h-1/2 w-full flex-col items-center justify-center">
-          <h2 class="small-heading-text">TokenId: {{ mainListing.tokenId }}</h2>
-          <h2 class="small-heading-text">Seller: {{ mainListing.seller }}</h2>
+    <div class="flex-col-set h-full w-full flex-1 items-center justify-center">
+      <div class="flex h-full w-full flex-col items-center justify-evenly text-center">
+        <h1 class="large-heading-text">MAIN LISTING</h1>
+        <img
+          class="flex-2 mt-6 flex h-3/5 w-3/5 rounded-t-md border-b-4 border-l-4 border-r-4 border-t-4 border-zinc-950"
+          src="../../../assets/images/bear-cub.webp"
+          alt="Bear Cub Image"
+        />
+        <div *ngIf="mainListing" class="flex w-3/4 flex-col items-center justify-center">
+          <h2 class="small-heading-text">Token Id: {{ mainListing.tokenId }}</h2>
+          <h2 class="small-heading-text">
+            Seller:
+            {{
+              this.userAddress.toLowerCase() === mainListing.seller.toLowerCase()
+                ? 'You'
+                : mainListing.seller
+            }}
+          </h2>
         </div>
         <button
           (click)="
             buyCub(mainListing.tokenId, mainListing.id, mainListing.price, mainListing.seller)
           "
-          class="small-heading-text flex h-full w-full items-center justify-center border-t-4 border-zinc-950 text-center active:opacity-15"
+          class="small-heading-text flex w-1/3 items-center justify-center border-b-4 border-zinc-950 text-center active:opacity-15"
         >
-          BUY CUB FOR $FUZZ {{ mainListing?.price || 0 }}
+          {{
+            !mainListing
+              ? 'Currently No Active Listings'
+              : 'BUY CUB FOR $FUZZ: ' + mainListing?.price
+          }}
         </button>
       </div>
     </div>
     <div
       class="flex-col-set h-full flex-1 items-center justify-between border-l-4 border-zinc-950 text-center"
     >
-      <div class="flex h-1/6 w-full items-center justify-center border-b-4 border-zinc-950">
+      <div class="flex h-1/6 w-full items-center justify-center">
         <h1 class="large-heading-text">OTHER LISTINGS</h1>
       </div>
-      <div class="no-scrollbar flex h-4/6 w-full flex-col items-start overflow-auto text-left">
+      <div class="no-scrollbar flex h-4/6 w-full flex-col items-center overflow-auto text-left">
         <div
           *ngFor="let listing of listingsArray"
-          class="broder-b-4 w-full border-t-4 border-zinc-950"
+          class="flex w-10/12 flex-row border-b-4 border-zinc-950 p-5"
         >
-          <h1 class="small-heading-text">Token ID: {{ listing.tokenId }}</h1>
-          <h1 class="small-heading-text">Price: {{ listing.price }}</h1>
-          <h1 *ngIf="userAddress" class="small-heading-text">
-            Seller:
-            {{
-              this.userAddress.toLowerCase() === listing.seller.toLowerCase()
-                ? 'You'
-                : listing.seller
-            }}
-          </h1>
-          <button
-            (click)="buyCub(listing.tokenId, listing.id, listing.price, listing.seller)"
-            class="small-heading-text border-only mb-1 ml-1"
-          >
-            BUY CUB
-          </button>
+          <div class="flex w-4/5 flex-1 flex-col">
+            <h1 class="small-heading-text p-2">Token ID: {{ listing.tokenId }}</h1>
+            <h1 class="small-heading-text p-2">Price: {{ listing.price }}</h1>
+            <h1 *ngIf="userAddress" class="small-heading-text p-2">
+              Seller:
+              {{
+                this.userAddress.toLowerCase() === listing.seller.toLowerCase()
+                  ? 'You'
+                  : listing.seller
+              }}
+            </h1>
+          </div>
+
+          <div class="flex w-1/5 flex-1 flex-col justify-end">
+            <button
+              (click)="buyCub(listing.tokenId, listing.id, listing.price, listing.seller)"
+              class="small-heading-text mb-1 ml-1 flex items-end justify-end p-2"
+            >
+              <h1 class="w-1/2 border-b-4 border-zinc-950">BUY CUB</h1>
+            </button>
+          </div>
+        </div>
+        <div
+          *ngIf="!listingsArray.length && !mainListing"
+          class="no-scrollbar flex h-4/6 w-full flex-col items-center justify-center overflow-auto text-center"
+        >
+          <h1 class="medium-heading-text">Currently No Active Listings</h1>
         </div>
       </div>
 
       <div class="flex h-1/6 w-full items-center justify-center">
         <button
           (click)="openListingModal()"
-          class="small-heading-text flex h-full w-full items-center justify-center border-t-4 border-zinc-950 text-center active:opacity-15"
+          class="small-heading-text flex h-full w-full items-center justify-center text-center active:opacity-15"
         >
           LIST A CUB FOR SALE
         </button>

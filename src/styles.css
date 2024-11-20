@@ -3,26 +3,31 @@
 @tailwind utilities;
 
 @layer components {
-  @font-face {
+  /* @font-face {
     font-family: 'Minecraftia';
     src: url('./assets/fonts/Minecraftia-Regular.ttf') format('truetype');
-  }
+  } */
 
   @font-face {
-    font-family: 'RobotoMonoBold';
+    font-family: 'robotomonobold';
     src: url('./assets/fonts/RobotoMono-Bold.ttf') format('truetype');
   }
 
+  @font-face {
+    font-family: 'arcadia';
+    src: url('./assets/fonts/ArcadeClassic.ttf') format('truetype');
+  }
+
   .action-button {
-    @apply h-20 w-128 select-none rounded-md  border-zinc-950 font-RobotoMonoBold text-3xl font-black active:opacity-15;
+    @apply font-robotomonobold h-20 w-128 select-none  rounded-md border-zinc-950 text-3xl font-black active:opacity-15;
   }
 
   .buy-button {
-    @apply w-70% rounded-md  border-4 border-zinc-950 bg-yellow-300 bg-opacity-85 font-RobotoMonoBold font-black opacity-100 active:opacity-15;
+    @apply font-robotomonobold w-70%  rounded-md border-4 border-zinc-950 bg-yellow-300 bg-opacity-85 font-black opacity-100 active:opacity-15;
   }
 
   .toolbar-button {
-    @apply z-20 w-20% rounded-md border-4 border-zinc-950 bg-yellow-300 bg-opacity-85 font-RobotoMonoBold font-black opacity-100 active:opacity-15;
+    @apply font-robotomonobold z-20 w-20% rounded-md border-4 border-zinc-950 bg-yellow-300 bg-opacity-85 font-black opacity-100 active:opacity-15;
   }
 
   .no-spinner::-webkit-outer-spin-button,
@@ -150,19 +155,19 @@
   }
 
   .large-heading-text {
-    @apply all-center  select-none font-RobotoMonoBold  font-black leading-normal text-black;
+    @apply all-center  font-robotomonobold select-none  font-black leading-normal text-black;
   }
 
   .medium-heading-text {
-    @apply select-none font-RobotoMonoBold text-3xl font-black;
+    @apply font-robotomonobold select-none text-3xl font-black;
   }
 
   .small-heading-text {
-    @apply select-none font-RobotoMonoBold text-2xl font-black;
+    @apply font-robotomonobold select-none text-2xl font-black;
   }
 
   .paragraph-text {
-    @apply font-RobotoMonoBold font-black leading-normal text-black;
+    @apply font-robotomonobold font-black leading-normal text-black;
   }
 
   .border-background {
@@ -198,11 +203,11 @@
       @apply text-lg;
     }
     .medium-heading-text {
-      @apply select-none font-RobotoMonoBold text-sm font-black;
+      @apply font-robotomonobold select-none text-sm font-black;
     }
 
     .small-heading-text {
-      @apply select-none font-RobotoMonoBold text-xs font-black;
+      @apply font-robotomonobold select-none text-xs font-black;
     }
     .paragraph-text {
       @apply text-3xs;
@@ -217,10 +222,10 @@
       @apply text-xl;
     }
     .medium-heading-text {
-      @apply select-none font-RobotoMonoBold text-sm font-black;
+      @apply font-robotomonobold select-none text-sm font-black;
     }
     .small-heading-text {
-      @apply select-none font-RobotoMonoBold text-xs font-black;
+      @apply font-robotomonobold select-none text-xs font-black;
     }
     .paragraph-text {
       @apply text-3xs;
@@ -232,11 +237,11 @@
       @apply text-2xl;
     }
     .medium-heading-text {
-      @apply select-none font-RobotoMonoBold text-lg font-black;
+      @apply font-robotomonobold select-none text-lg font-black;
     }
 
     .small-heading-text {
-      @apply select-none font-RobotoMonoBold text-base font-black;
+      @apply font-robotomonobold select-none text-base font-black;
     }
     .paragraph-text {
       @apply text-sm;
@@ -248,11 +253,11 @@
       @apply text-3xl;
     }
     .medium-heading-text {
-      @apply select-none font-RobotoMonoBold text-xl font-black;
+      @apply font-robotomonobold select-none text-xl font-black;
     }
 
     .small-heading-text {
-      @apply select-none font-RobotoMonoBold text-lg font-black;
+      @apply font-robotomonobold select-none text-lg font-black;
     }
     .paragraph-text {
       @apply text-base;
@@ -264,11 +269,11 @@
       @apply text-4xl;
     }
     .medium-heading-text {
-      @apply select-none font-RobotoMonoBold text-2xl font-black;
+      @apply font-robotomonobold select-none text-2xl font-black;
     }
 
     .small-heading-text {
-      @apply select-none font-RobotoMonoBold text-xl font-black;
+      @apply font-robotomonobold select-none text-xl font-black;
     }
     .paragraph-text {
       @apply text-base;
@@ -280,11 +285,11 @@
       @apply text-5xl;
     }
     .medium-heading-text {
-      @apply select-none font-RobotoMonoBold text-2xl font-black;
+      @apply font-robotomonobold select-none text-2xl font-black;
     }
 
     .small-heading-text {
-      @apply select-none font-RobotoMonoBold text-xl font-black;
+      @apply font-robotomonobold select-none text-xl font-black;
     }
     .paragraph-text {
       @apply text-base;

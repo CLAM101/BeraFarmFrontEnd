@@ -9,15 +9,15 @@
       ' xxl:flex-col-set h-full xs:w-90%    md:w-90%  '
     ]"
   >
-    <div class="w-full items-start justify-start space-y-4 text-left">
+    <!-- <div class="w-full items-start justify-start space-y-4 text-left">
       <h1 class="large-heading-text">PLAYER DASHBOARD</h1>
-    </div>
+    </div> -->
 
     <div
       class="all-center sm:flex-col-set xs:flex-col-set md:flex-col-set lg:flex-col-set xl:flex-row-set xxl:flex-row-set m-5 h-full"
     >
       <div class="flex-col-set all-center h-full flex-1 border-zinc-950">
-        <h1 class="medium-heading-text">OWNED CUBS {{ playerCubBalance }}</h1>
+        <h1 class="large-heading-text">OWNED CUBS: {{ playerCubBalance }}</h1>
         <div
           *ngIf="showCubGrid && playerCubBalance"
           class="all-start w-87% mt-5% grid h-85% grid-cols-10 xl:grid-cols-5 xxl:grid-cols-5"
@@ -37,43 +37,62 @@
           </h1>
         </div>
       </div>
-      <div class="flex-col-set h-full flex-1 justify-evenly space-y-4">
-        <h1 class="small-heading-text">CURRENT $FUZZ PRICE ${{ currentFuzzPrice }}</h1>
-        <h1 class="small-heading-text">REMAINING CUB SUPPLY {{ remainingCubSupply }}</h1>
-        <h1 class="small-heading-text">EMISSIONS PER CUB {{ emissionsPerCub }}</h1>
-        <h1 class="small-heading-text">CURRENT TOTAL EMISSIONS {{ currentTotalEmissions }}</h1>
-        <h1 class="small-heading-text">YOUR DAILY REWARDS {{ currentDailyRewards }} $FUZZ</h1>
+      <div
+        class="flex-col-set h-full flex-1 space-y-4 border-l-4 border-r-4 border-zinc-950 text-left"
+      >
+        <h1 class="large-heading-text p-3">GAME STATS</h1>
 
-        <h1 class="small-heading-text">TOTAL $FUZZ BURNED {{ totalBurned }}</h1>
-        <h1 class="small-heading-text">CURRENT CUB PRICE IN $FUZZ {{ currentCubPriceForFuzz }}</h1>
+        <h1 class="medium-heading-text p-2">PLAYER STATS:</h1>
+        <h1 class="small-heading-text p-3">
+          - YOUR DAILY REWARDS: {{ currentDailyRewards }} $FUZZ
+        </h1>
+        <h1 class="small-heading-text p-3">- YOUR $FUZZ BALANCE: {{ fuzzBalance }} $FUZZ</h1>
+
+        <h1 class="medium-heading-text p-2">GLOBAL STATS:</h1>
+        <h1 class="small-heading-text p-3">- CURRENT $FUZZ PRICE: ${{ currentFuzzPrice }}</h1>
+        <h1 class="small-heading-text p-3">- REMAINING CUB SUPPLY: {{ remainingCubSupply }}</h1>
+        <h1 class="small-heading-text p-3">- EMISSIONS PER CUB: {{ emissionsPerCub }}</h1>
+        <h1 class="small-heading-text p-3">
+          - CURRENT TOTAL EMISSIONS: {{ currentTotalEmissions }}
+        </h1>
+
+        <h1 class="small-heading-text p-3">- TOTAL $FUZZ BURNED: {{ totalBurned }}</h1>
+        <h1 class="small-heading-text p-3">
+          - CURRENT CUB PRICE IN $FUZZ: {{ currentCubPriceForFuzz }}
+        </h1>
       </div>
 
-      <div class="flex h-full flex-1 flex-col items-center justify-between space-y-4">
-        <h1 class="medium-heading-text">YOUR COST TO COMPOUND IN $FUZZ {{ playerCompoundCost }}</h1>
+      <div class="flex h-full flex-1 flex-col items-center">
+        <div class="flex h-full w-11/12 flex-1 flex-col items-center justify-between space-y-4">
+          <h1 class="large-heading-text p-3">GAME ACTIONS</h1>
 
-        <div class="flex flex-1 flex-col items-center justify-evenly">
-          <h1 class="small-heading-text">
-            A portion of your unclaimed rewards will be used to purchase another cub
-          </h1>
-          <button
-            (click)="compoundCub()"
-            class="large-heading-text border-only mb-5% h-10vh w-35vh select-none rounded-md font-RobotoMonoBold text-3xl font-black active:opacity-15 xl:w-45vh xxl:w-55vh"
-          >
-            COMPOUND
-          </button>
-        </div>
+          <div class="flex flex-1 flex-col items-center justify-evenly border-b-4 border-zinc-950">
+            <h1 class="medium-heading-text">
+              YOUR COST TO COMPOUND IN $FUZZ {{ playerCompoundCost }}
+            </h1>
+            <h1 class="small-heading-text">
+              A portion of your unclaimed rewards will be used to purchase another cub
+            </h1>
+            <button
+              (click)="compoundCub()"
+              class="large-heading-text border-only font-RobotoMonoBold mb-5% h-10vh w-35vh select-none rounded-md text-3xl font-black active:opacity-15 xl:w-45vh xxl:w-50vh"
+            >
+              COMPOUND
+            </button>
+          </div>
 
-        <div class="flex flex-1 flex-col items-center justify-evenly">
-          <h1 class="medium-heading-text">UNCLAIMED REWARDS {{ unclaimedRewards }} $FUZZ</h1>
-          <h1 class="small-heading-text">
-            If you choose to claim your rewards you will be charged a 5% tax on your claim.
-          </h1>
-          <button
-            (click)="claimRewards()"
-            class="large-heading-text border-only h-10vh w-35vh select-none rounded-md font-RobotoMonoBold text-3xl font-black active:opacity-15 xl:w-45vh xxl:w-55vh"
-          >
-            CLAIM
-          </button>
+          <div class="flex flex-1 flex-col items-center justify-evenly">
+            <h1 class="medium-heading-text">UNCLAIMED REWARDS {{ unclaimedRewards }} $FUZZ</h1>
+            <h1 class="small-heading-text">
+              If you choose to claim your rewards you will be charged a 5% tax on your claim.
+            </h1>
+            <button
+              (click)="claimRewards()"
+              class="large-heading-text border-only font-RobotoMonoBold h-10vh w-35vh select-none rounded-md text-3xl font-black active:opacity-15 xl:w-45vh xxl:w-50vh"
+            >
+              CLAIM
+            </button>
+          </div>
         </div>
       </div>
     </div>

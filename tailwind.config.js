@@ -14,7 +14,8 @@ module.exports = {
     extend: {
       fontFamily: {
         custom: ['Minecraftia', 'sans-serif'],
-        RobotoMonoBold: ['RobotoMono-Bold', 'sans-serif'],
+        robotomonobold: ['robotomonobold', 'sans-serif'],
+        arcadia: ['arcadia', 'sans-serif'],
       },
 
       fontSize: {

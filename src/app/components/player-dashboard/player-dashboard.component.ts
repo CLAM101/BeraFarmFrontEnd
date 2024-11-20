@@ -1,7 +1,6 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { EthersService } from 'src/app/services/ethers-service/ethers-service.service';
 import { GameServiceService } from 'src/app/services/game-service/game-service.service';
-import { CommonModule } from '@angular/common';
 import { ethers } from 'ethers';
 import { LoadingPopupComponent } from '../loading-popup/loading-popup.component';
 
@@ -27,6 +26,7 @@ export class PlayerDashboardComponent {
   remainingCubSupply: number;
   emissionsPerCub: number;
   currentDailyRewards: number;
+  fuzzBalance: string;
   unclaimedRewards: number;
   totalBurned: string;
   currentCubPriceForFuzz: number;
@@ -88,6 +88,7 @@ export class PlayerDashboardComponent {
   }
 
   private async initializeDashboard() {
+    this.fuzzBalance = await this.gameService.getFuzzBalance(this.fuzzTokenContract);
     this.playerCubBalance = await this.gameService.getCubBalance(this.beraCubContract);
 
     this.currentFuzzPrice = await this.gameService.getFuzzPrice(this.beraFarmContract);

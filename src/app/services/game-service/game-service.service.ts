@@ -37,10 +37,10 @@ export class GameServiceService {
     return (convertedMaxSupply - remainingCubSupply) * emissionsPerCub;
   }
 
-  async getFuzzBalance(fuzzTokenContract: any): Promise<number> {
+  async getFuzzBalance(fuzzTokenContract: any): Promise<string> {
     return parseFloat(
       ethers.formatEther(await fuzzTokenContract.balanceOf(window.ethereum.selectedAddress)),
-    );
+    ).toFixed(2);
   }
 
   async getTotalBurned(fuzzTokenContract: any): Promise<number> {

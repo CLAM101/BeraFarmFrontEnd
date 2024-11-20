@@ -19,10 +19,10 @@ export class ListingModalComponent {
   @Input() mainListing: any;
   @Output() cubListed = new EventEmitter<boolean>();
 
-  listPrice: number | null = null; // Initialize the variable
-  ownedTokenIds: string[] | null = null; // Initialize the variable
-  tokenBalance: number | null = null; // Initialize the variable
-  cubsApproved: boolean = false; // Initialize the variable
+  listPrice: number | null = null;
+  ownedTokenIds: string[] | null = null;
+  tokenBalance: number | null = null;
+  cubsApproved: boolean = false;
   constructor(private gameService: GameServiceService) {}
 
   async ngOnInit(): Promise<void> {
@@ -36,6 +36,7 @@ export class ListingModalComponent {
   async initializeData() {
     this.tokenBalance = await this.gameService.getCubBalance(this.beraCubContract);
     this.ownedTokenIds = await this.getUserTokenIds();
+
     this.ownedTokenIds = this.filterTokenIdsFromListings();
     this.cubsApproved = await this.checkApprovalStatus();
   }
@@ -100,10 +101,9 @@ export class ListingModalComponent {
       );
       await listingTx.wait();
       this.loadingPopup.finishLoading('Listing Successful', true);
+      this.cubListed.emit(true);
       await this.initializeData();
       this.listPrice = null;
-
-      this.cubListed.emit(true);
     } catch (error) {
       console.log('error listing item', error);
     }

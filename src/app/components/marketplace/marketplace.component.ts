@@ -89,6 +89,8 @@ export class MarketplaceComponent {
       }))
       .filter((listing) => listing.active);
 
+    this.orderListingsByPrice();
+
     if (allListings.length) {
       this.mainListing = this.listingsArray[0];
 
@@ -153,6 +155,5 @@ export class MarketplaceComponent {
     await this.getCubBalance();
 
     await this.setupListings();
-    this.orderListingsByPrice();
   }
 }

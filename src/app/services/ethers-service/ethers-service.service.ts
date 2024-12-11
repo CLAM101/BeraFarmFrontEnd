@@ -65,7 +65,7 @@ export class EthersService {
   async changeNetwork() {
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
-      params: [{ chainId: '0x539' }],
+      params: [{ chainId: '0x138D4' }],
     });
 
     this.store.dispatch(reinitializeContracts());
@@ -75,14 +75,14 @@ export class EthersService {
     window.ethereum.on('chainChanged', (chainId: string) => {
       let convertedChainId: number = parseInt(chainId, 16);
 
-      if (convertedChainId !== 1337) {
+      if (convertedChainId !== 80084) {
         this.changeNetwork();
       }
     });
   }
 
   async checkAndChangeNetwork() {
-    if (window.ethereum.chainId !== '0x539') {
+    if (window.ethereum.chainId !== '0x138D4') {
       this.changeNetwork();
     }
   }

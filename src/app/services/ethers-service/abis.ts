@@ -2953,18 +2953,30 @@ export const beraCubABI = [
   },
 ];
 
-export const standardERC20ABI = [
+export const mockHoneyABI = [
   {
     inputs: [
       {
-        internalType: 'string',
-        name: 'name_',
-        type: 'string',
+        components: [
+          {
+            internalType: 'address',
+            name: 'recipient',
+            type: 'address',
+          },
+          {
+            internalType: 'uint256',
+            name: 'amount',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct MockHoney.MintToRecipient[]',
+        name: '_mintToAddresses',
+        type: 'tuple[]',
       },
       {
-        internalType: 'string',
-        name: 'symbol_',
-        type: 'string',
+        internalType: 'uint256',
+        name: '_dripAmount',
+        type: 'uint256',
       },
     ],
     stateMutability: 'nonpayable',
@@ -3089,6 +3101,19 @@ export const standardERC20ABI = [
   },
   {
     inputs: [],
+    name: 'cooldown',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'decimals',
     outputs: [
       {
@@ -3125,6 +3150,19 @@ export const standardERC20ABI = [
     type: 'function',
   },
   {
+    inputs: [],
+    name: 'dripAmount',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
     inputs: [
       {
         internalType: 'address',
@@ -3149,6 +3187,25 @@ export const standardERC20ABI = [
     type: 'function',
   },
   {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    name: 'lastDrip',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
     inputs: [],
     name: 'name',
     outputs: [
@@ -3159,6 +3216,39 @@ export const standardERC20ABI = [
       },
     ],
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'requestTokens',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_cooldown',
+        type: 'uint256',
+      },
+    ],
+    name: 'setCooldown',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_dripAmount',
+        type: 'uint256',
+      },
+    ],
+    name: 'setDripAmount',
+    outputs: [],
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {

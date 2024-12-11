@@ -2,7 +2,7 @@ import { Attribute, Injectable } from '@angular/core';
 import { BrowserProvider, ethers } from 'ethers';
 import { Observable, Subject } from 'rxjs';
 import { beraFarm, fuzzToken, mockHoney, beraCub, marketPlace } from './contracts';
-import { beraFarmABI, tokenABI, standardERC20ABI, beraCubABI, nftMarketABI } from './abis';
+import { beraFarmABI, tokenABI, mockHoneyABI, beraCubABI, nftMarketABI } from './abis';
 import { Store } from '@ngrx/store';
 import { reinitializeContracts } from 'src/global-state/actions';
 import { selectAllContracts } from 'src/global-state/selectors';
@@ -50,7 +50,7 @@ export class EthersService {
   }
 
   getHoneyContract(provider: any) {
-    return new ethers.Contract(mockHoney, standardERC20ABI, provider);
+    return new ethers.Contract(mockHoney, mockHoneyABI, provider);
   }
 
   getBeraCubContract(provider: any) {

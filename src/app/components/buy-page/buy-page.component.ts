@@ -16,12 +16,14 @@ export class BuyPageComponent {
   enableFuzzBuy = false;
   enableHoneyBond = false;
   beraFarmContract;
+  honeyContract;
 
   constructor(public ethersService: EthersService) {}
   async ngOnInit(): Promise<void> {
-    const { beraFarmContract } = await this.ethersService.setupContracts();
+    const { beraFarmContract, honeyContract } = await this.ethersService.setupContracts();
 
     this.beraFarmContract = beraFarmContract;
+    this.honeyContract = honeyContract;
 
     await this.showAndHideBuyButtons();
   }
@@ -56,6 +58,10 @@ export class BuyPageComponent {
   closePanel() {
     this.showPanel = false;
     this.showAndHideBuyButtons();
+  }
+
+  async dripHoney() {
+    await this.honeyContract.requestTokens();
   }
 
   async configureBuyForHoney() {

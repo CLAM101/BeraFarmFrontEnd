@@ -1,5 +1,18 @@
 <div style="height: 78vh" class="flex w-screen items-center justify-center">
   <div class="flex-col-set w-full items-center justify-center" *ngIf="!showPanel">
+    <div class="w-1/3">
+      <div class="border-background mb-2 flex h-1/3 w-full flex-col items-center justify-center">
+        <h1 class="font-robotomonobold">
+          Honey Contract: 0xB1633ecE1675eE10Df2C3709C3Ed5c5a6095C59F
+        </h1>
+      </div>
+      <div class="border-background flex h-1/3 w-full flex-col items-center justify-center">
+        <h1 class="font-robotomonobold">
+          Fuzz Contract: 0xaDA94c5122303a0f8EB01495F711110fd9920256
+        </h1>
+      </div>
+    </div>
+
     <button [disabled]="!enableHoneyBuy" (click)="dripHoney()" class="buy-button h-1/2 w-1/3">
       DRIP 200 MOCK $HONEY
     </button>

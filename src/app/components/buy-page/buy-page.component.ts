@@ -20,10 +20,10 @@ export class BuyPageComponent {
 
   constructor(public ethersService: EthersService) {}
   async ngOnInit(): Promise<void> {
-    const { beraFarmContract, honeyContract } = await this.ethersService.setupContracts();
+    const { beraFarmContract, honeyMethodCaller } = await this.ethersService.setupContracts();
 
     this.beraFarmContract = beraFarmContract;
-    this.honeyContract = honeyContract;
+    this.honeyContract = honeyMethodCaller;
 
     await this.showAndHideBuyButtons();
   }

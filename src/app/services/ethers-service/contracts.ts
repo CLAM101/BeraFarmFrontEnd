@@ -1,5 +1,5 @@
-export const beraFarm = '0xa0F5576AA209F8aBE37C121f27f5F94d20DB5eAB';
-export const mockHoney = '0x0AA9161b9799dEb84aD988aB1F652496A427cE43';
-export const fuzzToken = '0xb2Cd4c6C64fEF65899F3D59b364Ce690b428cFf6';
-export const beraCub = '0xa894238eD131D0405DB47071aa79A05f95BA9394';
-export const marketPlace = '0x9bA33414cC296a603667E0929315a16617f5F6a6';
+export const beraFarm = '0xAbabc5F66Ae4cCFc7dc2648B4C67532151E30D31';
+export const mockHoney = '0xB1633ecE1675eE10Df2C3709C3Ed5c5a6095C59F';
+export const fuzzToken = '0xaDA94c5122303a0f8EB01495F711110fd9920256';
+export const beraCub = '0x7CC14D2386CCCb0BA3A66D5725Fe0F575e35E0D9';
+export const marketPlace = '0x19dCdd4dA59dC35C6EA8D3D6D8F4dAc986FF38F4';

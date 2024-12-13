@@ -64,6 +64,10 @@ export class TopToolbarComponent {
     this.ethersService.connectWallet();
   }
 
+  getFuzz() {
+    window.open('https://bartio.bex.berachain.com/swap', '_blank');
+  }
+
   mouseDown(button: string) {
     if (button === 'connectWallet') {
       this.connectWalletText = this.soonText;
